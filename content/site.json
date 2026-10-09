@@ -1,0 +1,55 @@
+{
+  "title": "vorkurs",
+  "description": "A design engineering studio that helps organisations think clearly about their digital products and helps them take shape.",
+  "url": "https://vorkurs.space/",
+  "email": "space@vorkurs.space",
+  "nav_label": "get in touch",
+  "hero": "A design engineering studio that helps organisations think clearly about their digital products and helps them take shape. For hospitality groups, investment firms, startups, scaleups, and public sector organisations that care about the world.",
+  "sections": [
+    {
+      "title": "Our practice",
+      "style": "service",
+      "items": [
+        { "heading": "Consulting & Strategy", "text": "We help you understand what needs to happen, and what doesn't. Before anything is built, we look at your goals, users, platform, and internal setup to bring clarity to complex situations. This helps you avoid wrong investments, align teams, and make decisions you can stand behind." },
+        { "heading": "System Design & Integration", "text": "We turn ideas into clear, usable structures. We design digital, brand, and content systems that work together in practice, not just on paper. This makes it easier for teams to collaborate, stay consistent, and adapt over time." },
+        { "heading": "Implementation & Engineering", "text": "We build things that work, and keep working. We translate strategy into reliable digital products that are fast, accessible, and easy to maintain. No unnecessary complexity. No fragile setups. Just solid digital infrastructure." },
+        { "heading": "Stewardship & Evolution", "text": "We help you keep things healthy over time. After launch, we stay involved to guide improvements, prevent fragmentation, and support better decisions. This protects your investment and avoids constant rebuilding." }
+      ]
+    },
+    {
+      "title": "How we work together",
+      "style": "way",
+      "items": [
+        { "heading": "Audit", "label": "Fixed scope", "intro": "For when something feels off but you're not sure what.", "text": "We look at your current setup — platform, brand, workflows — map the gaps, and give you a clear plan. Fixed fee, no commitment beyond that." },
+        { "heading": "Embedded", "label": "Monthly retainer", "intro": "For teams that need senior thinking on an ongoing basis.", "text": "We join your team 2–3 days a week and take ownership of design, development, or both. This is how most long-term partnerships start." },
+        { "heading": "Project", "label": "End to end", "intro": "For when you need something designed and built.", "text": "We take it from brief to launch. Strategy, design, engineering, deployment. One team, one process, no handoff gaps." },
+        { "heading": "Advisory", "label": "Fractional lead", "intro": "For organisations that need senior direction without a full-time hire.", "text": "We come in as a fractional lead — set the direction, define the workflow, align the team, and step back when the system runs on its own." }
+      ]
+    },
+    {
+      "title": "Selected work",
+      "style": "case",
+      "items": [
+        { "heading": "citizenM", "subheading": "Creative Lead & Design System Owner", "text": "Set creative direction across citizenM's digital ecosystem -- landing pages, campaigns, CRM, web content. Built and maintained the design system in Figma: components, templates, tokens. Co-led campaigns generating EUR 20M+ in revenue.\n\nMentored junior designers, managed external agencies, and kept the visual language consistent across 50+ properties worldwide.", "link_label": "View case study", "link_url": "https://tiberiomar.com/citizenm/", "link_visible": false },
+        { "heading": "CrossBoundary", "subheading": "Multi-site Design System", "text": "Led the design system for one of the largest sustainable-development investment firms in the Global South. Designed the component system in Figma and built the frontend myself, keeping visual integrity across regions and sub-brands.\n\nTranslating complex financial content into clear, trustworthy interfaces -- with a system that scales.", "link_label": "View case study", "link_url": "https://tiberiomar.com/crossboundary/", "link_visible": false },
+        { "heading": "Activant Capital", "subheading": "Web Design & Frontend", "text": "Redesigned the web presence for a research-led global investment firm. Translated complex financial positioning into a clean, confident digital experience. Designed in Figma, built in code." },
+        { "heading": "Erik Kessels & Gallerie d'Italia", "subheading": "Creative Lead & Technical Direction", "text": "Collaborated with artist Erik Kessels on Un'Immagine, a large-scale immersive installation at Gallerie d'Italia, Milan. Thousands of images from the Publifoto Archive, algorithmically stitched into a continuously moving 360-degree visual and sound experience.\n\nLed the creative-to-technical bridge -- interpreting the artistic vision, finding the right collaborator, managing the creative dialogue, and overseeing delivery.", "link_label": "View exhibition", "link_url": "https://gallerieditalia.com/en/turin/exhibitions-and-initiatives/exhibitions/2025/09/11/erik-kessels-un-immagine-exhibition-turin/", "link_visible": true }
+      ]
+    },
+    {
+      "title": "Principles",
+      "style": "principle",
+      "items": [
+        { "heading": "Form follows function", "text": "Every decision is shaped by use, context, and accessibility. Structure comes first." },
+        { "heading": "True materials", "text": "Strategy, technology, and content that reflect reality. Built for durability, not short-term appeal." },
+        { "heading": "Systems over artifacts", "text": "We don't make one-off deliverables. We make structures that stay consistent as they grow." },
+        { "heading": "Built to last", "text": "No shortcuts, no fragile setups. Things that work in two years, not just on launch day." }
+      ]
+    }
+  ],
+  "footer": {
+    "cta": "Not sure where to start? That's fine. [Get in touch](mailto:space@vorkurs.space).",
+    "phone": "+31 6 29 32 78 75",
+    "address": "Papaverhof 59,\n1032 LX Amsterdam"
+  }
+}
