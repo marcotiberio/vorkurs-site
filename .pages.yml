@@ -1,0 +1,96 @@
+# Pages CMS configuration — https://pagescms.org/docs
+content:
+  - name: site
+    label: vorkurs.space
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: hero
+        label: Intro (large text at the top)
+        type: text
+      - name: sections
+        label: Sections
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Section title
+            type: string
+          - name: style
+            label: Style
+            type: select
+            default: service
+            description: "Plain = heading + text. Way of working = heading – label, italic intro, text. Case study = heading, role, text, link."
+            options:
+              values:
+                - { name: service, label: Plain }
+                - { name: way, label: Way of working }
+                - { name: case, label: Case study }
+                - { name: principle, label: Principle }
+          - name: items
+            label: Items
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{heading}"
+            fields:
+              - name: heading
+                label: Heading (grey)
+                type: string
+              - name: label
+                label: Label after the dash (way of working only, e.g. Fixed scope)
+                type: string
+              - name: subheading
+                label: Role / subtitle (case study only)
+                type: string
+              - name: intro
+                label: Italic intro (way of working only)
+                type: string
+              - name: text
+                label: Text
+                type: text
+                description: Empty line = new paragraph. Links as [text](https://…).
+              - name: link_label
+                label: Link label (case study only)
+                type: string
+              - name: link_url
+                label: Link URL (case study only)
+                type: string
+              - name: link_visible
+                label: Show link
+                type: boolean
+                default: true
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - name: cta
+            label: Closing line
+            type: text
+            description: Links as [text](mailto:…) or [text](https://…).
+          - name: phone
+            label: Phone
+            type: string
+          - name: address
+            label: Studio address
+            type: text
+      - name: email
+        label: Email (header, footer)
+        type: string
+      - name: nav_label
+        label: Header link text
+        type: string
+      - name: title
+        label: Site name
+        type: string
+      - name: description
+        label: Description (search engines and link previews)
+        type: text
+      - name: url
+        label: Site address
+        type: string
