@@ -1,5 +1,5 @@
 {
-  "hero": "vorkurs is a design engineering studio.\nWe work inside organisations to figure out what their digital products should be, then design, build and ship them in their stack, with their team.\nFor investment firms, climate companies and mission-driven organisations, especially when the in-house team is too small for what needs to ship.",
+  "hero": "vorkurs is a design engineering studio.\nWe work inside organisations to figure out what their digital products should be, then design, build and ship them in their stack, with their team.\nFor investment firms, climate companies and mission-driven organisations, especially when the in-house team is too small for what needs to launch.",
   "sections": [
     {
       "title": "Our practice",
@@ -42,7 +42,7 @@
           "heading": "Embedded, monthly retainer",
           "label": "Monthly retainer",
           "intro": "For teams that need someone senior inside, not alongside.",
-          "text": "We join your team 2–3 days a week, sit with the people who use what we build, and ship directly into your stack: design, engineering, or both. Most long-term partnerships start here.",
+          "text": "We join your team 2–3 days a week, sit with the people who use what we build, and work directly into your stack: design, engineering, or both. Most long-term partnerships start here.",
           "link_visible": true
         },
         {
