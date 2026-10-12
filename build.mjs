@@ -121,7 +121,7 @@ ${css.replace(/^(?=.)/gm, '    ')}  </style>
 
 ${(site.sections || []).map(section).join('\n\n')}
 
-    <footer class="w-full flex flex-col md:flex-row md:justify-between md:items-end gap-4 md:gap-20">
+    <footer class="w-full flex flex-col md:flex-row md:justify-between md:items-start gap-4 md:gap-20">
       <div class="footer-cta">
         <p>${md(f.cta)}</p>
       </div>
