@@ -1,5 +1,5 @@
 {
-  "hero": "A design engineering studio that helps organisations think clearly about their digital products and helps them take shape. For hospitality groups, investment firms, startups, scaleups, and public sector organisations that care about the world.",
+  "hero": "vorkurs is a design engineering studio. We work inside organisations to figure out what their digital products should be, then design, build and ship them in their stack, with their team. For hospitality groups, investment firms, startups, scaleups, and public sector organisations that care about the world.",
   "sections": [
     {
       "title": "Our practice",
@@ -7,22 +7,22 @@
       "items": [
         {
           "heading": "Consulting & Strategy",
-          "text": "We help you understand what needs to happen, and what doesn't. Before anything is built, we look at your goals, users, platform, and internal setup to bring clarity to complex situations. This helps you avoid wrong investments, align teams, and make decisions you can stand behind.",
+          "text": "We work out what needs to happen, and what doesn’t. Goals, users, platform and how your team actually works, so you invest in the right thing and everyone knows why.",
           "link_visible": true
         },
         {
           "heading": "System Design & Integration",
-          "text": "We turn ideas into clear, usable structures. We design digital, brand, and content systems that work together in practice, not just on paper. This makes it easier for teams to collaborate, stay consistent, and adapt over time.",
+          "text": "Brand, content and digital systems that hold together in practice, not just on paper. Teams move faster, stay consistent, and change course without starting over.",
           "link_visible": true
         },
         {
-          "heading": "Implementation & Engineering",
-          "text": "We build things that work, and keep working. We translate strategy into reliable digital products that are fast, accessible, and easy to maintain. No unnecessary complexity. No fragile setups. Just solid digital infrastructure.",
+          "heading": "Build & Deploy",
+          "text": "We build fast, accessible, maintainable products and put them into production: websites, design systems, internal tools, AI-assisted workflows. No fragile setups, no handing off to someone else to finish.",
           "link_visible": true
         },
         {
           "heading": "Stewardship & Evolution",
-          "text": "We help you keep things healthy over time. After launch, we stay involved to guide improvements, prevent fragmentation, and support better decisions. This protects your investment and avoids constant rebuilding.",
+          "text": "After launch we stay close. We watch how it’s used, improve what matters and keep the system from fragmenting, so your investment keeps paying off instead of needing a rebuild.",
           "link_visible": true
         }
       ]
@@ -39,17 +39,17 @@
           "link_visible": true
         },
         {
-          "heading": "Embedded",
+          "heading": "Embedded, monthly retainer",
           "label": "Monthly retainer",
-          "intro": "For teams that need senior thinking on an ongoing basis.",
-          "text": "We join your team 2–3 days a week and take ownership of design, development, or both. This is how most long-term partnerships start.",
+          "intro": "For teams that need someone senior inside, not alongside.",
+          "text": "We join your team 2–3 days a week, sit with the people who use what we build, and ship directly into your stack: design, engineering, or both. Most long-term partnerships start here.",
           "link_visible": true
         },
         {
           "heading": "Project",
           "label": "End to end",
-          "intro": "For when you need something designed and built.",
-          "text": "We take it from brief to launch. Strategy, design, engineering, deployment. One team, one process, no handoff gaps.",
+          "intro": "For when you need something designed, built and running.",
+          "text": "From brief to launch and into production. Strategy, design, engineering, deployment: one team, no handoff gaps.",
           "link_visible": true
         },
         {
@@ -68,7 +68,7 @@
         {
           "heading": "citizenM",
           "subheading": "Creative Lead & Design System Owner",
-          "text": "Set creative direction across citizenM's digital ecosystem -- landing pages, campaigns, CRM, web content. Built and maintained the design system in Figma: components, templates, tokens. Co-led campaigns generating EUR 20M+ in revenue.\n\nMentored junior designers, managed external agencies, and kept the visual language consistent across 50+ properties worldwide.",
+          "text": "Set creative direction across citizenM's digital ecosystem – landing pages, campaigns, CRM, web content. Built and maintained the design system in Figma: components, templates, tokens. Co-led campaigns generating 20M in revenue.\n\nMentored junior designers, managed external agencies, and kept the visual language consistent across 50+ properties worldwide.",
           "link_label": "View case study",
           "link_url": "https://tiberiomar.com/citizenm/",
           "link_visible": false
@@ -76,7 +76,7 @@
         {
           "heading": "CrossBoundary",
           "subheading": "Multi-site Design System",
-          "text": "Led the design system for one of the largest sustainable-development investment firms in the Global South. Designed the component system in Figma and built the frontend myself, keeping visual integrity across regions and sub-brands.\n\nTranslating complex financial content into clear, trustworthy interfaces -- with a system that scales.",
+          "text": "Led the design system for one of the largest sustainable-development investment firms in the Global South. We helped envisioning the component system in Figma and built the frontend, keeping visual integrity across regions and sub-brands.\n\nTranslating complex financial content into clear, trustworthy interfaces -- with a system that scales.",
           "link_label": "View case study",
           "link_url": "https://tiberiomar.com/crossboundary/",
           "link_visible": false
@@ -117,15 +117,15 @@
           "link_visible": true
         },
         {
-          "heading": "Built to last",
-          "text": "No shortcuts, no fragile setups. Things that work in two years, not just on launch day.",
+          "heading": "Close to the problem",
+          "text": "We work where the work happens: with your team, your users and your real data, not from a deck at a distance.",
           "link_visible": true
         }
       ]
     }
   ],
   "footer": {
-    "cta": "Not sure where to start? That's fine. [Get in touch](mailto:space@vorkurs.space).",
+    "cta": "Not sure where to start? Most of our clients weren’t either. [Get in touch](mailto:space@vorkurs.space).",
     "phone": "+31 6 29 32 78 75",
     "address": "the sphere,\nNDSM-Plein 97,\n1033 WC Amsterdam"
   },
