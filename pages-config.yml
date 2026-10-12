@@ -1,4 +1,7 @@
 # Pages CMS configuration — https://pagescms.org/docs
+media:
+  input: static
+  output: /
 content:
   - name: site
     label: vorkurs.space
@@ -88,9 +91,49 @@ content:
       - name: title
         label: Site name
         type: string
-      - name: description
-        label: Description (search engines and link previews)
-        type: text
       - name: url
         label: Site address
         type: string
+        description: Full address with trailing slash, e.g. https://vorkurs.space/
+      - name: seo
+        label: SEO & link previews
+        type: object
+        fields:
+          - name: title
+            label: Page title
+            type: string
+            description: Shown in the browser tab and as the headline in Google. Aim for under 60 characters. Empty = site name.
+          - name: description
+            label: Meta description
+            type: text
+            description: The snippet under the headline in Google. Aim for 120–160 characters.
+          - name: share_title
+            label: Share title
+            type: string
+            description: Headline for link previews (LinkedIn, WhatsApp, Slack, X…). Empty = page title.
+          - name: share_description
+            label: Share description
+            type: text
+            description: Text for link previews. Empty = meta description.
+          - name: image
+            label: Share image
+            type: image
+            description: Picture for link previews. 1200 × 630 px, PNG or JPG.
+          - name: image_alt
+            label: Share image description
+            type: string
+            description: Describes the share image for screen readers.
+          - name: language
+            label: Language code
+            type: string
+            default: en
+            description: e.g. en, nl, de.
+          - name: twitter
+            label: X / Twitter handle
+            type: string
+            description: Optional, e.g. @vorkurs.
+          - name: noindex
+            label: Hide from search engines
+            type: boolean
+            default: false
+            description: Tick to ask Google & co. not to list the site (e.g. while it's in progress).

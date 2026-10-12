@@ -1,7 +1,17 @@
 {
   "title": "vorkurs",
-  "description": "A design engineering studio that helps organisations think clearly about their digital products and helps them take shape.",
   "url": "https://vorkurs.space/",
+  "seo": {
+    "title": "vorkurs",
+    "description": "A design engineering studio that helps organisations think clearly about their digital products and helps them take shape.",
+    "share_title": "",
+    "share_description": "",
+    "image": "/ogimage.png",
+    "image_alt": "",
+    "language": "en",
+    "twitter": "",
+    "noindex": false
+  },
   "email": "space@vorkurs.space",
   "nav_label": "get in touch",
   "hero": "A design engineering studio that helps organisations think clearly about their digital products and helps them take shape. For hospitality groups, investment firms, startups, scaleups, and public sector organisations that care about the world.",

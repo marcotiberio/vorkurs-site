@@ -24,6 +24,8 @@ One entry: **vorkurs.space**. Sections are a list (drag to reorder); each has it
 
 Empty line in a text = new paragraph. Links: `[text](https://…)`.
 
+**SEO & link previews** (bottom of the entry): page title, meta description, share title/description/image, language, X handle, and a "Hide from search engines" switch. Empty share fields fall back to the page title and meta description. The build also writes `robots.txt`, `sitemap.xml` and Organization structured data from the contact details.
+
 ## Preview locally
 
 `node build.mjs`, then open `dist/index.html` (or `npx serve dist`).

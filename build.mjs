@@ -44,29 +44,54 @@ ${(s.items || []).map((it) => item(s.style, it)).join('\n\n')}
 
 const f = site.footer || {};
 const tel = String(f.phone || '').replace(/[^\d+]/g, '');
+
+// SEO: empty fields fall back to the site name / meta description.
+const seo = site.seo || {};
+const url = site.url || '/';
+const title = seo.title || site.title;
+const description = seo.description || site.description || '';
+const shareTitle = seo.share_title || title;
+const shareDescription = seo.share_description || description;
+const abs = (p) => { try { return new URL(p, url).href; } catch { return p; } };
+const image = abs(seo.image || '/ogimage.png');
+const twitter = seo.twitter ? '@' + String(seo.twitter).replace(/^@/, '') : '';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.title,
+  url,
+  description,
+  logo: abs('/fav.png'),
+  ...(site.email && { email: site.email }),
+  ...(f.phone && { telephone: f.phone }),
+  ...(f.address && { address: { '@type': 'PostalAddress', streetAddress: String(f.address).replace(/,?\s*\n\s*/g, ', ') } }),
+};
+
 const html = `<!DOCTYPE html>
-<html lang="en">
+<html lang="${esc(seo.language || 'en')}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${esc(site.title)}</title>
-  <meta name="description" content="${esc(site.description)}">
-  <link rel="canonical" href="${esc(site.url)}">
+  <title>${esc(title)}</title>
+  <meta name="description" content="${esc(description)}">
+${seo.noindex ? '  <meta name="robots" content="noindex, nofollow">\n' : ''}  <link rel="canonical" href="${esc(url)}">
   <link rel="icon" href="/fav.png" type="image/png">
   <link rel="apple-touch-icon" href="/fav.png">
   <meta name="theme-color" content="#ffffff">
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="${esc(site.url)}">
-  <meta property="og:title" content="${esc(site.title)}">
-  <meta property="og:description" content="${esc(site.description)}">
-  <meta property="og:image" content="${esc(site.url)}ogimage.png">
-  <meta property="og:site_name" content="${esc(site.title)}">
+  <meta property="og:url" content="${esc(url)}">
+  <meta property="og:title" content="${esc(shareTitle)}">
+  <meta property="og:description" content="${esc(shareDescription)}">
+  <meta property="og:image" content="${esc(image)}">
+${seo.image_alt ? `  <meta property="og:image:alt" content="${esc(seo.image_alt)}">\n` : ''}  <meta property="og:site_name" content="${esc(site.title)}">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${esc(site.title)}">
-  <meta name="twitter:description" content="${esc(site.description)}">
-  <meta name="twitter:image" content="${esc(site.url)}ogimage.png">
+${twitter ? `  <meta name="twitter:site" content="${esc(twitter)}">\n` : ''}  <meta name="twitter:title" content="${esc(shareTitle)}">
+  <meta name="twitter:description" content="${esc(shareDescription)}">
+  <meta name="twitter:image" content="${esc(image)}">
+${seo.image_alt ? `  <meta name="twitter:image:alt" content="${esc(seo.image_alt)}">\n` : ''}
+  <script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
@@ -126,4 +151,12 @@ for (const file of readdirSync('static')) {
   copyFileSync(`static/${file}`, `${OUT}/${file}`);
 }
 writeFileSync(`${OUT}/index.html`, html);
+writeFileSync(`${OUT}/robots.txt`, seo.noindex
+  ? 'User-agent: *\nDisallow: /\n'
+  : `User-agent: *\nAllow: /\n\nSitemap: ${abs('/sitemap.xml')}\n`);
+writeFileSync(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>${esc(url)}</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod></url>
+</urlset>
+`);
 console.log(`Built ${OUT}/index.html (${(site.sections || []).length} sections).`);
