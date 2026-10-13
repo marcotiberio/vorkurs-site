@@ -73,6 +73,42 @@ content:
                 label: Show link
                 type: boolean
                 default: true
+      - name: logos
+        label: Logo strip (above the footer)
+        type: object
+        fields:
+          - name: visible
+            label: Show on site
+            type: boolean
+            default: true
+          - name: title
+            label: Title
+            type: string
+            description: Optional, e.g. Trusted by. Empty = no title.
+          - name: items
+            label: Logos
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+            fields:
+              - name: visible
+                label: Show on site
+                type: boolean
+                default: true
+              - name: name
+                label: Name
+                type: string
+                description: Used as the image description, and shown as text when there's no image.
+              - name: image
+                label: Logo
+                type: image
+                description: SVG or transparent PNG, ideally single-colour. It's shown in grey and turns to full colour on hover when linked.
+              - name: url
+                label: Link
+                type: string
+                description: Optional, e.g. https://earth-ai.com/
       - name: footer
         label: Footer
         type: object

@@ -160,6 +160,60 @@
       ]
     }
   ],
+  "logos": {
+    "visible": true,
+    "title": "",
+    "items": [
+      {
+        "visible": true,
+        "name": "Earth AI",
+        "image": "",
+        "url": ""
+      },
+      {
+        "visible": true,
+        "name": "onformative",
+        "image": "",
+        "url": ""
+      },
+      {
+        "visible": true,
+        "name": "brandmelder",
+        "image": "",
+        "url": ""
+      },
+      {
+        "visible": true,
+        "name": "Jane Goodall Institute",
+        "image": "",
+        "url": ""
+      },
+      {
+        "visible": true,
+        "name": "citizenM",
+        "image": "",
+        "url": ""
+      },
+      {
+        "visible": true,
+        "name": "CrossBoundary",
+        "image": "",
+        "url": ""
+      },
+      {
+        "visible": true,
+        "name": "Activant Capital",
+        "image": "",
+        "url": ""
+      },
+      {
+        "visible": true,
+        "name": "Gallerie d'Italia",
+        "image": "",
+        "url": ""
+      }
+    ]
+  },
   "footer": {
     "cta": "Not sure where to start? Most of our clients weren’t either. [Get in touch](mailto:space@vorkurs.space).",
     "phone": "+31 6 29 32 78 75",

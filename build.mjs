@@ -42,6 +42,34 @@ ${(s.items || []).filter((it) => it.visible !== false).map((it) => item(s.style,
 
     <div class="divider"></div>`;
 
+// Logo strip before the footer. The list is rendered twice so the CSS loop is seamless; the copy is hidden from screen readers.
+const logos = site.logos || {};
+const logoItems = (logos.items || []).filter((l) => l.visible !== false && (l.name || l.image));
+const logo = (l, hidden) => {
+  const inner = l.image
+    ? `<img src="${esc(l.image)}" alt="${hidden ? '' : esc(l.name)}" loading="lazy">`
+    : `<span>${esc(l.name)}</span>`;
+  return l.url && !hidden
+    ? `${I(10)}<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${inner}</a></li>`
+    : `${I(10)}<li>${inner}</li>`;
+};
+const logoStrip = logos.visible !== false && logoItems.length
+  ? `    <section class="logos" aria-label="${esc(logos.title || 'Selected clients and partners')}">
+${logos.title ? `      <h2 class="section-title">${esc(logos.title)}</h2>\n` : ''}      <div class="logos-track">
+        <ul>
+${logoItems.map((l) => logo(l, false)).join('\n')}
+        </ul>
+        <ul aria-hidden="true">
+${logoItems.map((l) => logo(l, true)).join('\n')}
+        </ul>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+`
+  : '';
+
 const f = site.footer || {};
 const tel = String(f.phone || '').replace(/[^\d+]/g, '');
 
@@ -121,7 +149,7 @@ ${css.replace(/^(?=.)/gm, '    ')}  </style>
 
 ${(site.sections || []).map(section).join('\n\n')}
 
-    <footer class="w-full flex flex-col md:flex-row md:justify-between md:items-start gap-4 md:gap-20">
+${logoStrip}    <footer class="w-full flex flex-col md:flex-row md:justify-between md:items-start gap-4 md:gap-20">
       <div class="footer-cta">
         <p>${md(f.cta)}</p>
       </div>
