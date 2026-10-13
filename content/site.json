@@ -160,80 +160,8 @@
       ]
     }
   ],
-  "logos": {
-    "visible": true,
-    "title": "",
-    "items": [
-      {
-        "visible": true,
-        "name": "Earth AI",
-        "image": "/logo-earthai.svg",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "onformative",
-        "image": "/logo-onformative.svg",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "brandmelder",
-        "image": "/logo-brandmelder.svg",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "NEW STANDARD.S",
-        "image": "/logo-newstandards.svg",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "Jane Goodall Institute",
-        "image": "/logo-jgi.png",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "Carbon Equity",
-        "image": "/logo-carbonequity.svg",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "citizenM",
-        "image": "/logo-citizenm.png",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "CrossBoundary",
-        "image": "/logo-crossboundary.svg",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "Activant Capital",
-        "image": "/logo-activant.svg",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "Gallerie d'Italia",
-        "image": "",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "KesselsKramer",
-        "image": "",
-        "url": ""
-      }
-    ]
-  },
   "footer": {
-    "cta": "Not sure where to start? Most of our clients weren’t either. [Get in touch](mailto:space@vorkurs.space).",
+    "cta": "Not sure where to start? Most of our clients weren’t either.\n[Get in touch](mailto:space@vorkurs.space).",
     "phone": "+31 6 29 32 78 75",
     "address": "the sphere,\nNDSM-Plein 97,\n1033 WC Amsterdam"
   },
