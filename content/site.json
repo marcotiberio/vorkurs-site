@@ -164,7 +164,7 @@
     "visible": true,
     "items": [
       {
-        "visible": true,
+        "visible": false,
         "name": "Earth AI",
         "image": "/logo-earthai.svg",
         "scale": 1
@@ -176,7 +176,7 @@
         "scale": 1
       },
       {
-        "visible": true,
+        "visible": false,
         "name": "brandmelder",
         "image": "/logo-brandmelder.svg",
         "scale": 1
@@ -188,7 +188,7 @@
         "scale": 1
       },
       {
-        "visible": true,
+        "visible": false,
         "name": "Jane Goodall Institute",
         "image": "/logo-jgi.png",
         "scale": 1
@@ -197,7 +197,7 @@
         "visible": true,
         "name": "&why",
         "image": "/logo-why.svg",
-        "url": ""
+        "scale": 1
       },
       {
         "visible": true,
