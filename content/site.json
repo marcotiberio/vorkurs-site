@@ -195,6 +195,12 @@
       },
       {
         "visible": true,
+        "name": "&why",
+        "image": "/logo-why.svg",
+        "url": ""
+      },
+      {
+        "visible": true,
         "name": "Carbon Equity",
         "image": "/logo-carbonequity.svg",
         "scale": 1
