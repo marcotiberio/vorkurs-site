@@ -78,15 +78,16 @@
           "heading": "Earth AI × onformative",
           "subheading": "Frontend Engineering & Performance",
           "text": "Partnered with Berlin studio onformative to build the website for Earth AI, an AI-driven mineral exploration company. It's a single scrolling story page where CGI films play as you scroll,built it on Nuxt and Prismic, connected it to the CMS the client already used, and had it live two weeks after kick-off.\n\nTo improve scroll-scrubbing video performances we re-encoded every clip so it jumps cleanly to any frame, wrote playback logic for each browser, and rebuilt how the page loads so visitors only download what they scroll to. A quick visit went from about 130 MB to 8 MB. Since launch we've stayed as development partner.",
-          "link_label": "View website",
-          "link_visible": false
+          "link_label": "Website",
+          "link_url": "https://earth-ai.com/",
+          "link_visible": true
         },
         {
           "visible": true,
           "heading": "brandmelder",
           "subheading": "Web Development & Image Tooling",
           "text": "We built the website for brandmelder, a non-profit climate journalism project by Netzwerk Klimajournalismus Deutschland. Working with the Berlin studio NEW STANDARD.S, we took their brand design to launch in under two weeks.\n\nInside the CMS we built a halftone image generator, starting from the studio's p5.js prototype. Editors upload a photo, adjust the dots, pick a brand colour, and the result becomes the article's image. Every story stays on-brand, with no designer needed.",
-          "link_label": "View website",
+          "link_label": "Website",
           "link_url": "https://brandmelder.org/",
           "link_visible": true
         },
