@@ -97,7 +97,7 @@
           "text": "We're the technical partner for the upcoming relaunch of the Jane Goodall Institute online presence, working alongside the design studio &why. We're turning their design into a lean, custom site the JGI team can run on their own, with donations at its core: chimp guardianships and gift certificates flow straight into their fundraising system.\n\nAlongside the build, we work closely with the editorial team, shaping blocks, donation flows and content tools around how they actually publish, on a support model built around a non-profit budget.",
           "link_label": "View website",
           "link_url": "https://janegoodall.de/",
-          "link_visible": false
+          "link_visible": true
         },
         {
           "visible": true,
