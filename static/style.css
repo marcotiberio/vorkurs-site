@@ -260,8 +260,6 @@ a {
 .logos-track {
   display: flex;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
 .logos-track ul {
@@ -317,11 +315,6 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .logos-track {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
   .logos-track ul {
     flex-wrap: wrap;
     flex-shrink: 1;
