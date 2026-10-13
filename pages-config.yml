@@ -42,6 +42,11 @@ content:
                 collapsed: true
                 summary: "{heading}"
             fields:
+              - name: visible
+                label: Show on site
+                type: boolean
+                default: true
+                description: Untick to hide this item without deleting it.
               - name: heading
                 label: Heading (grey)
                 type: string

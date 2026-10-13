@@ -36,7 +36,7 @@ const section = (s) => `    <div class="w-full flex flex-col md:flex-row md:just
       <h2 class="md:w-1/3 section-title">${esc(s.title)}</h2>
 
       <div class="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-8">
-${(s.items || []).map((it) => item(s.style, it)).join('\n\n')}
+${(s.items || []).filter((it) => it.visible !== false).map((it) => item(s.style, it)).join('\n\n')}
       </div>
     </div>
 

@@ -66,6 +66,7 @@
       "style": "case",
       "items": [
         {
+          "visible": true,
           "heading": "Earth AI × onformative",
           "subheading": "Frontend Engineering & Performance",
           "text": "Partnered with Berlin studio onformative to build the website for Earth AI, an AI-driven mineral exploration company. It's a single scrolling story page where CGI films play as you scroll,built it on Nuxt and Prismic, connected it to the CMS the client already used, and had it live two weeks after kick-off.\n\nTo improve scroll-scrubbing video performances we re-encoded every clip so it jumps cleanly to any frame, wrote playback logic for each browser, and rebuilt how the page loads so visitors only download what they scroll to. A quick visit went from about 130 MB to 8 MB. Since launch we've stayed as development partner.",
@@ -73,6 +74,7 @@
           "link_visible": false
         },
         {
+          "visible": true,
           "heading": "citizenM",
           "subheading": "Creative Direction & Design System",
           "text": "We set the creative direction across citizenM's digital ecosystem: landing pages, campaigns, CRM and web content. We built and maintained the design system in Figma, from components and templates to tokens, and co-led campaigns that generated 20M in revenue.\n\nAlong the way we mentored the in-house junior designers, managed external agencies, and kept the visual language consistent across 50+ properties worldwide.",
@@ -81,6 +83,7 @@
           "link_visible": false
         },
         {
+          "visible": true,
           "heading": "CrossBoundary",
           "subheading": "Multi-site Design System",
           "text": "We led the design system for one of the largest sustainable-development investment firms in the Global South. We shaped the component system in Figma and built the frontend, keeping the visual language intact across regions and sub-brands.\n\nThe work was about turning complex financial content into clear, trustworthy interfaces, with a system that scales.",
@@ -89,12 +92,14 @@
           "link_visible": false
         },
         {
+          "visible": true,
           "heading": "Activant Capital",
           "subheading": "Web Design & Frontend",
           "text": "We redesigned the web presence of a research-led global investment firm, turning complex financial positioning into a clean, confident digital experience. We designed it in Figma and built it in code.",
           "link_visible": true
         },
         {
+          "visible": true,
           "heading": "Erik Kessels & Gallerie d'Italia",
           "subheading": "Creative & Technical Direction",
           "text": "We worked with artist Erik Kessels on Un'Immagine, a large-scale immersive installation at Gallerie d'Italia, Milan. Thousands of images from the Publifoto Archive are stitched together by an algorithm into a continuously moving 360-degree visual and sound experience.\n\nWe were the bridge between the creative and the technical: interpreting the artistic vision, finding the right collaborator, managing the creative dialogue and overseeing delivery.",
