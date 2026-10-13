@@ -66,9 +66,17 @@
       "style": "case",
       "items": [
         {
+          "heading": "Earth AI × onformative",
+          "subheading": "Frontend Engineering & Performance",
+          "text": "We built the website for Earth AI, an AI-driven mineral exploration company, with the Berlin studio onformative and designer Max Mauracher. It's a single scrolling story page where CGI films play as you scroll. We built it on Nuxt and Prismic, connected it to the CMS the client already used, and had it live two weeks after kick-off.\n\nVideo that plays as you scroll is easy to prototype and hard to ship. We re-encoded every clip so it jumps cleanly to any frame, wrote playback logic for each browser, and rebuilt how the page loads so visitors only download what they scroll to. A quick visit went from about 130 MB to 8 MB. Since launch we've stayed on as onformative's development partner, adding new interactive sections as Earth AI's story grows.",
+          "link_label": "View website",
+          "link_url": "",
+          "link_visible": false
+        },
+        {
           "heading": "citizenM",
-          "subheading": "Creative Lead & Design System Owner",
-          "text": "Set creative direction across citizenM's digital ecosystem – landing pages, campaigns, CRM, web content. Built and maintained the design system in Figma: components, templates, tokens. Co-led campaigns generating 20M in revenue.\n\nMentored junior designers, managed external agencies, and kept the visual language consistent across 50+ properties worldwide.",
+          "subheading": "Creative Direction & Design System",
+          "text": "We set the creative direction across citizenM's digital ecosystem: landing pages, campaigns, CRM and web content. We built and maintained the design system in Figma, from components and templates to tokens, and co-led campaigns that generated 20M in revenue.\n\nAlong the way we mentored the in-house junior designers, managed external agencies, and kept the visual language consistent across 50+ properties worldwide.",
           "link_label": "View case study",
           "link_url": "https://tiberiomar.com/citizenm/",
           "link_visible": false
@@ -76,7 +84,7 @@
         {
           "heading": "CrossBoundary",
           "subheading": "Multi-site Design System",
-          "text": "Led the design system for one of the largest sustainable-development investment firms in the Global South. We helped envisioning the component system in Figma and built the frontend, keeping visual integrity across regions and sub-brands.\n\nTranslating complex financial content into clear, trustworthy interfaces -- with a system that scales.",
+          "text": "We led the design system for one of the largest sustainable-development investment firms in the Global South. We shaped the component system in Figma and built the frontend, keeping the visual language intact across regions and sub-brands.\n\nThe work was about turning complex financial content into clear, trustworthy interfaces, with a system that scales.",
           "link_label": "View case study",
           "link_url": "https://tiberiomar.com/crossboundary/",
           "link_visible": false
@@ -84,13 +92,13 @@
         {
           "heading": "Activant Capital",
           "subheading": "Web Design & Frontend",
-          "text": "Redesigned the web presence for a research-led global investment firm. Translated complex financial positioning into a clean, confident digital experience. Designed in Figma, built in code.",
+          "text": "We redesigned the web presence of a research-led global investment firm, turning complex financial positioning into a clean, confident digital experience. We designed it in Figma and built it in code.",
           "link_visible": true
         },
         {
           "heading": "Erik Kessels & Gallerie d'Italia",
-          "subheading": "Creative Lead & Technical Direction",
-          "text": "Collaborated with artist Erik Kessels on Un'Immagine, a large-scale immersive installation at Gallerie d'Italia, Milan. Thousands of images from the Publifoto Archive, algorithmically stitched into a continuously moving 360-degree visual and sound experience.\n\nLed the creative-to-technical bridge -- interpreting the artistic vision, finding the right collaborator, managing the creative dialogue, and overseeing delivery.",
+          "subheading": "Creative & Technical Direction",
+          "text": "We worked with artist Erik Kessels on Un'Immagine, a large-scale immersive installation at Gallerie d'Italia, Milan. Thousands of images from the Publifoto Archive are stitched together by an algorithm into a continuously moving 360-degree visual and sound experience.\n\nWe were the bridge between the creative and the technical: interpreting the artistic vision, finding the right collaborator, managing the creative dialogue and overseeing delivery.",
           "link_label": "View exhibition",
           "link_url": "https://gallerieditalia.com/en/turin/exhibitions-and-initiatives/exhibitions/2025/09/11/erik-kessels-un-immagine-exhibition-turin/",
           "link_visible": true
