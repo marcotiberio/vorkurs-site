@@ -68,9 +68,8 @@
         {
           "heading": "Earth AI × onformative",
           "subheading": "Frontend Engineering & Performance",
-          "text": "We built the website for Earth AI, an AI-driven mineral exploration company, with the Berlin studio onformative and designer Max Mauracher. It's a single scrolling story page where CGI films play as you scroll. We built it on Nuxt and Prismic, connected it to the CMS the client already used, and had it live two weeks after kick-off.\n\nVideo that plays as you scroll is easy to prototype and hard to ship. We re-encoded every clip so it jumps cleanly to any frame, wrote playback logic for each browser, and rebuilt how the page loads so visitors only download what they scroll to. A quick visit went from about 130 MB to 8 MB. Since launch we've stayed on as onformative's development partner, adding new interactive sections as Earth AI's story grows.",
+          "text": "Partnered with Berlin studio onformative to build the website for Earth AI, an AI-driven mineral exploration company. It's a single scrolling story page where CGI films play as you scroll,built it on Nuxt and Prismic, connected it to the CMS the client already used, and had it live two weeks after kick-off.\n\nTo improve scroll-scrubbing video performances we re-encoded every clip so it jumps cleanly to any frame, wrote playback logic for each browser, and rebuilt how the page loads so visitors only download what they scroll to. A quick visit went from about 130 MB to 8 MB. Since launch we've stayed as development partner.",
           "link_label": "View website",
-          "link_url": "",
           "link_visible": false
         },
         {
