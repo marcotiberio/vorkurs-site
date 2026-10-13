@@ -105,9 +105,9 @@
           "heading": "CrossBoundary",
           "subheading": "Multi-site Frontend Development",
           "text": "Partnering with Berlin-based agency backendforth, we led the development of the multi-site platform for one of the largest sustainable-development investment firms in the Global South. We turned the component system into a scalable frontend, keeping visual integrity across regions and sub-brands.\n\nTranslating complex financial content into clear, trustworthy interfaces, with a system that scales.",
-          "link_label": "View case study",
-          "link_url": "https://tiberiomar.com/crossboundary/",
-          "link_visible": false
+          "link_label": "Website",
+          "link_url": "https://crossboundary.com/",
+          "link_visible": true
         },
         {
           "visible": true,
@@ -160,60 +160,6 @@
       ]
     }
   ],
-  "logos": {
-    "visible": true,
-    "title": "",
-    "items": [
-      {
-        "visible": true,
-        "name": "Earth AI",
-        "image": "",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "onformative",
-        "image": "",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "brandmelder",
-        "image": "",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "Jane Goodall Institute",
-        "image": "",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "citizenM",
-        "image": "",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "CrossBoundary",
-        "image": "",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "Activant Capital",
-        "image": "",
-        "url": ""
-      },
-      {
-        "visible": true,
-        "name": "Gallerie d'Italia",
-        "image": "",
-        "url": ""
-      }
-    ]
-  },
   "footer": {
     "cta": "Not sure where to start? Most of our clients weren’t either. [Get in touch](mailto:space@vorkurs.space).",
     "phone": "+31 6 29 32 78 75",
