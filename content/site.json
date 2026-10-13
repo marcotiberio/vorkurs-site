@@ -74,7 +74,7 @@
       "style": "case",
       "items": [
         {
-          "visible": true,
+          "visible": false,
           "heading": "Earth AI × onformative",
           "subheading": "Frontend Engineering & Performance",
           "text": "Partnered with Berlin studio onformative to build the website for Earth AI, an AI-driven mineral exploration company. It's a single scrolling story page where CGI films play as you scroll,built it on Nuxt and Prismic, connected it to the CMS the client already used, and had it live two weeks after kick-off.\n\nTo improve scroll-scrubbing video performances we re-encoded every clip so it jumps cleanly to any frame, wrote playback logic for each browser, and rebuilt how the page loads so visitors only download what they scroll to. A quick visit went from about 130 MB to 8 MB. Since launch we've stayed as development partner.",
@@ -92,7 +92,7 @@
           "link_visible": true
         },
         {
-          "visible": true,
+          "visible": false,
           "heading": "Jane Goodall Institute Germany",
           "subheading": "Web Development · Ongoing",
           "text": "We're the technical partner for the upcoming relaunch of the Jane Goodall Institute online presence, working alongside the design studio &why. We're turning their design into a lean, custom site the JGI team can run on their own, with donations at its core: chimp guardianships and gift certificates flow straight into their fundraising system.\n\nAlongside the build, we work closely with the editorial team, shaping blocks, donation flows and content tools around how they actually publish, on a support model built around a non-profit budget.",
@@ -162,68 +162,65 @@
   ],
   "logos": {
     "visible": true,
-    "title": "",
     "items": [
       {
         "visible": true,
         "name": "Earth AI",
         "image": "/logo-earthai.svg",
-        "url": ""
+        "scale": 1
       },
       {
         "visible": true,
         "name": "onformative",
         "image": "/logo-onformative.svg",
-        "url": ""
+        "scale": 1
       },
       {
         "visible": true,
         "name": "brandmelder",
         "image": "/logo-brandmelder.svg",
-        "url": ""
+        "scale": 1
       },
       {
         "visible": true,
         "name": "NEW STANDARD.S",
         "image": "/logo-newstandards.svg",
-        "url": ""
+        "scale": 1
       },
       {
         "visible": true,
         "name": "Jane Goodall Institute",
         "image": "/logo-jgi.png",
-        "url": ""
+        "scale": 1
       },
       {
         "visible": true,
         "name": "Carbon Equity",
         "image": "/logo-carbonequity.svg",
-        "url": ""
+        "scale": 1
       },
       {
         "visible": true,
         "name": "citizenM",
         "image": "/logo-citizenm.png",
-        "url": ""
+        "scale": 1
       },
       {
         "visible": true,
         "name": "CrossBoundary",
         "image": "/logo-crossboundary.svg",
-        "url": ""
+        "scale": 1
       },
       {
         "visible": true,
         "name": "Gallerie d'Italia",
         "image": "/logo-gdi.svg",
-        "url": "",
         "scale": 1.8
       },
       {
         "visible": true,
         "name": "KesselsKramer",
         "image": "/logo-kesselskramer.png",
-        "url": "",
         "scale": 1.8
       }
     ]
