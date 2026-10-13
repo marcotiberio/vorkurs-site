@@ -105,6 +105,11 @@ content:
                 label: Logo
                 type: image
                 description: SVG or transparent PNG, ideally single-colour. It's shown in grey and turns to full colour on hover when linked.
+              - name: scale
+                label: Size
+                type: number
+                default: 1
+                description: Makes this logo bigger or smaller than the rest, e.g. 1.5 for square or stacked logos. 1 = normal.
               - name: url
                 label: Link
                 type: string

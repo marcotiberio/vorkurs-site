@@ -47,7 +47,7 @@ const logos = site.logos || {};
 const logoItems = (logos.items || []).filter((l) => l.visible !== false && (l.name || l.image));
 const logo = (l, hidden) => {
   const inner = l.image
-    ? `<img src="${esc(l.image)}" alt="${hidden ? '' : esc(l.name)}" loading="lazy">`
+    ? `<img src="${esc(l.image)}" alt="${hidden ? '' : esc(l.name)}" loading="lazy"${+l.scale && +l.scale !== 1 ? ` style="--logo-scale: ${+l.scale}"` : ''}>`
     : `<span>${esc(l.name)}</span>`;
   return l.url && !hidden
     ? `${I(10)}<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${inner}</a></li>`
