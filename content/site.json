@@ -101,15 +101,6 @@
         },
         {
           "visible": true,
-          "heading": "citizenM",
-          "subheading": "Creative Direction & Design System",
-          "text": "We set the creative direction across citizenM's digital ecosystem: landing pages, campaigns, CRM and web content. We built and maintained the design system in Figma, from components and templates to tokens, and co-led campaigns that generated 20M in revenue.\n\nAlong the way we mentored the in-house junior designers, managed external agencies, and kept the visual language consistent across 50+ properties worldwide.",
-          "link_label": "View case study",
-          "link_url": "https://tiberiomar.com/citizenm/",
-          "link_visible": false
-        },
-        {
-          "visible": true,
           "heading": "CrossBoundary",
           "subheading": "Multi-site Frontend Development",
           "text": "Partnering with Berlin-based agency backendforth, we led the development of the multi-site platform for one of the largest sustainable-development investment firms in the Global South. We turned the component system into a scalable frontend, keeping visual integrity across regions and sub-brands.\n\nTranslating complex financial content into clear, trustworthy interfaces, with a system that scales.",
@@ -118,11 +109,13 @@
           "link_visible": false
         },
         {
-          "visible": false,
-          "heading": "Activant Capital",
-          "subheading": "Web Design & Frontend",
-          "text": "We redesigned the web presence of a research-led global investment firm, turning complex financial positioning into a clean, confident digital experience. We designed it in Figma and built it in code.",
-          "link_visible": true
+          "visible": true,
+          "heading": "citizenM",
+          "subheading": "Creative Direction & Design System",
+          "text": "We set the creative direction across citizenM's digital ecosystem: landing pages, campaigns, CRM and web content. We built and maintained the design system in Figma, from components and templates to tokens, and co-led campaigns that generated 20M in revenue.\n\nAlong the way we mentored the in-house junior designers, managed external agencies, and kept the visual language consistent across 50+ properties worldwide.",
+          "link_label": "View case study",
+          "link_url": "https://tiberiomar.com/citizenm/",
+          "link_visible": false
         },
         {
           "visible": true,
