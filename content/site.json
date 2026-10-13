@@ -83,6 +83,24 @@
         },
         {
           "visible": true,
+          "heading": "brandmelder",
+          "subheading": "Web Development & Image Tooling",
+          "text": "We built the website for brandmelder, a non-profit climate journalism project by Netzwerk Klimajournalismus Deutschland. Working with the Berlin studio NEW STANDARD.S, we took their brand design to launch in under two weeks.\n\nInside the CMS we built a halftone image generator, starting from the studio's p5.js prototype. Editors upload a photo, adjust the dots, pick a brand colour, and the result becomes the article's image. Every story stays on-brand, with no designer needed.",
+          "link_label": "View website",
+          "link_url": "https://brandmelder.org/",
+          "link_visible": true
+        },
+        {
+          "visible": true,
+          "heading": "Jane Goodall Institute Germany",
+          "subheading": "Web Development · Ongoing",
+          "text": "We're the technical partner for the upcoming relaunch of janegoodall.de, working alongside the design studio &why. We're turning their design into a lean, custom site the JGI team can run on their own, with donations at its core: chimp guardianships and gift certificates flow straight into their fundraising system.\n\nAlongside the build, we work closely with the editorial team, shaping blocks, donation flows and content tools around how they actually publish, on a support model built around a non-profit budget.",
+          "link_label": "View website",
+          "link_url": "https://janegoodall.de/",
+          "link_visible": false
+        },
+        {
+          "visible": true,
           "heading": "citizenM",
           "subheading": "Creative Direction & Design System",
           "text": "We set the creative direction across citizenM's digital ecosystem: landing pages, campaigns, CRM and web content. We built and maintained the design system in Figma, from components and templates to tokens, and co-led campaigns that generated 20M in revenue.\n\nAlong the way we mentored the in-house junior designers, managed external agencies, and kept the visual language consistent across 50+ properties worldwide.",
