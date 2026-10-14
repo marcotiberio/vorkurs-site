@@ -84,7 +84,7 @@
         },
         {
           "visible": true,
-          "heading": "brandmelder",
+          "heading": "brandmelder x NEW STANDARD.S",
           "subheading": "Web Development & Image Tooling",
           "text": "We built the website for brandmelder, a non-profit climate journalism project by Netzwerk Klimajournalismus Deutschland. Working with the Berlin studio NEW STANDARD.S, we took their brand design to launch in under two weeks.\n\nInside the CMS we built a halftone image generator, starting from the studio's p5.js prototype. Editors upload a photo, adjust the dots, pick a brand colour, and the result becomes the article's image. Every story stays on-brand, with no designer needed.",
           "link_label": "Website",
