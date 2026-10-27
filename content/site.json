@@ -126,6 +126,15 @@
           "link_label": "View exhibition",
           "link_url": "https://gallerieditalia.com/en/turin/exhibitions-and-initiatives/exhibitions/2025/09/11/erik-kessels-un-immagine-exhibition-turin/",
           "link_visible": true
+        },
+        {
+          "visible": true,
+          "heading": "Solea",
+          "subheading": "Brand & Booking Platform",
+          "text": "Solea brings certified practitioners into Amsterdam offices: Thai yoga massage, yoga, breathwork and sound baths. Instead of renting a third-party booking tool, Solea wanted a system of its own, shaped around how practitioners and office teams actually work.\n\nWe designed the brand identity and built a browser-based booking app on top of it. Employees at UP on Piet Heinkade book a slot in the weekly treatment room and pay through Stripe. Health intake stays out of the app on purpose and happens in person, so sensitive data never lives online. Deployed on Vercel, the app is light enough to run day to day and structured to grow into a platform for more practitioners and more buildings.",
+          "link_label": "",
+          "link_url": "",
+          "link_visible": false
         }
       ]
     },
