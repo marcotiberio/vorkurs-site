@@ -77,7 +77,7 @@
           "visible": true,
           "heading": "Solea",
           "subheading": "Brand & Booking Platform",
-          "text": "Solea brings certified practitioners into Amsterdam offices: Thai yoga massage, yoga, breathwork and sound baths. Instead of renting a third-party booking tool, Solea wanted a system of its own, shaped around how practitioners and office teams actually work.\n\nWe designed the brand identity and built a browser-based booking app on top of it. Employees at UP on Piet Heinkade book a slot in the weekly treatment room and pay through Stripe. Health intake stays out of the app on purpose and happens in person, so sensitive data never lives online. Deployed on Vercel, the app is light enough to run day to day and structured to grow into a platform for more practitioners and more buildings.",
+          "text": "Solea brings certified practitioners into Amsterdam offices: Thai yoga massage, chair massage and more. Instead of renting a third-party booking tool, Solea wanted a system of its own, shaped around how practitioners and office teams actually work.\n\nWe designed the brand identity and built a browser-based booking app on top of it. Employees at specific locations book a slot in the weekly treatment room and pay directly to the therapist. A light app enough to run day to day and structured to grow into a platform for more practitioners and more buildings.\n\nIt gives freelance therapists more independence: their clients, their prices and their schedule, without handing a cut of every session to the large booking platforms.",
           "link_visible": false
         },
         {
