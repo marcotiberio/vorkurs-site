@@ -9,7 +9,7 @@
     {
       "visible": true,
       "title": "Practice",
-      "intro": "",
+      "intro": "Four disciplines, one team. Most projects move through all four, from working out what to build to keeping it in shape after launch.",
       "items": [
         { "visible": true, "heading": "Consulting & Strategy", "label": "", "lead": "", "text": "We work out what needs to happen, and what doesn’t. Goals, users, platform and how your team actually works, so you invest in the right thing and everyone knows why." },
         { "visible": true, "heading": "Brand & Story Systems", "label": "", "lead": "", "text": "Brand, content and digital systems that hold together in practice, not just on paper. Teams move faster, stay consistent, and change course without starting over." },

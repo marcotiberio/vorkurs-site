@@ -8,6 +8,7 @@
     "note": "The name comes from the *Vorkurs*, the Bauhaus preliminary course where every student started with materials, form and function before anything else.",
     "show_note": false
   },
+  "show_logos": false,
   "logos": [
     { "visible": true, "name": "Carbon Equity", "image": "assets/logos/logo-carbonequity.svg", "height": 32, "height_mobile": 26, "mono": false },
     { "visible": true, "name": "CrossBoundary", "image": "assets/logos/logo-crossboundary.svg", "height": 34, "height_mobile": 26, "mono": false },
@@ -61,7 +62,7 @@
       "outcome": "Campaigns that generated €20M+ in revenue in 2024 alone, kept on-brand across 37 hotels worldwide.",
       "layout": "feature",
       "media": [
-        { "type": "image", "src": "img/cm-sale.jpg", "alt": "Sleep like a champion campaign landing page", "caption": "“Sleep like a champion”, interactive sleep-type quiz", "frame": "plain" },
+        { "type": "video", "src": "img/cm-film.mp4", "alt": "citizenM brand film excerpt", "caption": "Short brand film, directed end to end", "frame": "plain" },
         { "type": "image", "src": "img/cm-sleep.jpg", "alt": "Sale campaign landing page", "caption": "Sale campaign landing page", "frame": "plain" },
         { "type": "image", "src": "img/cm-wake.jpg", "alt": "Quiz result page", "caption": "Quiz result", "frame": "plain" }
       ],
@@ -149,7 +150,7 @@
       "visible": true,
       "id": "solea",
       "title": "Solea",
-      "meta": ["Brand & booking platform"],
+      "meta": ["Design and build for a workplace wellbeing start-up, Amsterdam", "Brand & booking platform"],
       "outcome": "A booking platform of its own, so therapists keep their clients, their prices and their full fee.",
       "layout": "text",
       "media": [
