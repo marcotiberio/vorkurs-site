@@ -1,6 +1,6 @@
 // Builds vorkurs.space from content/site.json (edited in Pages CMS) into dist/.
 // Run: node build.mjs   — then open dist/index.html
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, copyFileSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, copyFileSync, statSync, cpSync } from 'node:fs';
 
 const OUT = process.env.OUT || 'dist';
 const site = JSON.parse(readFileSync('content/site.json', 'utf8'));
@@ -179,12 +179,15 @@ for (const file of readdirSync('static')) {
   copyFileSync(`static/${file}`, `${OUT}/${file}`);
 }
 writeFileSync(`${OUT}/index.html`, html);
+// The redesign lives in mockup/ as static pages and replaces the generated index.html.
+cpSync('mockup', OUT, { recursive: true, filter: (src) => !src.endsWith('.DS_Store') });
 writeFileSync(`${OUT}/robots.txt`, seo.noindex
   ? 'User-agent: *\nDisallow: /\n'
   : `User-agent: *\nAllow: /\n\nSitemap: ${abs('/sitemap.xml')}\n`);
 writeFileSync(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>${esc(url)}</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod></url>
+  <url><loc>${esc(abs('/approach.html'))}</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod></url>
 </urlset>
 `);
 console.log(`Built ${OUT}/index.html (${(site.sections || []).length} sections).`);
