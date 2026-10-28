@@ -10,6 +10,7 @@
 @theme {
   /* mobile is the base (Tailwind is mobile-first, so it has no prefix); tablet: and desktop: apply from these widths up */
   --breakpoint-*: initial;
+  --breakpoint-mobile: 560px; /* also the measure for text: max-w-screen-mobile */
   --breakpoint-tablet: 769px;
   --breakpoint-desktop: 1280px;
 

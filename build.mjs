@@ -16,8 +16,11 @@ const LINK = 'underline decoration-2 underline-offset-4 hover:no-underline';
 const CURRENT = 'aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-4 aria-[current=page]:hover:no-underline';
 const FOCUS = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink';
 const RULE = 'border-t-2 border-ink';
-const SECTION_HEAD = 'flex items-baseline justify-between gap-4 pt-10 pb-7';
-const H2 = 'text-title-sm leading-[34px] tablet:text-title tablet:leading-[54px]';
+// Section headings are a full-width strip: the title repeated in uppercase between two rules.
+// Screen readers get it once; the repeats are decoration.
+const strip = (title, id = '') => `<div class="mt-0 mb-7 flex gap-x-8 overflow-hidden border-y-2 border-ink py-2 whitespace-nowrap uppercase text-body-sm tracking-normal tablet:text-body tablet:tracking-normal"${id ? ` id="${id}"` : ''}>
+    <h2 class="flex-none">${esc(title)}</h2>${`<span class="flex-none" aria-hidden="true">${esc(title)}</span>`.repeat(15)}
+  </div>`;
 const BODY = 'text-body-sm tablet:text-body';
 const FIGURE = 'flex min-w-0 flex-col gap-2';
 
@@ -74,7 +77,7 @@ const header = (current) => {
   const n = site.nav;
   const cur = (page) => (page === current ? ' aria-current="page"' : '');
   const barLink = cx('hidden no-underline tablet:inline', CURRENT, FOCUS);
-  const menuLink = cx('block px-3 py-1.5 text-center text-[22px] tracking-[-0.7px] no-underline', CURRENT, FOCUS);
+  const menuLink = cx('block px-3.5 py-1.5 text-[22px] tracking-[-0.7px] no-underline', CURRENT, FOCUS);
   const x = 'hidden group-data-[open=true]:inline';
   return `  <header class="pointer-events-none sticky top-[env(safe-area-inset-top,0px)] z-20 flex justify-center pt-3">
     <nav class="bar group pointer-events-auto w-[min(560px,100%)] border-2 border-ink bg-paper text-nav" aria-label="Main" data-open="false">
@@ -84,43 +87,44 @@ const header = (current) => {
           <a class="${barLink}" href="index.html#work"${cur('home')}>${esc(n.work)}</a>
           <a class="${barLink}" href="approach.html"${cur('approach')}>${esc(n.approach)}</a>
           <span class="hidden h-[18px] w-px bg-ink tablet:block" aria-hidden="true"></span>
-          <a class="${barLink}" href="index.html#contact">${esc(n.touch)}</a>
+          <a class="${barLink}" href="mailto:${esc(site.email)}">${esc(n.touch)}</a>
           <button class="${cx('inline-flex cursor-pointer items-center gap-2.5 px-0.5 py-1.5 tablet:hidden', FOCUS)}" id="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="group-data-[open=true]:hidden">Menu</span><span class="${x} text-[22px] leading-none" aria-hidden="true">×</span><span class="${x} sr-only">Close</span></button>
         </div>
       </div>
       <div class="bar-menu grid grid-rows-[0fr] transition-[grid-template-rows] duration-[280ms] ease-[ease] group-data-[open=true]:grid-rows-[1fr] motion-reduce:transition-none tablet:hidden" id="menu">
         <div class="overflow-hidden">
-          <ul class="flex flex-col items-center gap-1 pt-2 pb-5">
+          <ul class="flex flex-col gap-1 pt-2 pb-2">
             <li><a class="${menuLink}" href="index.html#work"${cur('home')}>${esc(n.work)}</a></li>
-            <li><a class="${menuLink}" href="approach.html"${cur('approach')}>${esc(n.approach)}${n.approach_note ? `<small class="-mt-0.5 block text-center text-[14px] tracking-[-0.1px] text-grey">${esc(n.approach_note)}</small>` : ''}</a></li>
+            <li><a class="${menuLink}" href="approach.html"${cur('approach')}>${esc(n.approach)}${n.approach_note ? `<small class="hidden -mt-0.5 text-[14px] tracking-[-0.1px] text-grey">${esc(n.approach_note)}</small>` : ''}</a></li>
             <li><a class="${menuLink}" href="index.html#contact">${esc(n.contact)}</a></li>
           </ul>
-          <a class="${cx('mx-1.5 mb-1.5 block bg-ink p-3.5 text-center text-paper no-underline transition-colors duration-200 hover:bg-ink-soft', FOCUS)}" href="index.html#contact">${esc(n.cta)}</a>
+          <a class="${cx('mx-1.5 mb-1.5 block bg-ink p-3.5 text-center text-paper no-underline transition-colors duration-200 hover:bg-ink-soft', FOCUS)}" href="index.html#contact" hidden>${esc(n.cta)}</a>
         </div>
       </div>
     </nav>
   </header>`;
 };
 
-const hero = (h, extra = '') => `  <section class="flex flex-col gap-6 pt-[34px] pb-8 tablet:gap-9 tablet:pt-[62px] tablet:pb-12">
+const hero = (h, extra = '') => `  <section class="flex flex-col gap-6 pt-8 pb-8 tablet:gap-9 tablet:pt-12 tablet:pb-12">
     <h1 class="text-display-sm text-balance tablet:text-display">${md(h.title)}${h.subtitle ? ` ${md(h.subtitle)}` : ''}</h1>
 ${extra}  </section>`;
 
 // On other pages, #contact and friends point back to the home page.
 const footer = (isHome) => {
   const closing = isHome ? md(site.closing) : md(site.closing).replace(/href="#/g, 'href="index.html#');
-  return `  <section class="mt-14 ${RULE} pt-9">
+  // Closing line on the left, contact details beside it; stacked on phones.
+  return `  <footer class="mt-14 grid grid-cols-1 gap-x-20 gap-y-10 ${RULE} pt-9 tablet:grid-cols-[minmax(0,1fr)_auto]"${isHome ? ' id="contact"' : ''}>
     <p class="max-w-screen-mobile tablet:max-w-screen-tablet text-title-sm text-balance tablet:text-title">${closing}</p>
-  </section>
-  <footer class="mt-14 flex flex-wrap gap-x-20 gap-y-6 text-body-sm tablet:text-body tablet:leading-6"${isHome ? ' id="contact"' : ''}>
-    <div><h4 class="text-grey">Contact</h4><p class="min-w-0">${esc(site.email)}<br>${esc(site.phone)}</p></div>
-    <div><h4 class="text-grey">Studio</h4><p class="min-w-0">${md(site.address)}</p></div>
+    <div class="flex flex-wrap gap-x-20 gap-y-6 text-body-sm tablet:text-body tablet:leading-6">
+      <div><h4 class="text-grey">Contact</h4><p class="min-w-0">${esc(site.email)}<br>${esc(site.phone)}</p></div>
+      <div><h4 class="text-grey">Studio</h4><p class="min-w-0">${md(site.address)}</p></div>
+    </div>
   </footer>`;
 };
 
 const page = (meta, current, body, after = '') => `${head(meta)}
 <body class="bg-paper font-sans text-ink antialiased before:fixed before:inset-x-0 before:top-0 before:z-30 before:h-[env(safe-area-inset-top,0px)] before:bg-paper [&.sheet-open]:overflow-hidden">
-<div class="mx-auto flex w-full max-w-[1720px] flex-col pr-[max(20px,env(safe-area-inset-right,0px))] pb-[120px] pl-[max(20px,env(safe-area-inset-left,0px))]">
+<div class="mx-auto flex w-full max-w-[1720px] flex-col pr-[max(20px,env(safe-area-inset-right,0px))] pb-[20px] pl-[max(20px,env(safe-area-inset-left,0px))]">
 ${header(current)}
 
 ${body}
@@ -144,7 +148,8 @@ const visual = (m, cls) => m.type === 'video'
   : `<img class="${cls}" src="${src(m.src)}" alt="${esc(m.alt)}">`;
 
 // aspect: set by the layout around the figure; it wins over the frame's own ratio.
-const figure = (m, { aspect, figureClass = FIGURE } = {}) => {
+// fill: from tablet up, drop the ratio and stretch to the row height (set by the column beside it).
+const figure = (m, { aspect, fill, figureClass = FIGURE } = {}) => {
   const caption = m.caption ? `\n  <figcaption class="text-caption text-grey">${md(m.caption)}</figcaption>` : '';
   const ratio = aspect || FRAME_ASPECT[m.frame] || 'aspect-[3/2]';
   if (m.type === 'halftone') {
@@ -174,7 +179,7 @@ const figure = (m, { aspect, figureClass = FIGURE } = {}) => {
   }
   const shot = m.frame === 'shot';
   return `<figure class="${figureClass}">
-  <div class="${cx('max-w-full overflow-hidden bg-panel', ratio, shot && 'shadow-[inset_0_0_0_1px_rgba(0,0,0,.12)]')}">${visual(m, cx('size-full object-cover', shot && 'object-top'))}</div>${caption}
+  <div class="${cx('max-w-full overflow-hidden bg-panel', ratio, fill && 'relative tablet:aspect-auto tablet:flex-1', shot && 'shadow-[inset_0_0_0_1px_rgba(0,0,0,.12)]')}">${visual(m, cx('size-full object-cover', fill && 'tablet:absolute tablet:inset-0', shot && 'object-top'))}</div>${caption}
 </figure>`;
 };
 
@@ -182,7 +187,7 @@ const figure = (m, { aspect, figureClass = FIGURE } = {}) => {
 
 // Per layout: the grid, and the aspect ratio of the figure at index i (undefined = the frame decides).
 const LAYOUTS = {
-  feature: { grid: 'grid-cols-1 tablet:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]', aspect: () => undefined },
+  feature: { grid: 'grid-cols-1 tablet:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]', aspect: () => undefined, fill: (i) => i === 0 },
   two: { grid: 'grid-cols-1 tablet:grid-cols-2', aspect: () => undefined },
   three: { grid: 'grid-cols-2 tablet:grid-cols-3', aspect: (i) => (i ? 'aspect-[3/4]' : 'aspect-[3/2] tablet:aspect-[3/4]'), first: 'col-span-full tablet:col-span-1' },
   pano: { grid: 'grid-cols-2', aspect: (i) => (i ? 'aspect-[3/2]' : 'aspect-video tablet:aspect-[21/9]'), first: 'col-span-full' },
@@ -193,10 +198,10 @@ const caseCard = (c, index) => {
   const media = c.media || [];
   const layout = LAYOUTS[c.layout] || LAYOUTS.feature;
   const inMedia = c.layout === 'text';
-  const body = `<div class="${cx('grid gap-x-6 gap-y-3', BODY, inMedia ? 'col-span-full grid-cols-1 content-start tablet:col-span-1 tablet:pl-4' : 'grid-cols-1 tablet:grid-cols-2')}">
-${indent(ps(c.text, 'max-w-[453px] tablet:max-w-[533px]'), 2)}
+  const body = `<div class="${cx('grid gap-x-3 gap-y-3', BODY, inMedia ? 'col-span-full grid-cols-1 content-start tablet:col-span-1 tablet:pl-4' : 'grid-cols-1 tablet:grid-cols-2')}">
+${indent(ps(c.text, 'max-w-screen-tablet'), 2)}
 </div>`;
-  const fig = (m, i) => figure(m, { aspect: layout.aspect(i), figureClass: cx(FIGURE, i === 0 && layout.first) });
+  const fig = (m, i) => figure(m, { aspect: layout.aspect(i), fill: layout.fill?.(i), figureClass: cx(FIGURE, i === 0 && layout.first) });
   let inner;
   if (!LAYOUTS[c.layout] || c.layout === 'feature') {
     const [first, ...rest] = media;
@@ -220,7 +225,7 @@ ${indent(ps(c.text, 'max-w-[453px] tablet:max-w-[533px]'), 2)}
 ${(c.meta || []).filter(Boolean).map((m) => `      <li>${md(m)}</li>`).join('\n')}
     </ul>
   </div>
-  <p class="max-w-[382px] tablet:max-w-[556px] text-lead-sm text-balance tablet:text-lead">${md(c.outcome)}</p>
+  <p class="max-w-screen-tablet text-lead-sm text-balance tablet:text-lead">${md(c.outcome)}</p>
 ${media.length ? `  <div class="grid gap-3 ${layout.grid}">\n${indent(inner, 4)}\n  </div>\n` : ''}${inMedia ? '' : indent(body, 2) + '\n'}${link ? `  ${link}\n` : ''}</article>`;
 };
 
@@ -230,7 +235,7 @@ const sheetBlock = (b) => {
   const parts = [];
   const two = b.columns === 'two';
   if (b.text) parts.push(`<div class="${cx('grid gap-x-10 gap-y-5 text-body-sm tablet:text-body tablet:leading-[26px]', two && 'tablet:grid-cols-2')}">
-${indent(ps(b.text, two ? 'max-w-[453px] tablet:max-w-[533px]' : 'max-w-[610px] tablet:max-w-[718px]'), 2)}
+${indent(ps(b.text, two ? 'max-w-screen-mobile' : 'w-full'), 2)}
 </div>`);
   const media = b.media || [];
   if (media.length) {
@@ -260,10 +265,10 @@ const sheet = (c) => {
     <article class="mx-auto flex max-w-[calc(1680px+2*max(20px,3vw))] flex-col gap-10 px-[max(20px,3vw)] pt-10 pb-16">
       <header class="flex flex-col gap-4">
         <h2 class="font-strong text-[38px] leading-10 tracking-[-1.6px] tablet:text-[60px] tablet:leading-[62px] tablet:tracking-[-3px]" id="${esc(c.id)}-title">${esc(c.title)}</h2>
-${f.outcome ? `        <p class="max-w-[408px] tablet:max-w-[593px] text-lead-sm text-balance tablet:text-lead">${md(f.outcome)}</p>\n` : ''}      </header>
+${f.outcome ? `        <p class="w-full text-lead-sm text-balance tablet:text-lead">${md(f.outcome)}</p>\n` : ''}      </header>
 ${(f.facts || []).length ? `
       <dl class="grid grid-cols-2 gap-x-8 gap-y-5 tablet:grid-cols-4">
-${f.facts.map((x) => `        <div class="min-w-0 border-t border-ink pt-3"><dt class="mb-1 text-label text-grey">${esc(x.label)}</dt><dd class="${BODY}">${md(x.value)}</dd></div>`).join('\n')}
+${f.facts.map((x) => `        <div class="min-w-0 border-t-2 border-ink pt-3"><dt class="mb-1 text-label text-grey">${esc(x.label)}</dt><dd class="${BODY}">${md(x.value)}</dd></div>`).join('\n')}
       </dl>
 ` : ''}
 ${(f.blocks || []).map((b) => indent(sheetBlock(b), 6)).join('\n\n')}
@@ -281,17 +286,17 @@ ${(f.blocks || []).map((b) => indent(sheetBlock(b), 6)).join('\n\n')}
 const cases = shown(home.cases);
 const h = home.hero;
 const heroExtra = `    <div class="flex flex-wrap items-baseline gap-x-12 gap-y-4 text-[17px] leading-6 tracking-[-0.6px] tablet:text-[20px]"${h.show_contact ? '' : ' hidden'}>
-      <a class="${LINK}" href="#contact">${esc(site.nav.cta)}</a>
+      <a class="${LINK}" href="#contact" hidden>${esc(site.nav.cta)}</a>
       <span class="text-grey">${esc(site.email)} · ${esc(site.phone)}</span>
     </div>
-${h.note ? `    <p class="max-w-[452px] text-note text-grey [&_i]:text-ink"${h.show_note ? '' : ' hidden'}>${md(h.note)}</p>\n` : ''}`;
+${h.note ? `    <p class="max-w-screen-mobile text-note text-grey [&_i]:text-ink"${h.show_note ? '' : ' hidden'}>${md(h.note)}</p>\n` : ''}`;
 
 // Logos sit at one optical height, tuned per logo in the CMS; all are forced to black.
 const logo = (l) => {
   const filter = l.mono ? '[filter:grayscale(1)_brightness(0.4)_contrast(10)]' : '[filter:grayscale(1)_contrast(10)]';
   return `      <li><img class="block h-[var(--hm)] w-auto ${filter} tablet:h-[var(--h)]" style="--h:${+l.height || 24}px;--hm:${+l.height_mobile || 18}px" src="${src(l.image)}" alt="${esc(l.name)}"></li>`;
 };
-const logos = shown(home.logos);
+const logos = home.show_logos === false ? [] : shown(home.logos);
 
 const homeBody = `${hero(h, heroExtra)}
 ${logos.length ? `
@@ -301,9 +306,7 @@ ${logos.map(logo).join('\n')}
     </ul>
   </section>
 ` : ''}
-  <div class="${SECTION_HEAD}" id="work">
-    <h2 class="${H2}">${esc(home.work_title)}</h2>
-  </div>
+  ${strip(home.work_title, 'work')}
 
   <div class="flex flex-col">
 ${cases.map((c, i) => indent(caseCard(c, i), 2)).join('\n\n')}
@@ -314,13 +317,13 @@ const homeAfter = cases.filter((c) => c.full_case?.enabled).map(sheet).join('\n'
 
 // --- approach ---
 
-const item = (it) => `<div class="flex min-w-0 flex-col gap-2 border-t border-ink pt-3.5"><h3 class="flex items-baseline justify-between gap-4 font-strong text-[20px] leading-6 tracking-[-0.8px] tablet:text-[24px] tablet:leading-7">${esc(it.heading)}${it.label ? ` <span class="font-sans text-[16px] tracking-[-0.2px] whitespace-nowrap text-grey">${esc(it.label)}</span>` : ''}</h3>${it.lead ? `<p class="max-w-[453px] tablet:max-w-[533px] italic ${BODY}">${md(it.lead)}</p>` : ''}${ps(it.text, `max-w-[453px] tablet:max-w-[533px] ${BODY}`).replace(/\n/g, '')}</div>`;
+const item = (it) => `<div class="flex min-w-0 flex-col gap-2 border-t-2 border-ink pt-3.5"><h3 class="flex items-baseline justify-between gap-4 font-strong text-[20px] leading-6 tracking-[-0.8px] tablet:text-[24px] tablet:leading-7">${esc(it.heading)}${it.label ? ` <span class="font-sans text-[16px] tracking-[-0.2px] whitespace-nowrap text-grey">${esc(it.label)}</span>` : ''}</h3>${it.lead ? `<p class="max-w-screen-mobile italic ${BODY}">${md(it.lead)}</p>` : ''}${ps(it.text, `max-w-screen-mobile ${BODY}`).replace(/\n/g, '')}</div>`;
 
 const approachBody = `${hero(approach.hero)}
 
-${shown(approach.sections).map((s, i) => `  <section${i > 0 ? ` class="mt-14 ${RULE}"` : ''}>
-    <div class="${SECTION_HEAD}"><h2 class="${H2}">${esc(s.title)}</h2></div>
-${s.intro ? `    <p class="-mt-3 mb-8 max-w-[512px] tablet:max-w-[602px] text-grey ${BODY}">${md(s.intro)}</p>\n` : ''}    <div class="grid grid-cols-1 gap-7 tablet:grid-cols-2 tablet:gap-x-10 tablet:gap-y-9">
+${shown(approach.sections).map((s, i) => `  <section${i > 0 ? ' class="mt-14"' : ''}>
+    ${strip(s.title)}
+${s.intro ? `    <p class="mb-8 max-w-screen-tablet ${BODY}">${md(s.intro)}</p>\n` : ''}    <div class="grid grid-cols-1 gap-7 tablet:grid-cols-2 tablet:gap-x-10 tablet:gap-y-9">
 ${shown(s.items).map((it) => `      ${item(it)}`).join('\n')}
     </div>
   </section>`).join('\n\n')}`;

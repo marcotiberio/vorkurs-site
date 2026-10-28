@@ -35,7 +35,7 @@ content:
           - { name: contact, label: Contact link (menu), type: string }
           - { name: touch, label: Contact link (bar), type: string }
           - { name: cta, label: Call to action, type: string, description: Menu button, also used in the home hero. }
-      - { name: closing, label: Closing line (above the footer), type: text, description: "Links as [text](url). [Get in touch.](#contact) jumps to the contact details." }
+      - { name: closing, label: Closing line (above the footer), type: text, description: "Links as [text](url). [Get in touch.](mailto:marco@vorkurs.space) opens an email." }
 
   # ---------------------------------------------------------------- home
   - name: home
@@ -55,6 +55,7 @@ content:
           - { name: show_contact, label: Show call to action and contact line, type: boolean, default: false }
           - { name: note, label: Small note, type: text, description: "*text* for italic." }
           - { name: show_note, label: Show small note, type: boolean, default: false }
+      - { name: show_logos, label: Show client logos, type: boolean, default: true }
       - name: logos
         label: Client logos
         type: object

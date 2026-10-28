@@ -5,5 +5,9 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "tailwindcss": "^4.3.3"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node dev.mjs"
   }
 }
