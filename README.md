@@ -1,31 +1,31 @@
-# vorkurs.space (Pages CMS)
+# vorkurs.space
 
-Same site, same design — the text now lives in `content/site.json` and is edited at **app.pagescms.org**.
+All text and media are edited in **Pages CMS** (app.pagescms.org). The pages are generated, so there is no `index.html` to edit by hand.
 
-- `content/site.json` — all text (intro, sections, footer)
-- `static/` — fonts, favicon, share image, and the CSS (`style.css`, unchanged from the original)
-- `build.mjs` — turns the content into `dist/index.html`
-- `.pages.yml` — the editor setup (hidden file; `pages-config.yml` is a visible copy)
-
-## Publish
-
-1. Put this folder on GitHub (GitHub Desktop → File → Add local repository → Publish). Check `.pages.yml` is at the top level of the repo.
-2. Hosting — either:
-   - **Vercel (where the site is now):** import the repo; settings come from `vercel.json`. Then move the vorkurs.space domain to this project.
-   - **Netlify:** import the repo; settings come from `netlify.toml`.
-3. Editor: app.pagescms.org → sign in with GitHub → give it access to the repo.
+- `content/site.json`: studio name, contact details, navigation, closing line, link preview image
+- `content/home.json`: hero, client logos, case studies (including full cases that open over the page)
+- `content/approach.json`: hero and sections (Practice, Engagements, Principles)
+- `.pages.yml`: the editor setup. Every key in the JSON files must be declared here, or Pages CMS drops it on save.
+- `styles/site.css`: Tailwind entry with the design tokens (colours, fonts, type scale). The utility classes are in the markup in `build.mjs`.
+- `assets/`: `site.js`, `halftone.js`, fonts and client logos (logo uploads land in `assets/logos/`)
+- `img/`: case study images and videos (uploads land here)
+- `fav.png`, `ogimage.png`, `robots.txt`, `sitemap.xml`: served from the site root
+- `build.mjs`: renders the pages from `content/`, copies the files above into `dist/` and compiles the CSS with Tailwind
 
 ## Editing
 
-One entry: **vorkurs.space**. Sections are a list (drag to reorder); each has items. Pick a style per section:
-- *Plain* / *Principle* — grey heading + text
-- *Way of working* — "Heading – label", italic intro, text
-- *Case study* — heading, role, text, optional link (untick "Show link" to hide it)
+Three entries: **Site settings**, **Home**, **Approach**. Lists can be dragged to reorder; untick *Show on site* to hide something without deleting it.
 
-Empty line in a text = new paragraph. Links: `[text](https://…)`.
+In text fields: an empty line starts a new paragraph, `[text](https://…)` makes a link, `*text*` makes italics.
 
-**SEO & link previews** (bottom of the entry): page title, meta description, share title/description/image, language, X handle, and a "Hide from search engines" switch. Empty share fields fall back to the page title and meta description. The build also writes `robots.txt`, `sitemap.xml` and Organization structured data from the contact details.
+Case studies pick a media layout (large + stacked, two, three, wide + two, two + text) and each media item a frame (plain, screenshot, wide, tall, in a phone). A media item of type *Halftone tool* turns its image into the live halftone generator. Tick *Has a full case* to add a full case that opens over the page; its blocks are sections with optional heading, text and media.
+
+## Publish
+
+Push to `main` (Pages CMS commits there). Vercel and Netlify install the dependencies (Tailwind), then both run `node build.mjs` and publish `dist/`.
+
+A new page needs a content file, an entry in `.pages.yml`, a render step in `build.mjs` and a line in `sitemap.xml`.
 
 ## Preview locally
 
-`node build.mjs`, then open `dist/index.html` (or `npx serve dist`).
+`npm install` once, then `node build.mjs` and `npx serve dist`.

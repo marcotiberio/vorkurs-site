@@ -1,0 +1,53 @@
+/* Tailwind entry. build.mjs compiles it to dist/assets/site.css; the markup (and its classes) lives in build.mjs.
+   Layout: one column, 2px rules, II-Vorkurs, black and white, project images in their original colours. */
+@import "tailwindcss" source(none);
+@source "../build.mjs";
+
+@font-face { font-family: 'II-Vorkurs-Medium'; src: url('fonts/II-Vorkurs-Medium.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'II-Vorkurs-Medium'; src: url('fonts/II-Vorkurs-Medium-Oblique.ttf') format('truetype'); font-style: italic; font-display: swap; }
+@font-face { font-family: 'II-Vorkurs-Bold'; src: url('fonts/II-Vorkurs-Bold.ttf') format('truetype'); font-display: swap; }
+
+@theme {
+  /* mobile is the base (Tailwind is mobile-first, so it has no prefix); tablet: and desktop: apply from these widths up */
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 769px;
+  --breakpoint-desktop: 1280px;
+
+  --color-*: initial;
+  --color-ink: #000000;
+  --color-ink-soft: #333333;
+  --color-paper: #ffffff;
+  --color-grey: #767676;
+  --color-panel: #f1f1f1;
+  --color-tool: #fc8a6a;   /* brandmelder's own orange, as the tool outputs it */
+  --color-cream: #fff9ec;  /* Solea app background */
+  --color-sand: #ece6da;
+  --color-device: #111111;
+
+  --font-*: initial;
+  --font-sans: 'II-Vorkurs-Medium', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --font-strong: 'II-Vorkurs-Bold', 'II-Vorkurs-Medium', -apple-system, sans-serif;
+  --font-system: -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* type scale: size, line height, tracking */
+  --text-*: initial;
+  --text-display: 60px;    --text-display--line-height: 66px;    --text-display--letter-spacing: -3px;
+  --text-display-sm: 34px; --text-display-sm--line-height: 38px; --text-display-sm--letter-spacing: -1.5px;
+  --text-title: 45px;      --text-title--line-height: 48px;      --text-title--letter-spacing: -2.25px;
+  --text-title-sm: 28px;   --text-title-sm--line-height: 32px;   --text-title-sm--letter-spacing: -1.2px;
+  --text-lead: 32px;       --text-lead--line-height: 38px;       --text-lead--letter-spacing: -1.3px;
+  --text-lead-sm: 22px;    --text-lead-sm--line-height: 27px;    --text-lead-sm--letter-spacing: -0.7px;
+  --text-body: 20px;       --text-body--line-height: 25px;       --text-body--letter-spacing: -0.6px;
+  --text-body-sm: 17px;    --text-body-sm--line-height: 22px;    --text-body-sm--letter-spacing: -0.6px;
+  --text-nav: 18px;        --text-nav--line-height: normal;      --text-nav--letter-spacing: -0.5px;
+  --text-caption: 14px;    --text-caption--line-height: 18px;    --text-caption--letter-spacing: -0.1px;
+  --text-note: 15px;       --text-note--line-height: 20px;       --text-note--letter-spacing: -0.2px;
+  --text-label: 16px;      --text-label--line-height: normal;    --text-label--letter-spacing: -0.2px;
+
+  --animate-sheet-in: sheet-in .32s ease-out;
+  @keyframes sheet-in { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+}
+
+@layer base {
+  html { line-height: normal; color-scheme: light; }
+}

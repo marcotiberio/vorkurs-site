@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vorkurs.space/sitemap.xml

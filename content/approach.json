@@ -1,0 +1,43 @@
+{
+  "title": "Approach",
+  "description": "",
+  "hero": {
+    "title": "How we work.",
+    "subtitle": "What we do, the ways you can bring us in, and the principles behind both."
+  },
+  "sections": [
+    {
+      "visible": true,
+      "title": "Practice",
+      "intro": "",
+      "items": [
+        { "visible": true, "heading": "Consulting & Strategy", "label": "", "lead": "", "text": "We work out what needs to happen, and what doesn’t. Goals, users, platform and how your team actually works, so you invest in the right thing and everyone knows why." },
+        { "visible": true, "heading": "Brand & Story Systems", "label": "", "lead": "", "text": "Brand, content and digital systems that hold together in practice, not just on paper. Teams move faster, stay consistent, and change course without starting over." },
+        { "visible": true, "heading": "Build & Deploy", "label": "", "lead": "", "text": "We build fast, accessible, maintainable products and put them into production: websites, design systems, internal tools, AI-assisted workflows. No fragile setups, no handing off to someone else to finish." },
+        { "visible": true, "heading": "Stewardship & Evolution", "label": "", "lead": "", "text": "After launch we stay close. We watch how it’s used, improve what matters and keep the system from fragmenting, so your investment keeps paying off instead of needing a rebuild." }
+      ]
+    },
+    {
+      "visible": true,
+      "title": "Engagements",
+      "intro": "Most long-term partnerships start embedded. If you're not sure which fits, start with an audit.",
+      "items": [
+        { "visible": true, "heading": "Audit", "label": "Fixed scope", "lead": "For when something feels off but you're not sure what.", "text": "We look at your current setup (platform, brand, workflows), map the gaps, and give you a clear plan. Fixed fee, no commitment beyond that." },
+        { "visible": true, "heading": "Embedded", "label": "Monthly retainer", "lead": "For teams that need someone senior inside, not alongside.", "text": "We join your team 2–3 days a week, sit with the people who use what we build, and work directly in your stack: design, engineering, or both." },
+        { "visible": true, "heading": "Project", "label": "End to end", "lead": "For when you need something designed, built and running.", "text": "From brief to launch and into production. Strategy, design, engineering, deployment: one team, no handoff gaps." },
+        { "visible": true, "heading": "Advisory", "label": "Fractional lead", "lead": "For organisations that need senior direction without a full-time hire.", "text": "We come in as a fractional lead: set the direction, define the workflow, align the team, and step back when the system runs on its own." }
+      ]
+    },
+    {
+      "visible": true,
+      "title": "Principles",
+      "intro": "The name comes from the Bauhaus *Vorkurs*, the preliminary course where every student started with materials, form and function. These four come from there.",
+      "items": [
+        { "visible": true, "heading": "Form follows function", "label": "", "lead": "", "text": "Every decision is shaped by use, context, and accessibility. Structure comes first." },
+        { "visible": true, "heading": "True materials", "label": "", "lead": "", "text": "Strategy, technology, and content that reflect reality. Built for durability, not short-term appeal." },
+        { "visible": true, "heading": "Systems over artifacts", "label": "", "lead": "", "text": "We don't make one-off deliverables. We make structures that stay consistent as they grow." },
+        { "visible": true, "heading": "Close to the problem", "label": "", "lead": "", "text": "We work where the work happens: with your team, your users and your real data, not from a deck at a distance." }
+      ]
+    }
+  ]
+}

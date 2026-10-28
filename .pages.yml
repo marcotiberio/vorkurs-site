@@ -1,185 +1,202 @@
-# Pages CMS configuration — https://pagescms.org/docs
+# Pages CMS configuration: https://pagescms.org/docs
+# Every key in content/*.json must be listed here: Pages CMS drops fields it doesn't know about when it saves.
 media:
-  input: static
-  output: /
+  - name: images
+    label: Images & videos
+    input: img
+    output: img
+  - name: logos
+    label: Logos
+    input: assets/logos
+    output: assets/logos
+
 content:
+  # ---------------------------------------------------------------- site
   - name: site
-    label: vorkurs.space
+    label: Site settings
     type: file
     path: content/site.json
     format: json
     fields:
+      - { name: name, label: Studio name, type: string, description: Logo text and the end of every page title. }
+      - { name: url, label: Site address, type: string, description: "e.g. https://vorkurs.space (no trailing slash)" }
+      - { name: description, label: Default description, type: text, description: For search results and link previews when a page has none of its own. }
+      - { name: share_image, label: Link preview image, type: image, options: { media: images }, description: "Shown when the site is shared. 1200×630 works best." }
+      - { name: email, label: Email, type: string }
+      - { name: phone, label: Phone, type: string }
+      - { name: address, label: Studio address, type: text, description: One line per line. }
+      - name: nav
+        label: Navigation
+        type: object
+        fields:
+          - { name: work, label: Work link, type: string }
+          - { name: approach, label: Approach link, type: string }
+          - { name: approach_note, label: Approach note (small text in the menu), type: string }
+          - { name: contact, label: Contact link (menu), type: string }
+          - { name: touch, label: Contact link (bar), type: string }
+          - { name: cta, label: Call to action, type: string, description: Menu button, also used in the home hero. }
+      - { name: closing, label: Closing line (above the footer), type: text, description: "Links as [text](url). [Get in touch.](#contact) jumps to the contact details." }
+
+  # ---------------------------------------------------------------- home
+  - name: home
+    label: Home
+    type: file
+    path: content/home.json
+    format: json
+    fields:
+      - { name: title, label: Page title, type: string, description: Leave empty to use the studio name. }
+      - { name: description, label: Description, type: text, description: Leave empty to use the default. }
       - name: hero
-        label: Intro (large text at the top)
-        type: text
+        label: Hero
+        type: object
+        fields:
+          - { name: title, label: Headline, type: text }
+          - { name: subtitle, label: "Headline, grey part", type: text }
+          - { name: show_contact, label: Show call to action and contact line, type: boolean, default: false }
+          - { name: note, label: Small note, type: text, description: "*text* for italic." }
+          - { name: show_note, label: Show small note, type: boolean, default: false }
+      - name: logos
+        label: Client logos
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{name}" }
+        fields:
+          - { name: visible, label: Show on site, type: boolean, default: true }
+          - { name: name, label: Name, type: string, description: Read out to screen readers. }
+          - { name: image, label: Logo, type: image, options: { media: logos } }
+          - { name: height, label: Height in px (desktop), type: number, default: 24, description: "Tune per logo so they look the same size: about 24 for wordmarks, 38 for square marks." }
+          - { name: height_mobile, label: Height in px (mobile), type: number, default: 18 }
+          - { name: mono, label: Force black, type: boolean, default: false, description: For colour logos that have no black version. }
+      - { name: work_title, label: Work section title, type: string }
+      - name: cases
+        label: Case studies
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{title}" }
+        fields:
+          - { name: visible, label: Show on site, type: boolean, default: true }
+          - { name: id, label: Short id, type: string, description: "Lowercase, no spaces. Used for the full-case link, e.g. vorkurs.space/#citizenm" }
+          - { name: title, label: Title, type: string }
+          - { name: meta, label: Details (top right), type: string, list: true, description: "e.g. client or partner, then the discipline." }
+          - { name: outcome, label: Outcome, type: text }
+          - name: layout
+            label: Media layout
+            type: select
+            default: feature
+            options:
+              values:
+                - { name: feature, label: "Large + stacked (first item large, the rest beside it)" }
+                - { name: two, label: Two side by side }
+                - { name: three, label: Three side by side }
+                - { name: pano, label: Wide + two below }
+                - { name: text, label: "Two + text (text sits in the third column)" }
+          - &media
+            name: media
+            label: Media
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{caption}" }
+            fields:
+              - name: type
+                label: Type
+                type: select
+                default: image
+                options:
+                  values:
+                    - { name: image, label: Image }
+                    - { name: video, label: "Video (plays muted, on loop)" }
+                    - { name: halftone, label: "Halftone tool (live, from this image)" }
+              - { name: src, label: File, type: file, options: { media: images } }
+              - { name: alt, label: Description, type: string, description: "What's in the image, for screen readers." }
+              - { name: caption, label: Caption, type: string }
+              - name: frame
+                label: Frame
+                type: select
+                default: plain
+                options:
+                  values:
+                    - { name: plain, label: "Plain (fills the space)" }
+                    - { name: shot, label: "Screenshot (16:10, top aligned)" }
+                    - { name: wide, label: Wide (16:9) }
+                    - { name: phoneish, label: Tall (portrait) }
+                    - { name: phone, label: In a phone }
+          - { name: text, label: Text, type: text, description: "Empty line = new paragraph. Links as [text](url)." }
+          - { name: link_label, label: Link text, type: string, description: "e.g. brandmelder.org ↗" }
+          - { name: link_url, label: Link address, type: string, description: "Ignored when there's a full case; the link opens that instead." }
+          - name: full_case
+            label: Full case (opens over the page)
+            type: object
+            fields:
+              - { name: enabled, label: Has a full case, type: boolean, default: false }
+              - { name: outcome, label: Outcome, type: text }
+              - name: facts
+                label: Facts
+                type: object
+                list:
+                  collapsible: { collapsed: true, summary: "{label}" }
+                fields:
+                  - { name: label, label: Label, type: string }
+                  - { name: value, label: Value, type: text, description: One line per line. }
+              - name: blocks
+                label: Blocks
+                type: object
+                list:
+                  collapsible: { collapsed: true, summary: "{heading}" }
+                fields:
+                  - { name: heading, label: Heading, type: string, description: "Leave empty for a block without a heading or divider." }
+                  - { name: text, label: Text, type: text, description: Empty line = new paragraph. }
+                  - name: columns
+                    label: Text columns
+                    type: select
+                    default: one
+                    options:
+                      values:
+                        - { name: one, label: One }
+                        - { name: two, label: Two }
+                  - name: media_layout
+                    label: Media layout
+                    type: select
+                    default: single
+                    options:
+                      values:
+                        - { name: single, label: "Full width, one below the other" }
+                        - { name: two, label: Two side by side }
+                        - { name: three, label: Three side by side }
+                        - { name: three-tall, label: "Three side by side, tall" }
+                  - *media
+
+  # ---------------------------------------------------------------- approach
+  - name: approach
+    label: Approach
+    type: file
+    path: content/approach.json
+    format: json
+    fields:
+      - { name: title, label: Page title, type: string, description: "Shown as \"Title · vorkurs\"." }
+      - { name: description, label: Description, type: text, description: Leave empty to use the default. }
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - { name: title, label: Headline, type: text }
+          - { name: subtitle, label: "Headline, grey part", type: text }
       - name: sections
         label: Sections
         type: object
         list:
-          collapsible:
-            collapsed: true
-            summary: "{title}"
+          collapsible: { collapsed: true, summary: "{title}" }
         fields:
-          - name: title
-            label: Section title
-            type: string
-          - name: style
-            label: Style
-            type: select
-            default: service
-            description: "Plain = heading + text. Way of working = heading – label, italic intro, text. Case study = heading, role, text, link."
-            options:
-              values:
-                - { name: service, label: Plain }
-                - { name: way, label: Way of working }
-                - { name: case, label: Case study }
-                - { name: principle, label: Principle }
+          - { name: visible, label: Show on site, type: boolean, default: true }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Intro, type: text, description: "Optional. *text* for italic." }
           - name: items
             label: Items
             type: object
             list:
-              collapsible:
-                collapsed: true
-                summary: "{heading}"
+              collapsible: { collapsed: true, summary: "{heading}" }
             fields:
-              - name: visible
-                label: Show on site
-                type: boolean
-                default: true
-                description: Untick to hide this item without deleting it.
-              - name: heading
-                label: Heading (grey)
-                type: string
-              - name: label
-                label: Label after the dash (way of working only, e.g. Fixed scope)
-                type: string
-              - name: subheading
-                label: Role / subtitle (case study only)
-                type: string
-              - name: intro
-                label: Italic intro (way of working only)
-                type: string
-              - name: text
-                label: Text
-                type: text
-                description: Empty line = new paragraph. Links as [text](https://…).
-              - name: link_label
-                label: Link label (case study only)
-                type: string
-              - name: link_url
-                label: Link URL (case study only)
-                type: string
-              - name: link_visible
-                label: Show link
-                type: boolean
-                default: true
-      - name: logos
-        label: Logo strip (above the footer)
-        type: object
-        fields:
-          - name: visible
-            label: Show on site
-            type: boolean
-            default: true
-          - name: title
-            label: Title
-            type: string
-            description: Optional, e.g. Trusted by. Empty = no title.
-          - name: items
-            label: Logos
-            type: object
-            list:
-              collapsible:
-                collapsed: true
-                summary: "{name}"
-            fields:
-              - name: visible
-                label: Show on site
-                type: boolean
-                default: true
-              - name: name
-                label: Name
-                type: string
-                description: Used as the image description, and shown as text when there's no image.
-              - name: image
-                label: Logo
-                type: image
-                description: SVG or transparent PNG, ideally single-colour. It's shown in grey and turns to full colour on hover when linked.
-              - name: scale
-                label: Size
-                type: number
-                default: 1
-                description: Makes this logo bigger or smaller than the rest, e.g. 1.5 for square or stacked logos. 1 = normal.
-              - name: url
-                label: Link
-                type: string
-                description: Optional, e.g. https://earth-ai.com/
-      - name: footer
-        label: Footer
-        type: object
-        fields:
-          - name: cta
-            label: Closing line
-            type: text
-            description: Links as [text](mailto:…) or [text](https://…).
-          - name: phone
-            label: Phone
-            type: string
-          - name: address
-            label: Studio address
-            type: text
-      - name: email
-        label: Email (header, footer)
-        type: string
-      - name: nav_label
-        label: Header link text
-        type: string
-      - name: title
-        label: Site name
-        type: string
-      - name: url
-        label: Site address
-        type: string
-        description: Full address with trailing slash, e.g. https://vorkurs.space/
-      - name: seo
-        label: SEO & link previews
-        type: object
-        fields:
-          - name: title
-            label: Page title
-            type: string
-            description: Shown in the browser tab and as the headline in Google. Aim for under 60 characters. Empty = site name.
-          - name: description
-            label: Meta description
-            type: text
-            description: The snippet under the headline in Google. Aim for 120–160 characters.
-          - name: share_title
-            label: Share title
-            type: string
-            description: Headline for link previews (LinkedIn, WhatsApp, Slack, X…). Empty = page title.
-          - name: share_description
-            label: Share description
-            type: text
-            description: Text for link previews. Empty = meta description.
-          - name: image
-            label: Share image
-            type: image
-            description: Picture for link previews. 1200 × 630 px, PNG or JPG.
-          - name: image_alt
-            label: Share image description
-            type: string
-            description: Describes the share image for screen readers.
-          - name: language
-            label: Language code
-            type: string
-            default: en
-            description: e.g. en, nl, de.
-          - name: twitter
-            label: X / Twitter handle
-            type: string
-            description: Optional, e.g. @vorkurs.
-          - name: noindex
-            label: Hide from search engines
-            type: boolean
-            default: false
-            description: Tick to ask Google & co. not to list the site (e.g. while it's in progress).
+              - { name: visible, label: Show on site, type: boolean, default: true }
+              - { name: heading, label: Heading, type: string }
+              - { name: label, label: Label (grey, next to the heading), type: string, description: "Optional, e.g. Fixed scope" }
+              - { name: lead, label: Italic intro, type: string, description: Optional. }
+              - { name: text, label: Text, type: text, description: Empty line = new paragraph. }
