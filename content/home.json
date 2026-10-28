@@ -1,0 +1,182 @@
+{
+  "title": "",
+  "description": "",
+  "hero": {
+    "title": "vorkurs designs and builds digital products for climate, finance and mission‑driven organisations.",
+    "subtitle": "Strategy, design and code in one team, from the first question to launch and after.",
+    "show_contact": false,
+    "note": "The name comes from the *Vorkurs*, the Bauhaus preliminary course where every student started with materials, form and function before anything else.",
+    "show_note": false
+  },
+  "logos": [
+    { "visible": true, "name": "Carbon Equity", "image": "assets/logos/logo-carbonequity.svg", "height": 32, "height_mobile": 26, "mono": false },
+    { "visible": true, "name": "CrossBoundary", "image": "assets/logos/logo-crossboundary.svg", "height": 34, "height_mobile": 26, "mono": false },
+    { "visible": true, "name": "citizenM", "image": "assets/logos/logo-citizenm.png", "height": 38, "height_mobile": 30, "mono": false },
+    { "visible": true, "name": "onformative", "image": "assets/logos/logo-onformative.svg", "height": 22, "height_mobile": 17, "mono": false },
+    { "visible": true, "name": "NEW STANDARD.S", "image": "assets/logos/logo-newstandards.svg", "height": 17, "height_mobile": 13, "mono": false },
+    { "visible": true, "name": "&why", "image": "assets/logos/logo-why.svg", "height": 22, "height_mobile": 17, "mono": false },
+    { "visible": true, "name": "Gallerie d'Italia", "image": "assets/logos/logo-gdi.svg", "height": 38, "height_mobile": 30, "mono": false },
+    { "visible": true, "name": "KesselsKramer", "image": "assets/logos/logo-kesselskramer.png", "height": 38, "height_mobile": 30, "mono": true }
+  ],
+  "work_title": "Selected work",
+  "cases": [
+    {
+      "visible": true,
+      "id": "brandmelder",
+      "title": "brandmelder",
+      "meta": ["with NEW STANDARD.S, Berlin", "Web development & image tooling"],
+      "outcome": "From brand design to a live site in under two weeks, with a halftone tool that keeps every story on-brand.",
+      "layout": "feature",
+      "media": [
+        { "type": "halftone", "src": "img/source.jpg", "alt": "Bushfire photo in the house duotone", "caption": "The halftone generator, running live. Editors upload a photo, set the dots and pick a colour.", "frame": "plain" },
+        { "type": "image", "src": "img/shot-bm-home.jpg", "alt": "brandmelder homepage with a halftone lead image", "caption": "Homepage", "frame": "shot" },
+        { "type": "image", "src": "img/shot-bm-article.jpg", "alt": "brandmelder article page", "caption": "Article page", "frame": "shot" }
+      ],
+      "text": "brandmelder is a non-profit climate journalism project by Netzwerk Klimajournalismus Deutschland. Working with the Berlin studio NEW STANDARD.S, we took their brand design to a live site in under two weeks.\n\nInside the CMS we built a halftone image generator, starting from the studio's p5.js prototype. Every article image now comes out of it, so the site stays on-brand without a designer in the loop.",
+      "link_label": "brandmelder.org ↗",
+      "link_url": "https://brandmelder.org/",
+      "full_case": { "enabled": false, "outcome": "", "facts": [], "blocks": [] }
+    },
+    {
+      "visible": true,
+      "id": "crossboundary",
+      "title": "CrossBoundary",
+      "meta": ["with backendforth, Berlin", "Multi-site frontend development"],
+      "outcome": "One component system behind a multi-site platform, consistent across every region and sub-brand.",
+      "layout": "two",
+      "media": [
+        { "type": "image", "src": "img/shot-cb-home.jpg", "alt": "CrossBoundary Group homepage", "caption": "Group homepage, linking the advisory and investment platforms", "frame": "shot" },
+        { "type": "image", "src": "img/shot-cb-region.jpg", "alt": "CrossBoundary regional page for Sub-Saharan Africa", "caption": "Regional page: Sub-Saharan Africa", "frame": "shot" }
+      ],
+      "text": "CrossBoundary is one of the largest sustainable-development investment firms working in the Global South. Partnering with backendforth, we led development of their multi-site platform.\n\nWe turned the component system into a scalable frontend, so complex financial content reads clearly and every regional site and sub-brand stays visually consistent.",
+      "link_label": "crossboundary.com ↗",
+      "link_url": "https://crossboundary.com/",
+      "full_case": { "enabled": false, "outcome": "", "facts": [], "blocks": [] }
+    },
+    {
+      "visible": true,
+      "id": "citizenm",
+      "title": "citizenM",
+      "meta": ["In-house, 2022–2025", "Creative direction & design system"],
+      "outcome": "Campaigns that generated €20M+ in revenue in 2024 alone, kept on-brand across 37 hotels worldwide.",
+      "layout": "feature",
+      "media": [
+        { "type": "image", "src": "img/cm-sale.jpg", "alt": "Sleep like a champion campaign landing page", "caption": "“Sleep like a champion”, interactive sleep-type quiz", "frame": "plain" },
+        { "type": "image", "src": "img/cm-sleep.jpg", "alt": "Sale campaign landing page", "caption": "Sale campaign landing page", "frame": "plain" },
+        { "type": "image", "src": "img/cm-wake.jpg", "alt": "Quiz result page", "caption": "Quiz result", "frame": "plain" }
+      ],
+      "text": "We set the creative direction across citizenM's digital channels: landing pages, campaigns, CRM reaching millions of subscribers, and paid media.\n\nWe built the brand design system in Figma and led an in-house content team whose photography and video replaced agency work, saving €50K+ a year. Along the way we mentored junior designers and managed external agencies.",
+      "link_label": "Read the full case",
+      "link_url": "",
+      "full_case": {
+        "enabled": true,
+        "outcome": "Campaigns that generated €20M+ in revenue, the brand's best-performing to date, kept unmistakably citizenM on every surface.",
+        "facts": [
+          { "label": "Client", "value": "citizenM, global hotel brand" },
+          { "label": "Role", "value": "Senior Digital Designer & Campaign Lead, Brand Studio" },
+          { "label": "Deliverables", "value": "Campaigns, CRM, landing pages, paid, social, OOH, brand film" },
+          { "label": "Impact", "value": "€20M+ campaign revenue\n€50K+ saved a year on production" }
+        ],
+        "blocks": [
+          {
+            "heading": "",
+            "text": "",
+            "columns": "one",
+            "media_layout": "single",
+            "media": [
+              { "type": "image", "src": "img/cm-122.jpg", "alt": "Sleep like a champion campaign landing page", "caption": "“Sleep like a champion”, campaign landing page", "frame": "wide" }
+            ]
+          },
+          {
+            "heading": "",
+            "text": "citizenM is a global hotel brand built on a strong visual identity and an irreverent tone of voice. As the in-house creative lead, the job was to carry that identity into every digital surface, from a CRM system reaching millions of subscribers to paid campaigns across Meta, Google and programmatic channels.\n\nWe built and maintained the brand's design system in Figma, set up templates the marketing team could scale, and directed a short brand film end to end. An in-house content team took over photography and short-form video from external agencies, saving more than €50K a year.",
+            "columns": "two",
+            "media_layout": "single",
+            "media": []
+          },
+          {
+            "heading": "The approach",
+            "text": "The work sat where brand, web and performance meet. Every landing page, CRM flow and campaign had to feel playful, bold and never self-serious, while also pulling its weight commercially. That meant a visual system that could flex across dozens of campaigns without losing coherence.\n\nAt its centre is a web design system in Figma: reusable components, templates, Auto Layout structures and design tokens. It gave the in-house team and external partners one foundation to work from, and let campaigns turn around fast without starting from scratch.",
+            "columns": "one",
+            "media_layout": "three",
+            "media": [
+              { "type": "image", "src": "img/cm-67.jpg", "alt": "Sleep quiz question about wake-up time", "caption": "Sleep quiz: one question at a time", "frame": "wide" },
+              { "type": "image", "src": "img/cm-740.jpg", "alt": "Sleep quiz question about neurodivergence", "caption": "Inclusive questions, same playful voice", "frame": "wide" },
+              { "type": "image", "src": "img/cm-272.jpg", "alt": "Sleep quiz result, traveller type", "caption": "Result: your traveller type", "frame": "wide" }
+            ]
+          },
+          {
+            "heading": "Testing as part of the creative loop",
+            "text": "Campaign performance fed straight back into design. A/B tests, Hotjar heatmaps and Google Analytics showed which patterns actually converted, and the design system was sharpened on that evidence rather than on how a mockup looked.",
+            "columns": "one",
+            "media_layout": "two",
+            "media": [
+              { "type": "image", "src": "img/cm-831.jpg", "alt": "Rome opening campaign landing page", "caption": "Rome opening, with booking built into the page", "frame": "wide" },
+              { "type": "image", "src": "img/cm-381.jpg", "alt": "Sale campaign landing page", "caption": "Seasonal sale, same template, new story", "frame": "wide" }
+            ]
+          },
+          {
+            "heading": "CRM, paid and social",
+            "text": "",
+            "columns": "one",
+            "media_layout": "three-tall",
+            "media": [
+              { "type": "video", "src": "img/cm-crm1.mp4", "alt": "Animated newsletter header, launch", "caption": "Newsletter header, launch", "frame": "phoneish" },
+              { "type": "video", "src": "img/cm-crm2.mp4", "alt": "Animated newsletter header, reminder", "caption": "Newsletter header, reminder", "frame": "phoneish" },
+              { "type": "image", "src": "img/cm-ad-full.jpg", "alt": "Paid social ad: citizenM says mamma mia", "caption": "Paid social, Rome opening", "frame": "phoneish" }
+            ]
+          },
+          {
+            "heading": "Brand film",
+            "text": "",
+            "columns": "one",
+            "media_layout": "single",
+            "media": [
+              { "type": "video", "src": "img/cm-film.mp4", "alt": "citizenM brand film excerpt", "caption": "Short brand film, directed end to end", "frame": "wide" }
+            ]
+          },
+          {
+            "heading": "Role",
+            "text": "Leading the campaign team in citizenM's Brand Studio meant owning web design across the digital ecosystem: setting creative direction, defining quality benchmarks and keeping one visual language across every page and touchpoint, alongside running the A/B tests and iterating on conversion data.\n\nAlongside the creative work: mentoring a junior designer, reviewing the team's output, and managing external agencies, photographers and production partners. Every launch was shaped with Marketing, Product and Content, with design decisions tied to business KPIs.",
+            "columns": "two",
+            "media_layout": "single",
+            "media": []
+          }
+        ]
+      }
+    },
+    {
+      "visible": true,
+      "id": "solea",
+      "title": "Solea",
+      "meta": ["Brand & booking platform"],
+      "outcome": "A booking platform of its own, so therapists keep their clients, their prices and their full fee.",
+      "layout": "text",
+      "media": [
+        { "type": "video", "src": "img/solea.mp4", "alt": "Thai yoga massage session", "caption": "Thai yoga massage, from the brand film", "frame": "plain" },
+        { "type": "image", "src": "img/solea-app.png", "alt": "Solea booking screen: treatment, duration, day and time slots", "caption": "Booking: treatment, duration, day, time", "frame": "phone" }
+      ],
+      "text": "Solea brings certified practitioners into Amsterdam offices: Thai yoga massage, chair massage and more. We designed the brand and built a browser-based booking app on top of it.\n\nEmployees at partner offices book a slot in the weekly treatment room and pay the therapist directly, without a large platform taking a cut of every session.",
+      "link_label": "",
+      "link_url": "",
+      "full_case": { "enabled": false, "outcome": "", "facts": [], "blocks": [] }
+    },
+    {
+      "visible": true,
+      "id": "kessels",
+      "title": "Erik Kessels × Gallerie d'Italia",
+      "meta": ["Un'Immagine, Turin, 2025", "Creative & technical direction"],
+      "outcome": "A 360° room where an algorithm stitches thousands of archive photographs into one moving image.",
+      "layout": "pano",
+      "media": [
+        { "type": "image", "src": "img/kessels-room.jpg", "alt": "The projection room at Gallerie d'Italia", "caption": "The installation, Publifoto Archive", "frame": "plain" },
+        { "type": "image", "src": "img/kessels-visitors.jpg", "alt": "Visitors inside the installation", "caption": "Visitors inside the projection", "frame": "plain" },
+        { "type": "image", "src": "img/kessels-opening.jpg", "alt": "Crowd at the opening night", "caption": "Opening night", "frame": "plain" }
+      ],
+      "text": "We worked with artist Erik Kessels on Un'Immagine, a large-scale immersive installation built from the Publifoto Archive, with a continuously moving 360° image and sound.\n\nWe were the bridge between the creative and the technical: interpreting the artistic vision, coordinating between the artist and the exhibition venue, managing the creative dialogue and overseeing delivery.",
+      "link_label": "View exhibition ↗",
+      "link_url": "https://gallerieditalia.com/en/turin/exhibitions-and-initiatives/exhibitions/2025/09/11/erik-kessels-un-immagine-exhibition-turin/",
+      "full_case": { "enabled": false, "outcome": "", "facts": [], "blocks": [] }
+    }
+  ]
+}
