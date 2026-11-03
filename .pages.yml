@@ -76,10 +76,11 @@ content:
           collapsible: { collapsed: true, summary: "{title}" }
         fields:
           - { name: visible, label: Show on site, type: boolean, default: true }
-          - { name: id, label: Short id, type: string, description: "Lowercase, no spaces. Used for the full-case link, e.g. vorkurs.space/#citizenm" }
-          - { name: title, label: Title, type: string }
-          - { name: meta, label: Details (top right), type: string, list: true, description: "e.g. client or partner, then the discipline." }
-          - { name: outcome, label: Outcome, type: text }
+          - { name: id, label: Short id, type: string, description: "Lowercase, no spaces. The case page address, e.g. vorkurs.space/work/citizenm.html" }
+          - { name: title, label: Project, type: string, description: "What was made, e.g. Multi-site platform. Shown in the work list and as the case page heading." }
+          - { name: client, label: Client, type: string }
+          - { name: meta, label: Details, type: string, list: true, description: "Shown on the case page, e.g. partner, then the discipline." }
+          - { name: outcome, label: Outcome, type: text, description: One sentence. Shown in the work list and at the top of the case page. }
           - name: layout
             label: Media layout
             type: select
@@ -95,6 +96,7 @@ content:
             name: media
             label: Media
             type: object
+            description: The first four also appear as thumbnails in the work list (a halftone tool doesn't).
             list:
               collapsible: { collapsed: true, summary: "{caption}" }
             fields:
@@ -123,10 +125,11 @@ content:
                     - { name: phone, label: In a phone }
           - { name: text, label: Text, type: text, description: "Empty line = new paragraph. Links as [text](url)." }
           - { name: link_label, label: Link text, type: string, description: "e.g. brandmelder.org ↗" }
-          - { name: link_url, label: Link address, type: string, description: "Ignored when there's a full case; the link opens that instead." }
+          - { name: link_url, label: Link address, type: string, description: Shown at the end of the case page. }
           - name: full_case
-            label: Full case (opens over the page)
+            label: Full case
             type: object
+            description: "When on, the case page shows these blocks instead of the media and text above."
             fields:
               - { name: enabled, label: Has a full case, type: boolean, default: false }
               - { name: outcome, label: Outcome, type: text }
