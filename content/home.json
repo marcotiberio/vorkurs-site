@@ -25,6 +25,7 @@
       "visible": true,
       "id": "brandmelder",
       "title": "brandmelder",
+      "client": "Netzwerk Klimajournalismus",
       "meta": ["with NEW STANDARD.S, Berlin", "Web development & image tooling"],
       "outcome": "From brand design to a live site in under two weeks, with a halftone tool that keeps every story on-brand.",
       "layout": "feature",
@@ -41,7 +42,8 @@
     {
       "visible": true,
       "id": "crossboundary",
-      "title": "CrossBoundary",
+      "title": "Multi-site platform",
+      "client": "CrossBoundary",
       "meta": ["with backendforth, Berlin", "Multi-site frontend development"],
       "outcome": "One component system behind a multi-site platform, consistent across every region and sub-brand.",
       "layout": "two",
@@ -57,7 +59,8 @@
     {
       "visible": true,
       "id": "citizenm",
-      "title": "citizenM",
+      "title": "Campaigns & design system",
+      "client": "citizenM",
       "meta": ["In-house, 2022–2025", "Creative direction & design system"],
       "outcome": "Campaigns that generated €20M+ in revenue in 2024 alone, kept on-brand across 37 hotels worldwide.",
       "layout": "feature",
@@ -67,7 +70,7 @@
         { "type": "image", "src": "img/cm-wake.jpg", "alt": "Quiz result page", "caption": "Quiz result", "frame": "plain" }
       ],
       "text": "We set the creative direction across citizenM's digital channels: landing pages, campaigns, CRM reaching millions of subscribers, and paid media.\n\nWe built the brand design system in Figma and led an in-house content team whose photography and video replaced agency work, saving €50K+ a year. Along the way we mentored junior designers and managed external agencies.",
-      "link_label": "Read the full case",
+      "link_label": "",
       "link_url": "",
       "full_case": {
         "enabled": true,
@@ -149,7 +152,8 @@
     {
       "visible": true,
       "id": "solea",
-      "title": "Solea",
+      "title": "Brand & booking app",
+      "client": "Solea",
       "meta": ["Design and build for a workplace wellbeing start-up, Amsterdam", "Brand & booking platform"],
       "outcome": "A booking platform of its own, so therapists keep their clients, their prices and their full fee.",
       "layout": "text",
@@ -165,8 +169,9 @@
     {
       "visible": true,
       "id": "kessels",
-      "title": "Erik Kessels × Gallerie d'Italia",
-      "meta": ["Un'Immagine, Turin, 2025", "Creative & technical direction"],
+      "title": "Un'Immagine",
+      "client": "Erik Kessels × Gallerie d'Italia",
+      "meta": ["Gallerie d'Italia, Turin", "Creative & technical direction"],
       "outcome": "A 360° room where an algorithm stitches thousands of archive photographs into one moving image.",
       "layout": "pano",
       "media": [
@@ -177,6 +182,23 @@
       "text": "We worked with artist Erik Kessels on Un'Immagine, a large-scale immersive installation built from the Publifoto Archive, with a continuously moving 360° image and sound.\n\nWe were the bridge between the creative and the technical: interpreting the artistic vision, coordinating between the artist and the exhibition venue, managing the creative dialogue and overseeing delivery.",
       "link_label": "View exhibition ↗",
       "link_url": "https://gallerieditalia.com/en/turin/exhibitions-and-initiatives/exhibitions/2025/09/11/erik-kessels-un-immagine-exhibition-turin/",
+      "full_case": { "enabled": false, "outcome": "", "facts": [], "blocks": [] }
+    },
+    {
+      "visible": true,
+      "id": "buycloud",
+      "title": "Buycloud",
+      "client": "Noa Jansma",
+      "meta": ["Het Nieuwe Instituut, Rotterdam", "Platform development"],
+      "outcome": "A cadastre for cumulus clouds: buyers claim a cloud with a selfie, and an AI draws its border.",
+      "layout": "two",
+      "media": [
+        { "type": "image", "src": "img/buycloud-map.jpg", "alt": "The Cadastre of Cloud Certificates: cloud deeds scattered over a blue sky-map", "caption": "The shared sky-map of every cloud sold", "frame": "shot" },
+        { "type": "image", "src": "img/buycloud-certificate.jpg", "alt": "A cloud certificate: the outlined cloud over the buyer's photograph, with its coordinates, wind and price", "caption": "A certificate, with the border the AI drew", "frame": "shot" }
+      ],
+      "text": "Buycloud is an art project by Noa Jansma about ownership and climate change, exhibited at Het Nieuwe Instituut in Rotterdam. Buyers claim a cumulus cloud with a selfie, an AI draws its border, and the deed is filed in a shared sky-map.\n\nWe developed the platform. Each certificate freezes the cloud's coordinates, speed, energy and temperature at the moment of purchase, and when two clouds collide on the map, the bigger one eats the smaller.",
+      "link_label": "urcloud.buycloud.space ↗",
+      "link_url": "https://urcloud.buycloud.space/",
       "full_case": { "enabled": false, "outcome": "", "facts": [], "blocks": [] }
     }
   ]

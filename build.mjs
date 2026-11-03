@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, cpSync, rmSync, mkdirSync } from 'node:fs'
 import { execFileSync } from 'node:child_process';
 
 const OUT = 'dist';
-const STATIC = ['assets', 'img', 'fav.png', 'ogimage.png', 'robots.txt', 'sitemap.xml'];
+const STATIC = ['assets', 'img', 'fav.png', 'ogimage.png', 'robots.txt'];
 const load = (name) => JSON.parse(readFileSync(`content/${name}.json`, 'utf8'));
 const site = load('site');
 const home = load('home');
@@ -16,11 +16,9 @@ const LINK = 'underline decoration-2 underline-offset-4 hover:no-underline';
 const CURRENT = 'aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-4 aria-[current=page]:hover:no-underline';
 const FOCUS = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink';
 const RULE = 'border-t-2 border-ink';
-// Section headings are a full-width strip: the title repeated in uppercase between two rules.
-// Screen readers get it once; the repeats are decoration.
-const strip = (title, id = '') => `<div class="mt-0 mb-7 flex gap-x-8 overflow-hidden border-y-2 border-ink py-2 whitespace-nowrap uppercase text-body-sm tracking-normal tablet:text-body tablet:tracking-normal"${id ? ` id="${id}"` : ''}>
-    <h2 class="flex-none">${esc(title)}</h2>${`<span class="flex-none" aria-hidden="true">${esc(title)}</span>`.repeat(15)}
-  </div>`;
+const SECTION_HEAD = 'flex items-baseline justify-between gap-4 pt-10 pb-7';
+const H2 = 'text-title-sm leading-[34px] tablet:text-title tablet:leading-[54px]';
+const sectionHead = (title, id = '') => `<div class="${SECTION_HEAD}"${id ? ` id="${id}"` : ''}><h2 class="${H2}">${esc(title)}</h2></div>`;
 const BODY = 'text-body-sm tablet:text-body';
 const FIGURE = 'flex min-w-0 flex-col gap-2';
 
@@ -40,14 +38,18 @@ const cx = (...c) => c.filter(Boolean).join(' ');
 
 // --- shared page parts ---
 
+const siteUrl = (path) => site.url.replace(/\/$/, '') + '/' + path;
+
 const head = ({ title, description, path }) => {
-  const url = site.url.replace(/\/$/, '') + '/' + path;
-  const image = site.url.replace(/\/$/, '') + '/' + String(site.share_image || 'ogimage.png').replace(/^\//, '');
+  const url = siteUrl(path);
+  const image = siteUrl(String(site.share_image || 'ogimage.png').replace(/^\//, ''));
+  // Case pages sit in work/; the base keeps every relative link and file path pointing at the root.
+  const base = path.includes('/') ? '\n<base href="../">' : '';
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">${base}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(url)}">
@@ -72,28 +74,31 @@ const head = ({ title, description, path }) => {
 </head>`;
 };
 
-// One floating panel that holds the bar and, on phones, opens into the menu (site.js toggles data-open).
+// One floating bar: wordmark and links.
+// On phones the group is the menu button, and the bar opens in place into the menu (site.js toggles data-open).
+// site.js also sets data-hidden while scrolling down, which slides the bar away.
 const header = (current) => {
   const n = site.nav;
-  const cur = (page) => (page === current ? ' aria-current="page"' : '');
-  const barLink = cx('hidden no-underline tablet:inline', CURRENT, FOCUS);
-  const menuLink = cx('block px-3.5 py-1.5 text-[22px] tracking-[-0.7px] no-underline', CURRENT, FOCUS);
+  // Case pages count as Work.
+  const cur = (page) => (page === current || (page === 'home' && current === 'work') ? ' aria-current="page"' : '');
+  const CHIP = 'no-underline transition-colors duration-150 hover:bg-panel aria-[current=page]:bg-ink aria-[current=page]:text-paper';
+  const barLink = cx('px-3 py-1.5', CHIP, FOCUS);
+  const menuLink = cx('block px-4 py-2 text-center text-[22px] tracking-[-0.7px]', CHIP, FOCUS);
   const x = 'hidden group-data-[open=true]:inline';
-  return `  <header class="pointer-events-none sticky top-[env(safe-area-inset-top,0px)] z-20 flex justify-center pt-3">
-    <nav class="bar group pointer-events-auto w-[min(560px,100%)] border-2 border-ink bg-paper text-nav" aria-label="Main" data-open="false">
-      <div class="flex h-12 items-center justify-between pr-3 pl-3.5 tablet:h-[52px] tablet:pr-4 tablet:pl-[18px]">
-        <a class="${cx('font-strong text-[22px] tracking-[-0.8px] no-underline tablet:text-[26px]', FOCUS)}" href="index.html">${esc(site.name)}</a>
-        <div class="flex items-center gap-5">
+  return `  <header class="pointer-events-none sticky top-[env(safe-area-inset-top,0px)] z-20 flex justify-center pt-3 transition-transform duration-300 ease-[ease] data-[hidden=true]:-translate-y-[calc(100%+12px)] motion-reduce:transition-none" id="site-header">
+    <nav class="bar group pointer-events-auto w-full tablet:w-fit tablet:max-w-full border-2 border-ink bg-paper text-nav" aria-label="Main" data-open="false">
+      <div class="flex items-center gap-3 p-1.5 tablet:gap-4 tablet:p-2">
+        <a class="${cx('flex-none px-2 font-strong text-[22px] tracking-[-0.8px] no-underline tablet:text-[26px]', FOCUS)}" href="index.html">${esc(site.name)}</a>
+        <div class="hidden flex-none items-center gap-1 tablet:flex">
           <a class="${barLink}" href="index.html#work"${cur('home')}>${esc(n.work)}</a>
           <a class="${barLink}" href="approach.html"${cur('approach')}>${esc(n.approach)}</a>
-          <span class="hidden h-[18px] w-px bg-ink tablet:block" aria-hidden="true"></span>
           <a class="${barLink}" href="mailto:${esc(site.email)}">${esc(n.touch)}</a>
-          <button class="${cx('inline-flex cursor-pointer items-center gap-2.5 px-0.5 py-1.5 tablet:hidden', FOCUS)}" id="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="group-data-[open=true]:hidden">Menu</span><span class="${x} text-[22px] leading-none" aria-hidden="true">×</span><span class="${x} sr-only">Close</span></button>
         </div>
+        <button class="${cx('ml-auto flex cursor-pointer items-center gap-2.5 px-2 py-2 tablet:hidden', FOCUS)}" id="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span class="group-data-[open=true]:hidden">Menu</span><span class="${x} text-[22px] leading-none" aria-hidden="true">×</span><span class="${x} sr-only">Close</span></button>
       </div>
       <div class="bar-menu grid grid-rows-[0fr] transition-[grid-template-rows] duration-[280ms] ease-[ease] group-data-[open=true]:grid-rows-[1fr] motion-reduce:transition-none tablet:hidden" id="menu">
         <div class="overflow-hidden">
-          <ul class="flex flex-col gap-1 pt-2 pb-2">
+          <ul class="mx-1.5 mb-1.5 flex flex-col gap-1 p-2">
             <li><a class="${menuLink}" href="index.html#work"${cur('home')}>${esc(n.work)}</a></li>
             <li><a class="${menuLink}" href="approach.html"${cur('approach')}>${esc(n.approach)}${n.approach_note ? `<small class="hidden -mt-0.5 text-[14px] tracking-[-0.1px] text-grey">${esc(n.approach_note)}</small>` : ''}</a></li>
             <li><a class="${menuLink}" href="index.html#contact">${esc(n.contact)}</a></li>
@@ -123,7 +128,7 @@ const footer = (isHome) => {
 };
 
 const page = (meta, current, body, after = '') => `${head(meta)}
-<body class="bg-paper font-sans text-ink antialiased before:fixed before:inset-x-0 before:top-0 before:z-30 before:h-[env(safe-area-inset-top,0px)] before:bg-paper [&.sheet-open]:overflow-hidden">
+<body class="bg-paper font-sans text-ink antialiased before:fixed before:inset-x-0 before:top-0 before:z-30 before:h-[env(safe-area-inset-top,0px)] before:bg-paper">
 <div class="mx-auto flex w-full max-w-[1720px] flex-col pr-[max(20px,env(safe-area-inset-right,0px))] pb-[20px] pl-[max(20px,env(safe-area-inset-left,0px))]">
 ${header(current)}
 
@@ -160,8 +165,8 @@ const figure = (m, { aspect, fill, figureClass = FIGURE } = {}) => {
     <canvas class="absolute inset-0 block size-full" id="halftone" data-src="${src(m.src)}" aria-label="${esc(m.alt)}"></canvas>
     <div class="tool-ui absolute bottom-3 left-3 flex items-center gap-3 bg-paper px-3 py-2 text-caption leading-[normal] text-ink">
       <label class="text-grey" for="dots">Dot size</label>
-      <input class="w-[120px] accent-ink" id="dots" type="range" min="6" max="28" value="12">
-      <output class="min-w-[24px] text-right tabular-nums" id="dots-out" for="dots">12</output>
+      <input class="w-[120px] accent-ink" id="dots" type="range" min="6" max="28" value="6">
+      <output class="min-w-[24px] text-right tabular-nums" id="dots-out" for="dots">6</output>
     </div>
   </div>${caption}
 </figure>`;
@@ -183,7 +188,7 @@ const figure = (m, { aspect, fill, figureClass = FIGURE } = {}) => {
 </figure>`;
 };
 
-// --- home ---
+// --- cases ---
 
 // Per layout: the grid, and the aspect ratio of the figure at index i (undefined = the frame decides).
 const LAYOUTS = {
@@ -194,7 +199,8 @@ const LAYOUTS = {
   text: { grid: 'grid-cols-2 items-start tablet:grid-cols-3', aspect: () => 'aspect-[4/5]' },
 };
 
-const caseCard = (c, index) => {
+// The media and text of a case without a full case.
+const caseSummary = (c) => {
   const media = c.media || [];
   const layout = LAYOUTS[c.layout] || LAYOUTS.feature;
   const inMedia = c.layout === 'text';
@@ -210,28 +216,12 @@ ${indent(ps(c.text, 'max-w-screen-tablet'), 2)}
     inner = media.map(fig).join('\n');
     if (inMedia) inner += '\n' + body;
   }
-  let link = '';
-  const linkClass = cx(LINK, 'text-[20px] tracking-[-0.6px]');
-  if (c.full_case?.enabled) {
-    link = `<a class="${linkClass}" href="#${esc(c.id)}" data-open-case="${esc(c.id)}">${esc(c.link_label || 'Read the full case')}</a>`;
-  } else if (c.link_url) {
-    const external = /^https?:/.test(c.link_url) ? ' target="_blank" rel="noopener"' : '';
-    link = `<a class="${linkClass}" href="${esc(c.link_url)}"${external}>${esc(c.link_label || c.link_url)}</a>`;
-  }
-  return `<article class="${cx('flex flex-col gap-7', index > 0 && `mt-11 ${RULE} pt-9`)}">
-  <div class="grid grid-cols-1 items-end gap-x-10 gap-y-2 tablet:grid-cols-[minmax(0,1fr)_auto]">
-    <h3 class="font-strong text-[34px] leading-[38px] tracking-[-2px] tablet:text-[45px] tablet:leading-[48px]">${esc(c.title)}</h3>
-    <ul class="text-[15px] leading-[22px] tracking-[-0.4px] text-grey tablet:text-right tablet:text-[17px]">
-${(c.meta || []).filter(Boolean).map((m) => `      <li>${md(m)}</li>`).join('\n')}
-    </ul>
-  </div>
-  <p class="max-w-screen-tablet text-lead-sm text-balance tablet:text-lead">${md(c.outcome)}</p>
-${media.length ? `  <div class="grid gap-3 ${layout.grid}">\n${indent(inner, 4)}\n  </div>\n` : ''}${inMedia ? '' : indent(body, 2) + '\n'}${link ? `  ${link}\n` : ''}</article>`;
+  return [media.length && `<div class="grid gap-3 ${layout.grid}">\n${indent(inner, 2)}\n</div>`, !inMedia && body].filter(Boolean).join('\n');
 };
 
 const GRIDS = { two: 'grid-cols-1 tablet:grid-cols-2', three: 'grid-cols-1 tablet:grid-cols-3', 'three-tall': 'grid-cols-2 tablet:grid-cols-3' };
 
-const sheetBlock = (b) => {
+const block = (b) => {
   const parts = [];
   const two = b.columns === 'two';
   if (b.text) parts.push(`<div class="${cx('grid gap-x-10 gap-y-5 text-body-sm tablet:text-body tablet:leading-[26px]', two && 'tablet:grid-cols-2')}">
@@ -246,44 +236,71 @@ ${indent(ps(b.text, two ? 'max-w-screen-mobile' : 'w-full'), 2)}
   }
   if (!b.heading) return parts.join('\n');
   return `<section class="flex flex-col gap-5 ${RULE} pt-6">
-  <h3 class="text-title-sm tablet:text-title tablet:leading-[50px]">${md(b.heading)}</h3>
+  <h2 class="text-title-sm tablet:text-title tablet:leading-[50px]">${md(b.heading)}</h2>
 ${indent(parts.join('\n'), 2)}
 </section>`;
 };
 
-// The full case opens as a modal sheet (site.js); sheet and sheet-scroll are its hooks.
-const sheet = (c) => {
-  const f = c.full_case;
-  const button = 'cursor-pointer py-1 text-nav hover:underline hover:decoration-2 hover:underline-offset-4';
-  return `<dialog class="sheet m-auto h-full max-h-none w-full max-w-none border-0 bg-paper p-0 text-ink open:animate-sheet-in backdrop:bg-[rgba(0,0,0,.4)] motion-reduce:open:animate-none tablet:h-[calc(100%-24px)] tablet:w-[min(1180px,calc(100%-24px))] tablet:border-2 tablet:border-ink" id="${esc(c.id)}" aria-labelledby="${esc(c.id)}-title">
-  <div class="sheet-scroll h-full overflow-y-auto overscroll-contain">
-    <div class="sticky top-0 z-[2] flex items-center justify-between border-b-2 border-ink bg-paper px-[max(20px,3vw)] py-3 text-nav">
-      <span class="text-grey">Case study</span>
-      <button type="button" class="${button}" data-close>Close <span class="ml-1.5 text-[22px]" aria-hidden="true">×</span></button>
-    </div>
+const cases = shown(home.cases);
+const casePath = (c) => `work/${c.id}.html`;
+const hasHalftone = (media) => (media || []).some((m) => m.type === 'halftone');
 
-    <article class="mx-auto flex max-w-[calc(1680px+2*max(20px,3vw))] flex-col gap-10 px-[max(20px,3vw)] pt-10 pb-16">
-      <header class="flex flex-col gap-4">
-        <h2 class="font-strong text-[38px] leading-10 tracking-[-1.6px] tablet:text-[60px] tablet:leading-[62px] tablet:tracking-[-3px]" id="${esc(c.id)}-title">${esc(c.title)}</h2>
-${f.outcome ? `        <p class="w-full text-lead-sm text-balance tablet:text-lead">${md(f.outcome)}</p>\n` : ''}      </header>
-${(f.facts || []).length ? `
-      <dl class="grid grid-cols-2 gap-x-8 gap-y-5 tablet:grid-cols-4">
-${f.facts.map((x) => `        <div class="min-w-0 border-t-2 border-ink pt-3"><dt class="mb-1 text-label text-grey">${esc(x.label)}</dt><dd class="${BODY}">${md(x.value)}</dd></div>`).join('\n')}
+// Each case has a page of its own: the full case when there is one, otherwise the summary.
+const casePage = (c) => {
+  const f = c.full_case?.enabled ? c.full_case : null;
+  const details = (c.meta || []).filter(Boolean);
+  const facts = f?.facts?.length ? f.facts : [
+    c.client && { label: 'Client', value: c.client },
+    details.length && { label: 'Details', value: details.join('\n') },
+  ].filter(Boolean);
+  let link = '';
+  if (c.link_url) {
+    const external = /^https?:/.test(c.link_url) ? ' target="_blank" rel="noopener"' : '';
+    link = `<a class="${cx(LINK, 'text-[20px] tracking-[-0.6px]')}" href="${esc(c.link_url)}"${external}>${esc(c.link_label || c.link_url)}</a>`;
+  }
+  const body = f ? (f.blocks || []).map(block).join('\n\n') : caseSummary(c);
+  // From tablet up: title and outcome on the left, the facts stacked beside them (the work list's columns).
+  return `  <article class="flex flex-col gap-10 pt-8 tablet:pt-12">
+    <div class="grid grid-cols-1 items-start gap-10 tablet:grid-cols-6 tablet:gap-x-5">
+      <header class="flex flex-col gap-4 tablet:col-span-4">
+        <h1 class="font-strong text-[38px] leading-10 tracking-[-1.6px] tablet:text-[60px] tablet:leading-[62px] tablet:tracking-[-3px]">${esc(c.title)}</h1>
+${(f?.outcome || c.outcome) ? `        <p class="w-full text-lead-sm text-balance tablet:text-lead">${md(f?.outcome || c.outcome)}</p>\n` : ''}      </header>
+${facts.length ? `      <dl class="grid grid-cols-2 gap-x-8 gap-y-5 tablet:col-span-2 tablet:grid-cols-1">
+${facts.map((x) => `        <div class="min-w-0"><dt class="mb-1 text-label text-grey">${esc(x.label)}</dt><dd class="${BODY}">${md(x.value)}</dd></div>`).join('\n')}
       </dl>
-` : ''}
-${(f.blocks || []).map((b) => indent(sheetBlock(b), 6)).join('\n\n')}
-
-      <footer class="flex flex-col items-baseline justify-between gap-4 ${RULE} pt-5 text-[17px] tracking-[-0.6px] tablet:flex-row tablet:text-[20px]">
-        <button type="button" class="${button}" data-close>Back to all work</button>
-        <a class="${LINK}" href="#contact" data-close>Start a project like this</a>
-      </footer>
-    </article>
-  </div>
-</dialog>
-`;
+` : ''}    </div>
+${indent(body, 4)}
+${link ? `    ${link}\n` : ''}  </article>`;
 };
 
-const cases = shown(home.cases);
+// --- home ---
+
+// Work index: one row per case.
+const ROW_GRID = 'grid grid-cols-1 tablet:grid-cols-6 tablet:gap-x-5';
+// Clients and column labels are set in small caps-style uppercase, like a catalogue.
+const CAPS = 'text-body-sm tracking-[0.04em] uppercase tablet:text-body tablet:tracking-[0.04em]';
+const thumb = (m) => {
+  const cls = 'block h-[120px] w-auto max-w-none flex-none bg-panel object-cover tablet:h-[180px]';
+  return m.type === 'video'
+    ? `<video class="${cls}" src="${src(m.src)}" autoplay muted loop playsinline aria-hidden="true"></video>`
+    : `<img class="${cls}" src="${src(m.src)}" alt="" loading="lazy">`;
+};
+// Title and thumbnails on the left; client with the outcome right under it on the right.
+// The halftone tool only works on its case page, so it is left out of the thumbnails.
+// On phones: title, client, outcome, thumbnails.
+const caseRow = (c) => `<li id="${esc(c.id)}">
+  <a class="${cx('group block border-t-2 border-ink pt-4 pb-6 no-underline tablet:pt-5 tablet:pb-8', FOCUS)}" href="${casePath(c)}">
+    <div class="${ROW_GRID} items-baseline">
+      <span class="text-lead-sm decoration-2 underline-offset-4 group-hover:underline tablet:col-span-4 tablet:text-lead">${esc(c.title)}</span>
+      <div class="tablet:col-span-2 tablet:row-span-2">
+        <p class="${CAPS}">${esc(c.client)}</p>
+        <p class="mt-2 line-clamp-3 max-w-screen-mobile">${md(c.outcome)}</p>
+      </div>
+      <div class="mt-4 flex gap-2.5 overflow-hidden tablet:col-span-4 tablet:mt-5">${(c.media || []).filter((m) => m.type !== 'halftone').slice(0, 4).map(thumb).join('')}</div>
+    </div>
+  </a>
+</li>`;
+
 const h = home.hero;
 const heroExtra = `    <div class="flex flex-wrap items-baseline gap-x-12 gap-y-4 text-[17px] leading-6 tracking-[-0.6px] tablet:text-[20px]"${h.show_contact ? '' : ' hidden'}>
       <a class="${LINK}" href="#contact" hidden>${esc(site.nav.cta)}</a>
@@ -306,14 +323,16 @@ ${logos.map(logo).join('\n')}
     </ul>
   </section>
 ` : ''}
-  ${strip(home.work_title, 'work')}
+  ${sectionHead(home.work_title, 'work')}
 
-  <div class="flex flex-col">
-${cases.map((c, i) => indent(caseCard(c, i), 2)).join('\n\n')}
+  <div class="${BODY}">
+    <div class="${ROW_GRID} hidden pb-2 text-label tracking-[0.04em] text-grey uppercase tablet:grid" aria-hidden="true">
+      <span class="col-span-4">Project</span><span class="col-span-2">Client</span>
+    </div>
+    <ol>
+${cases.map((c) => indent(caseRow(c), 6)).join('\n')}
+    </ol>
   </div>`;
-
-const homeAfter = cases.filter((c) => c.full_case?.enabled).map(sheet).join('\n')
-  + (cases.some((c) => (c.media || []).some((m) => m.type === 'halftone')) ? '<script src="assets/halftone.js"></script>' : '');
 
 // --- approach ---
 
@@ -321,9 +340,9 @@ const item = (it) => `<div class="flex min-w-0 flex-col gap-2 border-t-2 border-
 
 const approachBody = `${hero(approach.hero)}
 
-${shown(approach.sections).map((s, i) => `  <section${i > 0 ? ' class="mt-14"' : ''}>
-    ${strip(s.title)}
-${s.intro ? `    <p class="mb-8 max-w-screen-tablet ${BODY}">${md(s.intro)}</p>\n` : ''}    <div class="grid grid-cols-1 gap-7 tablet:grid-cols-2 tablet:gap-x-10 tablet:gap-y-9">
+${shown(approach.sections).map((s, i) => `  <section${i > 0 ? ` class="mt-14 ${RULE}"` : ''}>
+    ${sectionHead(s.title)}
+${s.intro ? `    <p class="-mt-3 mb-8 max-w-screen-tablet ${BODY}">${md(s.intro)}</p>\n` : ''}    <div class="grid grid-cols-1 gap-7 tablet:grid-cols-2 tablet:gap-x-10 tablet:gap-y-9">
 ${shown(s.items).map((it) => `      ${item(it)}`).join('\n')}
     </div>
   </section>`).join('\n\n')}`;
@@ -333,10 +352,24 @@ ${shown(s.items).map((it) => `      ${item(it)}`).join('\n')}
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT);
 for (const file of STATIC) cpSync(file, `${OUT}/${file}`, { recursive: true, filter: (s) => !s.endsWith('.DS_Store') });
+const paths = ['', 'approach.html'];
 writeFileSync(`${OUT}/index.html`, page(
-  { title: pageTitle(home.title), description: home.description || site.description, path: '' }, 'home', homeBody, homeAfter));
+  { title: pageTitle(home.title), description: home.description || site.description, path: '' }, 'home', homeBody));
 writeFileSync(`${OUT}/approach.html`, page(
   { title: pageTitle(approach.title), description: approach.description || site.description, path: 'approach.html' }, 'approach', approachBody));
+mkdirSync(`${OUT}/work`);
+cases.forEach((c, i) => {
+  const halftone = !c.full_case?.enabled && hasHalftone(c.media) ? '<script src="assets/halftone.js"></script>' : '';
+  writeFileSync(`${OUT}/${casePath(c)}`, page(
+    { title: pageTitle([c.title, c.client].filter(Boolean).join(' · ')), description: c.outcome || site.description, path: casePath(c) }, 'work', casePage(c), halftone));
+  paths.push(casePath(c));
+});
+// The sitemap lists every page, so new cases are in it without editing anything.
+writeFileSync(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${paths.map((p) => `  <url><loc>${esc(siteUrl(p))}</loc></url>`).join('\n')}
+</urlset>
+`);
 // Tailwind scans this file for classes, so the CSS is built after the pages exist.
 execFileSync('node_modules/.bin/tailwindcss', ['-i', 'styles/site.css', '-o', `${OUT}/assets/site.css`, '--minify'], { stdio: 'inherit' });
-console.log(`Built ${OUT}/ (home: ${cases.length} cases, approach: ${shown(approach.sections).length} sections).`);
+console.log(`Built ${OUT}/ (home and ${cases.length} case pages, approach: ${shown(approach.sections).length} sections).`);

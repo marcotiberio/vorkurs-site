@@ -44,9 +44,6 @@
   --text-caption: 14px;    --text-caption--line-height: 18px;    --text-caption--letter-spacing: -0.1px;
   --text-note: 15px;       --text-note--line-height: 20px;       --text-note--letter-spacing: -0.2px;
   --text-label: 16px;      --text-label--line-height: normal;    --text-label--letter-spacing: -0.2px;
-
-  --animate-sheet-in: sheet-in .32s ease-out;
-  @keyframes sheet-in { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
 }
 
 @layer base {

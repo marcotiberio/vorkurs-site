@@ -10,28 +10,17 @@
     bar.querySelectorAll('.bar-menu a').forEach(a => a.addEventListener('click', () => set(false)));
   }
 
+  // the bar slides away while scrolling down and comes back on the way up
+  const head = document.getElementById('site-header');
+  if (head) {
+    let last = scrollY;
+    addEventListener('scroll', () => {
+      const y = scrollY;
+      if (Math.abs(y - last) < 6) return;
+      head.dataset.hidden = y > last && y > 120 && bar?.dataset.open !== 'true';
+      last = y;
+    }, { passive: true });
+    head.addEventListener('focusin', () => { head.dataset.hidden = false; });
+  }
 
-  // case studies open as a modal sheet; #citizenm in the address opens it directly
-  const openCase = id => {
-    const d = document.getElementById(id);
-    if (!d || d.open) return;
-    d.showModal();
-    document.body.classList.add('sheet-open');
-    d.querySelector('.sheet-scroll').scrollTop = 0;
-    if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
-  };
-  document.querySelectorAll('[data-open-case]').forEach(a => a.addEventListener('click', e => {
-    e.preventDefault(); openCase(a.dataset.openCase);
-  }));
-  document.querySelectorAll('dialog.sheet').forEach(d => {
-    d.addEventListener('close', () => {
-      document.body.classList.remove('sheet-open');
-      if (location.hash === '#' + d.id) history.replaceState(null, '', location.pathname + location.search);
-    });
-    d.addEventListener('click', e => { if (e.target === d) d.close(); });          // backdrop
-    d.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => d.close()));
-  });
-  const fromHash = () => { const id = location.hash.slice(1); if (id && document.querySelector('dialog.sheet#' + CSS.escape(id))) openCase(id); };
-  fromHash();
-  window.addEventListener('hashchange', fromHash);
 })();
