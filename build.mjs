@@ -129,7 +129,7 @@ const footer = (isHome) => {
 
 const page = (meta, current, body, after = '') => `${head(meta)}
 <body class="bg-paper font-sans text-ink antialiased before:fixed before:inset-x-0 before:top-0 before:z-30 before:h-[env(safe-area-inset-top,0px)] before:bg-paper">
-<div class="mx-auto flex w-full max-w-[1720px] flex-col pr-[max(20px,env(safe-area-inset-right,0px))] pb-[20px] pl-[max(20px,env(safe-area-inset-left,0px))]">
+<div class="flex w-full flex-col pr-[max(20px,env(safe-area-inset-right,0px))] pb-[20px] pl-[max(20px,env(safe-area-inset-left,0px))]">
 ${header(current)}
 
 ${body}
