@@ -279,11 +279,19 @@ ${link ? `    ${link}\n` : ''}  </article>`;
 const ROW_GRID = 'grid grid-cols-1 tablet:grid-cols-6 tablet:gap-x-5';
 // Clients and column labels are set in small caps-style uppercase, like a catalogue.
 const CAPS = 'text-body-sm tracking-[0.04em] uppercase tablet:text-body tablet:tracking-[0.04em]';
+// Thumbnails are equal tiles in a three-up grid, so every row keeps the same rhythm.
+// Screenshots crop from the top left; a phone screen rises from the bottom of a sand tile, like its frame on the case page.
+const THUMBS = 3;
 const thumb = (m) => {
-  const cls = 'block h-[120px] w-auto max-w-none flex-none bg-panel object-cover tablet:h-[180px]';
-  return m.type === 'video'
-    ? `<video class="${cls}" src="${src(m.src)}" autoplay muted loop playsinline aria-hidden="true"></video>`
-    : `<img class="${cls}" src="${src(m.src)}" alt="" loading="lazy">`;
+  const phone = m.frame === 'phone';
+  const shot = m.frame === 'shot';
+  const cls = cx('block transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none',
+    phone ? 'absolute inset-x-0 top-[10%] mx-auto h-full w-[42%] origin-bottom rounded-t-[10px] border-x-[5px] border-t-[5px] border-device object-cover object-top tablet:rounded-t-[16px] tablet:border-x-[7px] tablet:border-t-[7px]' : 'size-full object-cover',
+    shot && 'object-left-top');
+  const el = m.type === 'video'
+    ? `<video class="${cls}" src="${src(m.src)}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>`
+    : `<img class="${cls}" src="${src(m.src)}" alt="" loading="lazy" decoding="async">`;
+  return `<div class="${cx('relative aspect-[4/3] min-w-0 overflow-hidden', phone ? 'bg-sand' : 'bg-panel', shot && 'shadow-[inset_0_0_0_1px_rgba(0,0,0,.12)]')}">${el}</div>`;
 };
 // Title and thumbnails on the left; client with the outcome right under it on the right.
 // The halftone tool only works on its case page, so it is left out of the thumbnails.
@@ -296,7 +304,7 @@ const caseRow = (c) => `<li id="${esc(c.id)}">
         <p class="${CAPS}">${esc(c.client)}</p>
         <p class="mt-2 line-clamp-3 max-w-screen-mobile">${md(c.outcome)}</p>
       </div>
-      <div class="mt-4 flex gap-2.5 overflow-hidden tablet:col-span-4 tablet:mt-5">${(c.media || []).filter((m) => m.type !== 'halftone').slice(0, 4).map(thumb).join('')}</div>
+      <div class="mt-4 grid grid-cols-3 gap-2 tablet:col-span-4 tablet:mt-5 tablet:gap-2.5">${(c.media || []).filter((m) => m.type !== 'halftone').slice(0, THUMBS).map(thumb).join('')}</div>
     </div>
   </a>
 </li>`;

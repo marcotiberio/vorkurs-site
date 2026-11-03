@@ -18,7 +18,7 @@ Three entries: **Site settings**, **Home**, **Approach**. Lists can be dragged t
 
 In text fields: an empty line starts a new paragraph, `[text](https://…)` makes a link, `*text*` makes italics.
 
-Case studies pick a media layout (large + stacked, two, three, wide + two, two + text) and each media item a frame (plain, screenshot, wide, tall, in a phone). A media item of type *Halftone tool* turns its image into the live halftone generator. The work list on the home page shows project and client; each row also shows the first four media as thumbnails and the outcome. Every case has a page of its own: the media and text, or, with *Has a full case* ticked, the full case blocks (sections with optional heading, text and media) instead.
+Case studies pick a media layout (large + stacked, two, three, wide + two, two + text) and each media item a frame (plain, screenshot, wide, tall, in a phone). A media item of type *Halftone tool* turns its image into the live halftone generator. The work list on the home page shows project and client; each row also shows the first three media as equal thumbnails and the outcome. Every case has a page of its own: the media and text, or, with *Has a full case* ticked, the full case blocks (sections with optional heading, text and media) instead.
 
 ## Publish
 
