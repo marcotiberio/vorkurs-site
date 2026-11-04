@@ -73,6 +73,10 @@ jobs:
             ## Verdict
             One line: "Safe to merge", "Merge after fixes", or "Needs rework".
 
+            If there is at least one 🔴 or 🟡 issue, end the comment with this exact
+            line, unchanged, after the Verdict:
+            - [ ] @claude fix the 🔴/🟡 items above
+
             For each 🔴 or 🟡 issue, also leave an inline comment on the exact line.
           claude_args: |
             --max-turns 30
