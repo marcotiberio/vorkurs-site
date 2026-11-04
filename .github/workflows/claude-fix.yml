@@ -1,0 +1,40 @@
+name: Claude fix
+
+# Runs when Marco comments "@claude ..." on a pull request, e.g. "@claude fix".
+# Applies the requested changes on the PR branch. Every commit is tagged
+# [review-fix] so the review workflow re-checks the result.
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+concurrency:
+  group: claude-fix-${{ github.event.issue.number || github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    if: >-
+      github.event.comment.user.login == 'marcotiberio' &&
+      contains(github.event.comment.body, '@claude') &&
+      (github.event_name == 'pull_request_review_comment' || github.event.issue.pull_request)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: |
+            --max-turns 60
+            --append-system-prompt "You are fixing a pull request after an automated review. If the comment just says 'fix' (or similar), address ONLY the 🔴 Must fix and 🟡 Should fix items from the latest 'claude[bot]' review comment on this PR; ignore ⚪ nits. If the comment asks for something specific, do only that. Follow the repo's CLAUDE.md. Do not add features, refactor unrelated code, or change files the review did not mention. If the repo has a build command (e.g. npm run build), run it and make sure it passes before pushing. Every commit message MUST start with '[review-fix] '. Finish by replying on the PR with 2-4 short bullets: what you changed, and anything you deliberately left alone."
