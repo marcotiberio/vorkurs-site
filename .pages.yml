@@ -68,6 +68,47 @@ content:
           - { name: height, label: Height in px (desktop), type: number, default: 24, description: "Tune per logo so they look the same size: about 24 for wordmarks, 38 for square marks." }
           - { name: height_mobile, label: Height in px (mobile), type: number, default: 18 }
           - { name: mono, label: Force black, type: boolean, default: false, description: For colour logos that have no black version. }
+      - name: sections
+        label: Sections
+        description: "Text sections around the work list: the problem, what we do, ways to work with us, for whom."
+        type: object
+        list:
+          collapsible: { collapsed: true, summary: "{title}" }
+        fields:
+          - { name: visible, label: Show on site, type: boolean, default: true }
+          - { name: id, label: Anchor, type: string, description: "Optional. Lowercase, no spaces; links to vorkurs.space/#anchor." }
+          - { name: title, label: Title, type: string }
+          - name: place
+            label: Position
+            type: select
+            default: before_work
+            options:
+              values:
+                - { value: before_work, label: Before the work list }
+                - { value: after_work, label: After the work list }
+          - name: layout
+            label: Layout
+            type: select
+            default: grid
+            options:
+              values:
+                - { value: grid, label: "Grid (heading, label, italic intro, text)" }
+                - { value: numbered, label: "Numbered list (heading only, large)" }
+          - { name: intro, label: Intro, type: text, description: "Optional, large. *text* for italic." }
+          - name: items
+            label: Items
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{heading}" }
+            fields:
+              - { name: visible, label: Show on site, type: boolean, default: true }
+              - { name: heading, label: Heading, type: text, description: In the numbered layout this is the whole line. }
+              - { name: label, label: Label (grey, next to the heading), type: string, description: "Optional, e.g. Fixed scope. Grid only." }
+              - { name: lead, label: Italic intro, type: string, description: Optional. Grid only. }
+              - { name: text, label: Text, type: text, description: Empty line = new paragraph. Grid only. }
+          - { name: outro, label: Closing line, type: text, description: "Optional, large and grey, below the items." }
+          - { name: link_label, label: Link text, type: string, description: "Optional, e.g. How we work →" }
+          - { name: link_url, label: Link address, type: string, description: "e.g. approach.html" }
       - { name: work_title, label: Work section title, type: string }
       - name: cases
         label: Case studies

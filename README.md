@@ -3,7 +3,7 @@
 All text and media are edited in **Pages CMS** (app.pagescms.org). The pages are generated, so there is no `index.html` to edit by hand.
 
 - `content/site.json`: studio name, contact details, navigation, closing line, link preview image
-- `content/home.json`: hero, client logos, case studies. Each case is a row in the work list and gets its own page at `work/{id}.html`
+- `content/home.json`: hero, client logos, sections (the problem, what we do, ways to work with us, for whom; each placed before or after the work list), case studies. Each case is a row in the work list and gets its own page at `work/{id}.html`
 - `content/approach.json`: hero and sections (Practice, Engagements, Principles)
 - `.pages.yml`: the editor setup. Every key in the JSON files must be declared here, or Pages CMS drops it on save.
 - `styles/site.css`: Tailwind entry with the design tokens (colours, fonts, type scale). The utility classes are in the markup in `build.mjs`.

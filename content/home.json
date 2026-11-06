@@ -2,8 +2,8 @@
   "title": "",
   "description": "",
   "hero": {
-    "title": "vorkurs designs and builds digital products for climate, finance and mission‑driven organisations.",
-    "subtitle": "Strategy, design and code in one team, from the first question to launch and after.",
+    "title": "Important work deserves digital products that hold up.",
+    "subtitle": "vorkurs designs and builds them for climate, finance and mission‑driven organisations: strategy, design and code in one team, from the first question to launch and after.",
     "show_contact": false,
     "note": "The name comes from the *Vorkurs*, the Bauhaus preliminary course where every student started with materials, form and function before anything else.",
     "show_note": false
@@ -18,6 +18,51 @@
     { "visible": true, "name": "&why", "image": "assets/logos/logo-why.svg", "height": 22, "height_mobile": 17, "mono": false },
     { "visible": true, "name": "Gallerie d'Italia", "image": "assets/logos/logo-gdi.svg", "height": 38, "height_mobile": 30, "mono": false },
     { "visible": true, "name": "KesselsKramer", "image": "assets/logos/logo-kesselskramer.png", "height": 38, "height_mobile": 30, "mono": true }
+  ],
+  "sections": [
+    {
+      "visible": true, "id": "problem", "title": "The problem", "place": "before_work", "layout": "numbered",
+      "intro": "The work matters. The digital side keeps getting in the way.",
+      "items": [
+        {"visible":  true, "heading":  "Strategy, design and development sit with different people, and the meaning gets lost between them.", "label":  "", "lead":  "", "text":  ""},
+        {"visible":  true, "heading":  "The site was built once and has been patched ever since.", "label":  "", "lead":  "", "text":  ""},
+        {"visible":  true, "heading":  "Complex content, data or finance reads as harder than it is.", "label":  "", "lead":  "", "text":  ""},
+        {"visible":  true, "heading":  "Every new campaign, region or sub-brand drifts a little further from the system.", "label":  "", "lead":  "", "text":  ""}
+      ],
+      "outro": "Not because the team isn't good. Because the pieces were never built to work together.", "link_label": "", "link_url": ""
+    },
+    {
+      "visible": true, "id": "practice", "title": "What we do", "place": "before_work", "layout": "grid",
+      "intro": "One team, from working out what to build to keeping it in shape after launch. Nothing lost between strategy, design and code.",
+      "items": [
+        {"visible":  true, "heading":  "Consulting & Strategy", "label":  "", "lead":  "", "text":  "Goals, users, platform and how your team actually works, so you invest in the right thing and everyone knows why."},
+        {"visible":  true, "heading":  "Brand & Story Systems", "label":  "", "lead":  "", "text":  "Brand, content and digital systems that hold together in practice, so teams move faster and stay consistent."},
+        {"visible":  true, "heading":  "Build & Deploy", "label":  "", "lead":  "", "text":  "Fast, accessible, maintainable websites, design systems, internal tools and AI-assisted workflows, put into production by the people who designed them."},
+        {"visible":  true, "heading":  "Stewardship & Evolution", "label":  "", "lead":  "", "text":  "After launch we stay close, improve what matters and keep the system from fragmenting, so it never needs a rebuild."}
+      ],
+      "outro": "", "link_label": "How we work →", "link_url": "approach.html"
+    },
+    {
+      "visible": true, "id": "engagements", "title": "Ways to work with us", "place": "after_work", "layout": "grid",
+      "intro": "Short, scoped engagements built around where you are, not hours. If you're not sure which fits, start with an audit.",
+      "items": [
+        {"visible":  true, "heading":  "Audit", "label":  "Fixed scope", "lead":  "For when something feels off but you're not sure what.", "text":  "We map your platform, brand and workflows and give you a clear plan. Fixed fee, no commitment beyond that."},
+        {"visible":  true, "heading":  "Project", "label":  "End to end", "lead":  "For when you need something designed, built and running.", "text":  "Strategy, design, engineering and deployment, from brief to launch and into production."},
+        {"visible":  true, "heading":  "Embedded", "label":  "Monthly retainer", "lead":  "For teams that need someone senior inside, not alongside.", "text":  "We join your team 2–3 days a week and work directly in your stack: design, engineering, or both."},
+        {"visible":  true, "heading":  "Advisory", "label":  "Fractional lead", "lead":  "For when you need senior direction without a full-time hire.", "text":  "We set the direction, define the workflow, align the team, and step back when the system runs on its own."}
+      ],
+      "outro": "", "link_label": "More on engagements →", "link_url": "approach.html"
+    },
+    {
+      "visible": true, "id": "for-whom", "title": "For whom", "place": "after_work", "layout": "grid",
+      "intro": "For organisations whose work is more important, and more complicated, than their website lets on.",
+      "items": [
+        {"visible":  true, "heading":  "Climate & impact", "label":  "", "lead":  "", "text":  "Non-profits, journalism and climate organisations that need to be understood quickly and trusted for the long run."},
+        {"visible":  true, "heading":  "Finance & investment", "label":  "", "lead":  "", "text":  "Firms with complex products across regions, funds and sub-brands, that need one consistent system behind it all."},
+        {"visible":  true, "heading":  "Brands & culture", "label":  "", "lead":  "", "text":  "Brands, hotels and cultural institutions whose campaigns and channels need to stay unmistakably theirs at scale."}
+      ],
+      "outro": "", "link_label": "", "link_url": ""
+    }
   ],
   "work_title": "Selected work",
   "cases": [

@@ -323,6 +323,26 @@ const logo = (l) => {
 };
 const logos = home.show_logos === false ? [] : shown(home.logos);
 
+const item = (it) => `<div class="flex min-w-0 flex-col gap-2 border-t-2 border-ink pt-3.5"><h3 class="flex items-baseline justify-between gap-4 font-strong text-[20px] leading-6 tracking-[-0.8px] tablet:text-[24px] tablet:leading-7">${esc(it.heading)}${it.label ? ` <span class="font-sans text-[16px] tracking-[-0.2px] whitespace-nowrap text-grey">${esc(it.label)}</span>` : ''}</h3>${it.lead ? `<p class="max-w-screen-mobile italic ${BODY}">${md(it.lead)}</p>` : ''}${ps(it.text, `max-w-screen-mobile ${BODY}`).replace(/\n/g, '')}</div>`;
+
+// Home sections sit before or after the work list. numbered: rows led by 01, 02…; grid: the approach-style items.
+const numbered = (items) => `    <ol class="${BODY}">
+${items.map((it, i) => `      <li class="${ROW_GRID} items-baseline border-t-2 border-ink pt-3.5 pb-5 tablet:pt-4 tablet:pb-6"><span class="text-grey tabular-nums tablet:col-span-1">${String(i + 1).padStart(2, '0')}</span><p class="max-w-screen-tablet text-lead-sm text-balance tablet:col-span-5 tablet:text-lead">${md(it.heading)}</p></li>`).join('\n')}
+    </ol>`;
+const homeSection = (s) => {
+  const items = shown(s.items);
+  const body = s.layout === 'numbered' ? numbered(items) : `    <div class="grid grid-cols-1 gap-7 tablet:grid-cols-2 tablet:gap-x-10 tablet:gap-y-9${items.length === 3 ? ' desktop:grid-cols-3' : ''}">
+${items.map((it) => `      ${item(it)}`).join('\n')}
+    </div>`;
+  return `  <section class="mt-14 ${RULE}"${s.id ? ` id="${esc(s.id)}"` : ''}>
+    ${sectionHead(s.title)}
+${s.intro ? `    <p class="-mt-3 mb-8 max-w-screen-tablet text-lead-sm text-balance tablet:text-lead">${md(s.intro)}</p>\n` : ''}${body}
+${s.outro ? `    <p class="mt-6 max-w-screen-tablet text-lead-sm text-balance text-grey tablet:mt-8 tablet:text-lead">${md(s.outro)}</p>\n` : ''}${s.link_label && s.link_url ? `    <p class="mt-8 ${BODY}"><a class="${LINK}" href="${esc(s.link_url)}">${esc(s.link_label)}</a></p>\n` : ''}  </section>`;
+};
+const homeSections = shown(home.sections);
+const before = homeSections.filter((s) => s.place !== 'after_work').map(homeSection).join('\n\n');
+const after = homeSections.filter((s) => s.place === 'after_work').map(homeSection).join('\n\n');
+
 const homeBody = `${hero(h, heroExtra)}
 ${logos.length ? `
   <section class="border-y-2 border-ink py-7" aria-label="Clients and partners">
@@ -330,7 +350,8 @@ ${logos.length ? `
 ${logos.map(logo).join('\n')}
     </ul>
   </section>
-` : ''}
+` : ''}${before ? `\n${before}\n` : ''}
+  <section${before ? ` class="mt-14 ${RULE}"` : ''}>
   ${sectionHead(home.work_title, 'work')}
 
   <div class="${BODY}">
@@ -340,11 +361,11 @@ ${logos.map(logo).join('\n')}
     <ol>
 ${cases.map((c) => indent(caseRow(c), 6)).join('\n')}
     </ol>
-  </div>`;
+  </div>
+  </section>${after ? `\n\n${after}` : ''}`;
 
 // --- approach ---
 
-const item = (it) => `<div class="flex min-w-0 flex-col gap-2 border-t-2 border-ink pt-3.5"><h3 class="flex items-baseline justify-between gap-4 font-strong text-[20px] leading-6 tracking-[-0.8px] tablet:text-[24px] tablet:leading-7">${esc(it.heading)}${it.label ? ` <span class="font-sans text-[16px] tracking-[-0.2px] whitespace-nowrap text-grey">${esc(it.label)}</span>` : ''}</h3>${it.lead ? `<p class="max-w-screen-mobile italic ${BODY}">${md(it.lead)}</p>` : ''}${ps(it.text, `max-w-screen-mobile ${BODY}`).replace(/\n/g, '')}</div>`;
 
 const approachBody = `${hero(approach.hero)}
 
@@ -380,4 +401,4 @@ ${paths.map((p) => `  <url><loc>${esc(siteUrl(p))}</loc></url>`).join('\n')}
 `);
 // Tailwind scans this file for classes, so the CSS is built after the pages exist.
 execFileSync('node_modules/.bin/tailwindcss', ['-i', 'styles/site.css', '-o', `${OUT}/assets/site.css`, '--minify'], { stdio: 'inherit' });
-console.log(`Built ${OUT}/ (home and ${cases.length} case pages, approach: ${shown(approach.sections).length} sections).`);
+console.log(`Built ${OUT}/ (home: ${homeSections.length} sections and ${cases.length} case pages, approach: ${shown(approach.sections).length} sections).`);
