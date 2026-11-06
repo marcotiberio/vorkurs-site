@@ -172,7 +172,7 @@
       "title": "Un'Immagine",
       "client": "Erik Kessels × Gallerie d'Italia",
       "meta": ["Gallerie d'Italia, Turin", "Creative & technical direction"],
-      "outcome": "A 360° room where an algorithm stitches thousands of archive photographs into one moving image.",
+      "outcome": "A 360° room where an algorithm blends thousands of archive photographs into one moving image.",
       "layout": "pano",
       "media": [
         { "type": "image", "src": "img/kessels-room.jpg", "alt": "The projection room at Gallerie d'Italia", "caption": "The installation, Publifoto Archive", "frame": "plain" },

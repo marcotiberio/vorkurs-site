@@ -68,7 +68,7 @@ content:
           - { name: height, label: Height in px (desktop), type: number, default: 24, description: "Tune per logo so they look the same size: about 24 for wordmarks, 38 for square marks." }
           - { name: height_mobile, label: Height in px (mobile), type: number, default: 18 }
           - { name: mono, label: Force black, type: boolean, default: false, description: For colour logos that have no black version. }
-      - { name: work_title, label: Work section title, type: string }
+      - { name: work_title, label: Work page title, type: string, description: "Small label at the top of work.html, and the link to it at the bottom of the home hero." }
       - name: cases
         label: Case studies
         type: object
@@ -192,6 +192,7 @@ content:
         fields:
           - { name: visible, label: Show on site, type: boolean, default: true }
           - { name: title, label: Title, type: string }
+          - { name: on_home, label: Show on home page, type: boolean, default: true, description: "In short form: headings, labels and italic intros only." }
           - { name: intro, label: Intro, type: text, description: "Optional. *text* for italic." }
           - name: items
             label: Items
