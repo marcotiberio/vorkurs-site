@@ -27,6 +27,8 @@
   --color-cream: #fff9ec;  /* Solea app background */
   --color-sand: #ece6da;
   --color-device: #111111;
+  --color-frame: #777777;  /* grey around a screenshot's browser window, as built into the citizenM images */
+  --color-chrome: #1f2224; /* that window's title bar */
 
   --font-*: initial;
   --font-sans: 'II-Vorkurs-Medium', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
