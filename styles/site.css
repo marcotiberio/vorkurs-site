@@ -1,5 +1,5 @@
 /* Tailwind entry. build.mjs compiles it to dist/assets/site.css; the markup (and its classes) lives in build.mjs.
-   Layout: one column, 2px rules, II-Vorkurs, black and white, project images in their original colours. */
+   Layout: one column, 1px hairlines, II-Vorkurs, white on black, project images in their original colours. */
 @import "tailwindcss" source(none);
 @source "../build.mjs";
 
@@ -15,11 +15,14 @@
   --breakpoint-desktop: 1280px;
 
   --color-*: initial;
-  --color-ink: #000000;
-  --color-ink-soft: #333333;
-  --color-paper: #ffffff;
-  --color-grey: #767676;
-  --color-panel: #f1f1f1;
+  /* White on black, like tiberiomar.com: ink is the text and rules, paper the page. */
+  --color-ink: #ffffff;
+  --color-ink-soft: #cccccc;
+  --color-paper: #000000;
+  --color-grey: #a3a3a3;   /* secondary text: white at 64%, as on addmore.studio */
+  --color-faint: #7a7a7a;  /* small labels: white at 48% */
+  --color-line: #333333;   /* hairlines between cells and rows */
+  --color-panel: #1a1a1a;
   --color-tool: #fc8a6a;   /* brandmelder's own orange, as the tool outputs it */
   --color-cream: #fff9ec;  /* Solea app background */
   --color-sand: #ece6da;
@@ -43,9 +46,19 @@
   --text-nav: 18px;        --text-nav--line-height: normal;      --text-nav--letter-spacing: -0.5px;
   --text-caption: 14px;    --text-caption--line-height: 18px;    --text-caption--letter-spacing: -0.1px;
   --text-note: 15px;       --text-note--line-height: 20px;       --text-note--letter-spacing: -0.2px;
+  --text-eyebrow: 11px;    --text-eyebrow--line-height: 16px;    --text-eyebrow--letter-spacing: 0.06em;
+  --text-hero: clamp(44px, 5.4vw, 104px);    --text-hero--line-height: 1.1;     --text-hero--letter-spacing: -0.045em;
+  --text-closing: clamp(40px, 5.2vw, 96px);  --text-closing--line-height: 0.98; --text-closing--letter-spacing: -0.045em;
   --text-label: 16px;      --text-label--line-height: normal;    --text-label--letter-spacing: -0.2px;
 }
 
+/* Images dropped by assets/trail.js on the home hero. Not in build.mjs, so not Tailwind classes. */
+@layer components {
+  .trail-img { position: absolute; display: block; object-fit: cover; animation: trail-in .28s ease-out; }
+  @keyframes trail-in { from { opacity: 0; transform: scale(.92); } }
+  @media (prefers-reduced-motion: reduce) { .trail-img { animation: none; } }
+}
+
 @layer base {
-  html { line-height: normal; color-scheme: light; }
+  html { line-height: normal; color-scheme: dark; }
 }

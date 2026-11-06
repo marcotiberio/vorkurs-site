@@ -15,10 +15,16 @@ const approach = load('approach');
 const LINK = 'underline decoration-2 underline-offset-4 hover:no-underline';
 const CURRENT = 'aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-4 aria-[current=page]:hover:no-underline';
 const FOCUS = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink';
-const RULE = 'border-t-2 border-ink';
-const SECTION_HEAD = 'flex items-baseline justify-between gap-4 pt-10 pb-7';
-const H2 = 'text-title-sm leading-[34px] tablet:text-title tablet:leading-[54px]';
-const sectionHead = (title, id = '') => `<div class="${SECTION_HEAD}"${id ? ` id="${id}"` : ''}><h2 class="${H2}">${esc(title)}</h2></div>`;
+const RULE = 'border-t border-line';
+// Two tones, as on addmore.studio: the first sentence in ink, the rest in grey.
+const twoTone = (text) => {
+  const [, first, rest] = String(text || '').match(/^(.+?[.?!])\s+([\s\S]+)$/) || [, text, ''];
+  return `${md(first)}${rest ? ` <span class="text-grey">${md(rest)}</span>` : ''}`;
+};
+// A section opens with a small numbered label and its intro set large.
+const sectionIntro = (s, n) => `<header class="flex flex-col gap-5 pt-8 pb-10 tablet:pt-10 tablet:pb-12">
+      <h2 class="text-eyebrow text-faint uppercase">${String(n).padStart(2, '0')}&ensp;${esc(s.title)}</h2>
+${s.intro ? `      <p class="max-w-[1100px] text-title-sm text-balance tablet:text-title">${twoTone(s.intro)}</p>\n` : ''}    </header>`;
 const BODY = 'text-body-sm tablet:text-body';
 const FIGURE = 'flex min-w-0 flex-col gap-2';
 
@@ -55,7 +61,7 @@ const head = ({ title, description, path }) => {
 <link rel="canonical" href="${esc(url)}">
 <link rel="icon" href="/fav.png" type="image/png">
 <link rel="apple-touch-icon" href="/fav.png">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:url" content="${esc(url)}">
 <meta property="og:title" content="${esc(title)}">
@@ -79,18 +85,18 @@ const head = ({ title, description, path }) => {
 // site.js also sets data-hidden while scrolling down, which slides the bar away.
 const header = (current) => {
   const n = site.nav;
-  // Case pages count as Work.
-  const cur = (page) => (page === current || (page === 'home' && current === 'work') ? ' aria-current="page"' : '');
+  // The work page and the case pages are Work.
+  const cur = (page) => (page === current ? ' aria-current="page"' : '');
   const CHIP = 'no-underline transition-colors duration-150 hover:bg-panel aria-[current=page]:bg-ink aria-[current=page]:text-paper';
   const barLink = cx('px-3 py-1.5', CHIP, FOCUS);
   const menuLink = cx('block px-4 py-2 text-center text-[22px] tracking-[-0.7px]', CHIP, FOCUS);
   const x = 'hidden group-data-[open=true]:inline';
   return `  <header class="pointer-events-none sticky top-[env(safe-area-inset-top,0px)] z-20 flex justify-center pt-3 transition-transform duration-300 ease-[ease] data-[hidden=true]:-translate-y-[calc(100%+12px)] motion-reduce:transition-none" id="site-header">
-    <nav class="bar group pointer-events-auto w-full tablet:w-fit tablet:max-w-full border-2 border-ink bg-paper text-nav" aria-label="Main" data-open="false">
+    <nav class="bar group pointer-events-auto w-full tablet:w-fit tablet:max-w-full border border-line bg-paper text-nav" aria-label="Main" data-open="false">
       <div class="flex items-center gap-3 p-1.5 tablet:gap-4 tablet:p-2">
         <a class="${cx('flex-none px-2 font-strong text-[22px] tracking-[-0.8px] no-underline tablet:text-[26px]', FOCUS)}" href="index.html">${esc(site.name)}</a>
         <div class="hidden flex-none items-center gap-1 tablet:flex">
-          <a class="${barLink}" href="index.html#work"${cur('home')}>${esc(n.work)}</a>
+          <a class="${barLink}" href="work.html"${cur('work')}>${esc(n.work)}</a>
           <a class="${barLink}" href="approach.html"${cur('approach')}>${esc(n.approach)}</a>
           <a class="${barLink}" href="mailto:${esc(site.email)}">${esc(n.touch)}</a>
         </div>
@@ -99,7 +105,7 @@ const header = (current) => {
       <div class="bar-menu grid grid-rows-[0fr] transition-[grid-template-rows] duration-[280ms] ease-[ease] group-data-[open=true]:grid-rows-[1fr] motion-reduce:transition-none tablet:hidden" id="menu">
         <div class="overflow-hidden">
           <ul class="mx-1.5 mb-1.5 flex flex-col gap-1 p-2">
-            <li><a class="${menuLink}" href="index.html#work"${cur('home')}>${esc(n.work)}</a></li>
+            <li><a class="${menuLink}" href="work.html"${cur('work')}>${esc(n.work)}</a></li>
             <li><a class="${menuLink}" href="approach.html"${cur('approach')}>${esc(n.approach)}${n.approach_note ? `<small class="hidden -mt-0.5 text-[14px] tracking-[-0.1px] text-grey">${esc(n.approach_note)}</small>` : ''}</a></li>
             <li><a class="${menuLink}" href="index.html#contact">${esc(n.contact)}</a></li>
           </ul>
@@ -111,18 +117,18 @@ const header = (current) => {
 };
 
 const hero = (h, extra = '') => `  <section class="flex flex-col gap-6 pt-8 pb-8 tablet:gap-9 tablet:pt-12 tablet:pb-12">
-    <h1 class="text-display-sm text-balance tablet:text-display">${md(h.title)}${h.subtitle ? ` ${md(h.subtitle)}` : ''}</h1>
+    <h1 class="text-display-sm text-balance tablet:text-display">${md(h.title)}${h.subtitle ? ` <span class="text-grey">${md(h.subtitle)}</span>` : ''}</h1>
 ${extra}  </section>`;
 
 // On other pages, #contact and friends point back to the home page.
 const footer = (isHome) => {
   const closing = isHome ? md(site.closing) : md(site.closing).replace(/href="#/g, 'href="index.html#');
-  // Closing line on the left, contact details beside it; stacked on phones.
-  return `  <footer class="mt-14 grid grid-cols-1 gap-x-20 gap-y-10 ${RULE} pt-9 tablet:grid-cols-[minmax(0,1fr)_auto]"${isHome ? ' id="contact"' : ''}>
-    <p class="max-w-screen-mobile tablet:max-w-screen-tablet text-title-sm text-balance tablet:text-title">${closing}</p>
+  // The closing line set large across the page, contact details under it.
+  return `  <footer class="mt-20 flex flex-col gap-14 ${RULE} pt-10 tablet:gap-20 tablet:pt-14"${isHome ? ' id="contact"' : ''}>
+    <p class="max-w-[1300px] text-title text-balance tablet:text-closing">${closing}</p>
     <div class="flex flex-wrap gap-x-20 gap-y-6 text-body-sm tablet:text-body tablet:leading-6">
-      <div><h4 class="text-grey">Contact</h4><p class="min-w-0">${esc(site.email)}<br>${esc(site.phone)}</p></div>
-      <div><h4 class="text-grey">Studio</h4><p class="min-w-0">${md(site.address)}</p></div>
+      <div><h4 class="mb-1 text-eyebrow text-faint uppercase">Contact</h4><p class="min-w-0">${esc(site.email)}<br>${esc(site.phone)}</p></div>
+      <div><h4 class="mb-1 text-eyebrow text-faint uppercase">Studio</h4><p class="min-w-0">${md(site.address)}</p></div>
     </div>
   </footer>`;
 };
@@ -276,36 +282,38 @@ ${link ? `    ${link}\n` : ''}  </article>`;
 // --- home ---
 
 // Work index: one row per case.
-const ROW_GRID = 'grid grid-cols-1 tablet:grid-cols-6 tablet:gap-x-5';
-// Clients and column labels are set in small caps-style uppercase, like a catalogue.
-const CAPS = 'text-body-sm tracking-[0.04em] uppercase tablet:text-body tablet:tracking-[0.04em]';
-// Thumbnails are equal tiles in a three-up grid, so every row keeps the same rhythm.
+// Each row: the text in the left quarter, the case's images in a strip across the rest (like the
+// Art direction list on tiberiomar.com). The strip has one height; however many images a case has,
+// they share it equally, so every row is full.
 // Screenshots crop from the top left; a phone screen rises from the bottom of a sand tile, like its frame on the case page.
-const THUMBS = 3;
+const STRIP = 4;
 const thumb = (m) => {
   const phone = m.frame === 'phone';
   const shot = m.frame === 'shot';
   const cls = cx('block transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none',
-    phone ? 'absolute inset-x-0 top-[10%] mx-auto h-full w-[42%] origin-bottom rounded-t-[10px] border-x-[5px] border-t-[5px] border-device object-cover object-top tablet:rounded-t-[16px] tablet:border-x-[7px] tablet:border-t-[7px]' : 'size-full object-cover',
+    phone ? 'absolute inset-x-0 top-[10%] mx-auto h-full w-[min(42%,240px)] origin-bottom rounded-t-[10px] border-x-[5px] border-t-[5px] border-device object-cover object-top tablet:rounded-t-[16px] tablet:border-x-[7px] tablet:border-t-[7px]' : 'size-full object-cover',
     shot && 'object-left-top');
   const el = m.type === 'video'
     ? `<video class="${cls}" src="${src(m.src)}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>`
     : `<img class="${cls}" src="${src(m.src)}" alt="" loading="lazy" decoding="async">`;
-  return `<div class="${cx('relative aspect-[4/3] min-w-0 overflow-hidden', phone ? 'bg-sand' : 'bg-panel', shot && 'shadow-[inset_0_0_0_1px_rgba(0,0,0,.12)]')}">${el}</div>`;
+  return `<div class="${cx('relative h-full min-w-0 overflow-hidden', phone ? 'bg-sand' : 'bg-panel')}">${el}</div>`;
 };
-// Title and thumbnails on the left; client with the outcome right under it on the right.
-// The halftone tool only works on its case page, so it is left out of the thumbnails.
-// On phones: title, client, outcome, thumbnails.
+// The strip takes the case's own media first, then images from its full case. The halftone tool only
+// works on its case page, so it is left out.
+const strip = (c) => [...new Map([...(c.media || []), ...(c.full_case?.enabled ? (c.full_case.blocks || []).flatMap((b) => b.media || []) : [])]
+  .filter((m) => m.type !== 'halftone' && m.src).map((m) => [m.src, m])).values()].slice(0, STRIP);
+// Each row is a pair of hairline cells: the client as a small label at the top of the text cell, the title
+// and outcome at its foot, level with the bottom of the strip.
 const caseRow = (c) => `<li id="${esc(c.id)}">
-  <a class="${cx('group block border-t-2 border-ink pt-4 pb-6 no-underline tablet:pt-5 tablet:pb-8', FOCUS)}" href="${casePath(c)}">
-    <div class="${ROW_GRID} items-baseline">
-      <span class="text-lead-sm decoration-2 underline-offset-4 group-hover:underline tablet:col-span-4 tablet:text-lead">${esc(c.title)}</span>
-      <div class="tablet:col-span-2 tablet:row-span-2">
-        <p class="${CAPS}">${esc(c.client)}</p>
-        <p class="mt-2 line-clamp-3 max-w-screen-mobile">${md(c.outcome)}</p>
+  <a class="${cx('group grid grid-cols-1 gap-4 border-b border-line py-5 no-underline tablet:grid-cols-4 tablet:gap-0 tablet:py-0', FOCUS)}" href="${casePath(c)}">
+    <div class="flex flex-col justify-between gap-6 tablet:border-r tablet:border-line tablet:py-6 tablet:pr-6">
+      <p class="text-eyebrow text-faint uppercase">${esc(c.client)}</p>
+      <div>
+        <h2 class="text-lead-sm decoration-2 underline-offset-4 group-hover:underline desktop:text-lead">${esc(c.title)}</h2>
+        <p class="mt-2 line-clamp-4 max-w-screen-mobile">${md(c.outcome)}</p>
       </div>
-      <div class="mt-4 grid grid-cols-3 gap-2 tablet:col-span-4 tablet:mt-5 tablet:gap-2.5">${(c.media || []).filter((m) => m.type !== 'halftone').slice(0, THUMBS).map(thumb).join('')}</div>
     </div>
+    <div class="grid h-[44vw] auto-cols-fr grid-flow-col gap-2 tablet:col-span-3 tablet:my-6 tablet:ml-6 tablet:h-[clamp(240px,22vw,520px)] tablet:gap-2.5">${strip(c).map(thumb).join('')}</div>
   </a>
 </li>`;
 
@@ -316,53 +324,103 @@ const heroExtra = `    <div class="flex flex-wrap items-baseline gap-x-12 gap-y-
     </div>
 ${h.note ? `    <p class="max-w-screen-mobile text-note text-grey [&_i]:text-ink"${h.show_note ? '' : ' hidden'}>${md(h.note)}</p>\n` : ''}`;
 
-// Logos sit at one optical height, tuned per logo in the CMS; all are forced to black.
+// Logos sit at one optical height, tuned per logo in the CMS; all are forced to white.
 const logo = (l) => {
-  const filter = l.mono ? '[filter:grayscale(1)_brightness(0.4)_contrast(10)]' : '[filter:grayscale(1)_contrast(10)]';
+  const filter = l.mono ? '[filter:grayscale(1)_brightness(0.4)_contrast(10)_invert(1)]' : '[filter:grayscale(1)_contrast(10)_invert(1)]';
   return `      <li><img class="block h-[var(--hm)] w-auto ${filter} tablet:h-[var(--h)]" style="--h:${+l.height || 24}px;--hm:${+l.height_mobile || 18}px" src="${src(l.image)}" alt="${esc(l.name)}"></li>`;
 };
 const logos = home.show_logos === false ? [] : shown(home.logos);
 
-const homeBody = `${hero(h, heroExtra)}
+// Home hero: the headline over a stage where project images pile up (assets/trail.js).
+// The headline sits on paper so it stays readable over any image.
+// Pool: every image of every shown case, its full case included; halftone tools and videos are left out.
+const trailPool = [...new Set(cases.flatMap((c) => [...(c.media || []), ...(c.full_case?.enabled ? (c.full_case.blocks || []).flatMap((b) => b.media || []) : [])])
+  .filter((m) => m.type === 'image' && m.src).map((m) => src(m.src)))];
+const homeHero = `  <section class="relative isolate flex min-h-[72svh] flex-col justify-between gap-6 overflow-hidden pt-8 pb-4 tablet:min-h-[82svh] tablet:pt-12" data-trail>
+    <h1 class="relative z-10 max-w-[1500px] text-display-sm text-balance tablet:text-hero"><span class="bg-paper box-decoration-clone">${md(h.title)}${h.subtitle ? ` <span class="text-grey">${md(h.subtitle)}</span>` : ''}</span></h1>
+${heroExtra.replace(/^    <div class="/, '    <div class="relative z-10 ')}    <div class="trail-stage pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+    <div class="relative z-10 flex items-end justify-between gap-4">
+      <a class="${cx(LINK, 'bg-paper text-lead-sm tablet:text-lead')}" href="work.html">${esc(home.work_title)} →</a>
+      <button class="${cx('trail-toggle cursor-pointer border border-ink bg-paper px-3 py-1 text-caption', FOCUS)}" type="button" hidden>Pause</button>
+    </div>
+  </section>
+<script type="application/json" id="trail-data">${JSON.stringify(trailPool).replace(/</g, '\\u003c')}</script>
+<script>
+  // The work list used to be on this page: old links to #work or #<case id> go on to work.html.
+  if (${JSON.stringify(['work', ...cases.map((c) => c.id)])}.includes(location.hash.slice(1))) location.replace('work.html' + location.hash);
+</script>`;
+
+const homeBody = `${homeHero}
 ${logos.length ? `
-  <section class="border-y-2 border-ink py-7" aria-label="Clients and partners">
+  <section class="border-y border-line py-7" aria-label="Clients and partners">
     <ul class="flex flex-wrap items-center justify-start gap-x-7 gap-y-[22px] tablet:justify-between tablet:gap-x-10 tablet:gap-y-7">
 ${logos.map(logo).join('\n')}
     </ul>
   </section>
-` : ''}
-  ${sectionHead(home.work_title, 'work')}
+` : ''}`;
+
+// --- work ---
+
+// The work page opens with its title as a small label, straight above the list.
+const workBody = `  <header class="pt-8 pb-5 tablet:pt-12 tablet:pb-6">
+    <h1 class="text-eyebrow text-faint uppercase">${esc(home.work_title)}</h1>
+  </header>
 
   <div class="${BODY}">
-    <div class="${ROW_GRID} hidden pb-2 text-label tracking-[0.04em] text-grey uppercase tablet:grid" aria-hidden="true">
-      <span class="col-span-4">Project</span><span class="col-span-2">Client</span>
-    </div>
-    <ol>
+    <ol class="border-t border-line">
 ${cases.map((c) => indent(caseRow(c), 6)).join('\n')}
     </ol>
   </div>`;
 
 // --- approach ---
 
-const item = (it) => `<div class="flex min-w-0 flex-col gap-2 border-t-2 border-ink pt-3.5"><h3 class="flex items-baseline justify-between gap-4 font-strong text-[20px] leading-6 tracking-[-0.8px] tablet:text-[24px] tablet:leading-7">${esc(it.heading)}${it.label ? ` <span class="font-sans text-[16px] tracking-[-0.2px] whitespace-nowrap text-grey">${esc(it.label)}</span>` : ''}</h3>${it.lead ? `<p class="max-w-screen-mobile italic ${BODY}">${md(it.lead)}</p>` : ''}${ps(it.text, `max-w-screen-mobile ${BODY}`).replace(/\n/g, '')}</div>`;
+const item = (it) => `<div class="flex min-w-0 flex-col gap-2 border-t border-line pt-3.5"><h3 class="flex items-baseline justify-between gap-4 font-strong text-[20px] leading-6 tracking-[-0.8px] tablet:text-[24px] tablet:leading-7">${esc(it.heading)}${it.label ? ` <span class="font-sans text-[16px] tracking-[-0.2px] whitespace-nowrap text-grey">${esc(it.label)}</span>` : ''}</h3>${it.lead ? `<p class="max-w-screen-mobile italic ${BODY}">${md(it.lead)}</p>` : ''}${ps(it.text, `max-w-screen-mobile ${BODY}`).replace(/\n/g, '')}</div>`;
+
+// Practice, Engagements and Principles in full on the approach page.
+const approachSections = () => shown(approach.sections).map((s, i) => `  <section class="${cx(i > 0 && 'mt-14', RULE)}">
+    ${sectionIntro(s, i + 1)}
+    <div class="grid grid-cols-1 gap-7 tablet:grid-cols-2 tablet:gap-x-10 tablet:gap-y-9">
+${shown(s.items).map((it) => `      ${item(it)}`).join('\n')}
+    </div>
+  </section>`).join('\n\n');
+
+// On the home page, the sections ticked "Show on home page" in short form, as hairline cells (like
+// addmore.studio): the label, or the item's number, at the top; the heading and italic intro at the bottom.
+// Then a link to the approach page for the rest.
+const shortItem = (it, i) => `<div class="${cx('flex min-w-0 flex-col justify-between gap-10 border-r border-b border-line p-5 tablet:p-6', it.lead ? 'min-h-[170px] tablet:min-h-[220px]' : 'min-h-[130px] tablet:min-h-[150px]')}">
+        <span class="text-eyebrow text-faint uppercase">${it.label ? esc(it.label) : String(i + 1).padStart(2, '0')}</span>
+        <div class="flex flex-col gap-2"><h3 class="text-lead-sm tablet:text-lead">${esc(it.heading)}</h3>${it.lead ? `<p class="text-grey ${BODY}">${md(it.lead)}</p>` : ''}</div>
+      </div>`;
+const homeApproach = () => {
+  const sections = shown(approach.sections).filter((s) => s.on_home !== false);
+  if (!sections.length) return '';
+  return sections.map((s, n) => {
+    const leads = shown(s.items).some((it) => it.lead);
+    return `  <section class="mt-14 ${RULE}">
+    ${sectionIntro(s, n + 1)}
+    <div class="${cx('grid border-t border-l border-line', leads ? 'grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4' : 'grid-cols-2 desktop:grid-cols-4')}">
+${shown(s.items).map((it, i) => `      ${shortItem(it, i)}`).join('\n')}
+    </div>
+  </section>`;
+  }).join('\n\n') + `
+
+  <p class="mt-12 text-lead-sm tablet:text-lead"><a class="${LINK}" href="approach.html">How we work →</a></p>`;
+};
 
 const approachBody = `${hero(approach.hero)}
 
-${shown(approach.sections).map((s, i) => `  <section${i > 0 ? ` class="mt-14 ${RULE}"` : ''}>
-    ${sectionHead(s.title)}
-${s.intro ? `    <p class="-mt-3 mb-8 max-w-screen-tablet ${BODY}">${md(s.intro)}</p>\n` : ''}    <div class="grid grid-cols-1 gap-7 tablet:grid-cols-2 tablet:gap-x-10 tablet:gap-y-9">
-${shown(s.items).map((it) => `      ${item(it)}`).join('\n')}
-    </div>
-  </section>`).join('\n\n')}`;
+${approachSections()}`;
 
 // --- write ---
 
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT);
 for (const file of STATIC) cpSync(file, `${OUT}/${file}`, { recursive: true, filter: (s) => !s.endsWith('.DS_Store') });
-const paths = ['', 'approach.html'];
+const paths = ['', 'work.html', 'approach.html'];
 writeFileSync(`${OUT}/index.html`, page(
-  { title: pageTitle(home.title), description: home.description || site.description, path: '' }, 'home', homeBody));
+  { title: pageTitle(home.title), description: home.description || site.description, path: '' }, 'home', `${homeBody}\n\n${homeApproach()}`, '<script src="assets/trail.js"></script>'));
+writeFileSync(`${OUT}/work.html`, page(
+  { title: pageTitle(home.work_title), description: home.description || site.description, path: 'work.html' }, 'work', workBody));
 writeFileSync(`${OUT}/approach.html`, page(
   { title: pageTitle(approach.title), description: approach.description || site.description, path: 'approach.html' }, 'approach', approachBody));
 mkdirSync(`${OUT}/work`);
@@ -380,4 +438,4 @@ ${paths.map((p) => `  <url><loc>${esc(siteUrl(p))}</loc></url>`).join('\n')}
 `);
 // Tailwind scans this file for classes, so the CSS is built after the pages exist.
 execFileSync('node_modules/.bin/tailwindcss', ['-i', 'styles/site.css', '-o', `${OUT}/assets/site.css`, '--minify'], { stdio: 'inherit' });
-console.log(`Built ${OUT}/ (home and ${cases.length} case pages, approach: ${shown(approach.sections).length} sections).`);
+console.log(`Built ${OUT}/ (home, work and ${cases.length} case pages, approach: ${shown(approach.sections).length} sections).`);

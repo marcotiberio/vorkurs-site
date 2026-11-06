@@ -9,6 +9,7 @@
     {
       "visible": true,
       "title": "Practice",
+      "on_home": true,
       "intro": "Four disciplines, one team. Most projects move through all four, from working out what to build to keeping it in shape after launch.",
       "items": [
         { "visible": true, "heading": "Consulting & Strategy", "label": "", "lead": "", "text": "We work out what needs to happen, and what doesn’t. Goals, users, platform and how your team actually works, so you invest in the right thing and everyone knows why." },
@@ -20,6 +21,7 @@
     {
       "visible": true,
       "title": "Engagements",
+      "on_home": true,
       "intro": "Most long-term partnerships start embedded. If you're not sure which fits, start with an audit.",
       "items": [
         { "visible": true, "heading": "Audit", "label": "Fixed scope", "lead": "For when something feels off but you're not sure what.", "text": "We look at your current setup (platform, brand, workflows), map the gaps, and give you a clear plan. Fixed fee, no commitment beyond that." },
@@ -31,6 +33,7 @@
     {
       "visible": true,
       "title": "Principles",
+      "on_home": false,
       "intro": "The name comes from the Bauhaus *Vorkurs*, the preliminary course where every student started with materials, form and function. These four come from there.",
       "items": [
         { "visible": true, "heading": "Form follows function", "label": "", "lead": "", "text": "Every decision is shaped by use, context, and accessibility. Structure comes first." },
