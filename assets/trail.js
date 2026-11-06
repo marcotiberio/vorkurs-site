@@ -3,6 +3,8 @@
 // The pile keeps the newest 36. The Pause button stops the automatic landing.
 // Reduced motion: nothing lands on its own and nothing animates; a still pile of six to start.
 // Stops while the hero is off screen or the tab is hidden.
+// Only the first six images load with the page; the rest follow once the page has loaded or the
+// mouse first moves (never with reduced motion), so phones don't fetch the whole pool up front.
 (() => {
   const hero = document.querySelector('[data-trail]');
   const data = document.getElementById('trail-data');
@@ -39,7 +41,7 @@
   };
   const dropAnywhere = () => drop(Math.random() * stage.clientWidth, Math.random() * stage.clientHeight);
 
-  srcs.forEach((src) => {
+  const load = (src) => {
     const img = new Image();
     img.decoding = 'async';
     img.onload = () => {
@@ -47,7 +49,16 @@
       if (pool.length <= START) dropAnywhere();
     };
     img.src = src;
-  });
+  };
+  srcs.slice(0, START).forEach(load);
+  let rest = false;
+  const loadRest = () => {
+    if (rest || calm) return;
+    rest = true;
+    srcs.slice(START).forEach(load);
+  };
+  if (document.readyState === 'complete') setTimeout(loadRest, 1500);
+  else addEventListener('load', () => setTimeout(loadRest, 1500), { once: true });
 
   // Mouse trail
   let lastMove = 0;
@@ -55,6 +66,7 @@
   let ly = null;
   hero.addEventListener('pointermove', (e) => {
     if (e.pointerType !== 'mouse') return;
+    loadRest();
     lastMove = performance.now();
     const r = stage.getBoundingClientRect();
     const x = e.clientX - r.left;

@@ -347,7 +347,7 @@ ${heroExtra.replace(/^    <div class="/, '    <div class="relative z-10 ')}    <
 <script type="application/json" id="trail-data">${JSON.stringify(trailPool).replace(/</g, '\\u003c')}</script>
 <script>
   // The work list used to be on this page: old links to #work or #<case id> go on to work.html.
-  if (${JSON.stringify(['work', ...cases.map((c) => c.id)])}.includes(location.hash.slice(1))) location.replace('work.html' + location.hash);
+  if (${JSON.stringify(['work', ...cases.map((c) => c.id)]).replace(/</g, '\\u003c')}.includes(location.hash.slice(1))) location.replace('work.html' + location.hash);
 </script>`;
 
 const homeBody = `${homeHero}
