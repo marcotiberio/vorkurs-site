@@ -285,18 +285,25 @@ ${link ? `    ${link}\n` : ''}  </article>`;
 // Each row: the text in the left quarter, the case's images in a strip across the rest (like the
 // Art direction list on tiberiomar.com). The strip has one height; however many images a case has,
 // they share it equally, so every row is full.
-// Screenshots crop from the top left; a phone screen rises from the bottom of a sand tile, like its frame on the case page.
+// Every website screenshot sits in the same browser window on grey, like the citizenM images, which
+// have that frame built in; a phone screen rises from the bottom of the same grey. Photos fill their tile.
+// Thumbnails are black and white until their row is hovered; screens that can't hover show colour.
 const STRIP = 4;
+const MONO = 'transition-[filter] duration-500 ease-out [@media(hover:hover)]:grayscale group-hover:grayscale-0 group-focus-visible:grayscale-0 motion-reduce:transition-none';
+const LIFT = 'transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none';
 const thumb = (m) => {
-  const phone = m.frame === 'phone';
-  const shot = m.frame === 'shot';
-  const cls = cx('block transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transition-none',
-    phone ? 'absolute inset-x-0 top-[10%] mx-auto h-full w-[min(42%,240px)] origin-bottom rounded-t-[10px] border-x-[5px] border-t-[5px] border-device object-cover object-top tablet:rounded-t-[16px] tablet:border-x-[7px] tablet:border-t-[7px]' : 'size-full object-cover',
-    shot && 'object-left-top');
-  const el = m.type === 'video'
+  const media = (cls) => (m.type === 'video'
     ? `<video class="${cls}" src="${src(m.src)}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>`
-    : `<img class="${cls}" src="${src(m.src)}" alt="" loading="lazy" decoding="async">`;
-  return `<div class="${cx('relative h-full min-w-0 overflow-hidden', phone ? 'bg-sand' : 'bg-panel')}">${el}</div>`;
+    : `<img class="${cls}" src="${src(m.src)}" alt="" loading="lazy" decoding="async">`);
+  const tile = (bg, inner) => `<div class="${cx('relative h-full min-w-0 overflow-hidden', bg, MONO)}">${inner}</div>`;
+  if (m.frame === 'shot') {
+    const dots = ['bg-[#ff5f57]', 'bg-[#febc2e]', 'bg-[#28c840]'].map((c) => `<i class="size-[5px] rounded-full ${c}"></i>`).join('');
+    return tile('bg-frame', `<div class="${cx('absolute inset-x-[8%] top-[12%] bottom-[12%] flex flex-col overflow-hidden rounded-[4px] bg-chrome shadow-[0_12px_30px_-12px_rgba(0,0,0,.6)]', LIFT)}"><div class="flex h-[7%] min-h-[9px] flex-none items-center gap-[3px] px-[2.5%]" aria-hidden="true">${dots}</div>${media('min-h-0 w-full flex-1 object-cover object-top')}</div>`);
+  }
+  if (m.frame === 'phone') {
+    return tile('bg-frame', media(cx('absolute inset-x-0 top-[10%] mx-auto h-full w-[min(42%,240px)] origin-bottom rounded-t-[10px] border-x-[5px] border-t-[5px] border-device object-cover object-top tablet:rounded-t-[16px] tablet:border-x-[7px] tablet:border-t-[7px]', LIFT)));
+  }
+  return tile('bg-panel', media(cx('block size-full object-cover', LIFT)));
 };
 // The strip takes the case's own media first, then images from its full case. The halftone tool only
 // works on its case page, so it is left out.
@@ -374,13 +381,18 @@ ${cases.map((c) => indent(caseRow(c), 6)).join('\n')}
 
 // --- approach ---
 
-const item = (it) => `<div class="flex min-w-0 flex-col gap-2 border-t border-line pt-3.5"><h3 class="flex items-baseline justify-between gap-4 font-strong text-[20px] leading-6 tracking-[-0.8px] tablet:text-[24px] tablet:leading-7">${esc(it.heading)}${it.label ? ` <span class="font-sans text-[16px] tracking-[-0.2px] whitespace-nowrap text-grey">${esc(it.label)}</span>` : ''}</h3>${it.lead ? `<p class="max-w-screen-mobile italic ${BODY}">${md(it.lead)}</p>` : ''}${ps(it.text, `max-w-screen-mobile ${BODY}`).replace(/\n/g, '')}</div>`;
+// A full approach item, as a hairline cell like the home page's: the label (or the item's number)
+// at the top; heading, italic intro and text at the bottom.
+const item = (it, i) => `<div class="flex min-w-0 flex-col justify-between gap-10 border-r border-b border-line p-5 tablet:p-6 min-h-[170px] tablet:min-h-[220px]">
+        <span class="text-eyebrow text-faint uppercase">${it.label ? esc(it.label) : String(i + 1).padStart(2, '0')}</span>
+        <div class="flex flex-col gap-2"><h3 class="text-lead-sm tablet:text-lead">${esc(it.heading)}</h3>${it.lead ? `<p class="italic ${BODY}">${md(it.lead)}</p>` : ''}${ps(it.text, `max-w-screen-mobile text-grey ${BODY}`).replace(/\n/g, '')}</div>
+      </div>`;
 
 // Practice, Engagements and Principles in full on the approach page.
 const approachSections = () => shown(approach.sections).map((s, i) => `  <section class="${cx(i > 0 && 'mt-14', RULE)}">
     ${sectionIntro(s, i + 1)}
-    <div class="grid grid-cols-1 gap-7 tablet:grid-cols-2 tablet:gap-x-10 tablet:gap-y-9">
-${shown(s.items).map((it) => `      ${item(it)}`).join('\n')}
+    <div class="grid grid-cols-1 border-t border-l border-line tablet:grid-cols-2">
+${shown(s.items).map((it, i) => `      ${item(it, i)}`).join('\n')}
     </div>
   </section>`).join('\n\n');
 
