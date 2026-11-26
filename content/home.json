@@ -2,13 +2,13 @@
   "title": "",
   "description": "",
   "hero": {
-    "title": "vorkurs designs and builds digital products for climate, finance and mission‑driven organisations.",
-    "subtitle": "Strategy, design and code in one team, from the first question to launch and after.",
+    "title": "vorkurs helps climate, finance and mission‑driven organisations work out what their digital products should be, and then builds them.",
+    "subtitle": "Most work starts with a two-week Direction sprint: a working version, tried with real people, and a plan at a fixed price.",
     "show_contact": false,
     "note": "The name comes from the *Vorkurs*, the Bauhaus preliminary course where every student started with materials, form and function before anything else.",
     "show_note": false
   },
-  "show_logos": false,
+  "show_logos": true,
   "logos": [
     { "visible": true, "name": "Carbon Equity", "image": "assets/logos/logo-carbonequity.svg", "height": 32, "height_mobile": 26, "mono": false },
     { "visible": true, "name": "CrossBoundary", "image": "assets/logos/logo-crossboundary.svg", "height": 34, "height_mobile": 26, "mono": false },

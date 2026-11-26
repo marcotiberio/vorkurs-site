@@ -1,3 +1,13 @@
 [build]
   command = "node build.mjs"
   publish = "dist"
+
+[[redirects]]
+  from = "/work"
+  to = "/work.html"
+  status = 301
+
+[[redirects]]
+  from = "/approach"
+  to = "/approach.html"
+  status = 301
