@@ -360,7 +360,7 @@ ${heroExtra.replace(/^    <div class="/, '    <div class="relative z-10 ')}    <
 const homeBody = `${homeHero}
 ${logos.length ? `
   <section class="border-y border-line py-7" aria-label="Clients and partners">
-    <ul class="flex flex-wrap items-center justify-start gap-x-7 gap-y-[22px] tablet:justify-between tablet:gap-x-10 tablet:gap-y-7">
+${home.proof ? `    <p class="mb-7 max-w-[900px] text-lead-sm text-balance tablet:text-lead">${md(home.proof)}</p>\n` : ''}    <ul class="flex flex-wrap items-center justify-start gap-x-7 gap-y-[22px] tablet:justify-between tablet:gap-x-10 tablet:gap-y-7">
 ${logos.map(logo).join('\n')}
     </ul>
   </section>

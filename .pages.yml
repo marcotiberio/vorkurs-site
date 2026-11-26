@@ -56,6 +56,7 @@ content:
           - { name: note, label: Small note, type: text, description: "*text* for italic." }
           - { name: show_note, label: Show small note, type: boolean, default: false }
       - { name: show_logos, label: Show client logos, type: boolean, default: true }
+      - { name: proof, label: Line above the logos, type: text, description: "Client names and one result. Shown when the logos are. [text](https://…) makes a link." }
       - name: logos
         label: Client logos
         type: object
