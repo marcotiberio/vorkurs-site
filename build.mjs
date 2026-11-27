@@ -394,7 +394,7 @@ const item = (it, i) => `<div class="flex min-w-0 flex-col justify-between gap-1
 // Practice, Engagements and Principles in full on the approach page.
 const approachSections = () => shown(approach.sections).map((s, i) => `  <section class="${cx(i > 0 && 'mt-14', RULE)}">
     ${sectionIntro(s, i + 1)}
-    <div class="grid grid-cols-1 border-t border-l border-line tablet:grid-cols-2">
+    <div class="${cx('grid grid-cols-1 border-t border-l border-line', shown(s.items).length === 3 ? 'desktop:grid-cols-3' : 'tablet:grid-cols-2')}">
 ${shown(s.items).map((it, i) => `      ${item(it, i)}`).join('\n')}
     </div>
   </section>`).join('\n\n');
@@ -411,9 +411,11 @@ const homeApproach = () => {
   if (!sections.length) return '';
   return sections.map((s, n) => {
     const leads = shown(s.items).some((it) => it.lead);
+    // Three items sit in one row of three; otherwise two, then four across.
+    const cols = shown(s.items).length === 3 ? 'grid-cols-1 tablet:grid-cols-3' : leads ? 'grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4' : 'grid-cols-2 desktop:grid-cols-4';
     return `  <section class="mt-14 ${RULE}">
     ${sectionIntro(s, n + 1)}
-    <div class="${cx('grid border-t border-l border-line', leads ? 'grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4' : 'grid-cols-2 desktop:grid-cols-4')}">
+    <div class="${cx('grid border-t border-l border-line', cols)}">
 ${shown(s.items).map((it, i) => `      ${shortItem(it, i)}`).join('\n')}
     </div>
   </section>`;
