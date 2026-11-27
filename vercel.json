@@ -1,4 +1,10 @@
 {
   "buildCommand": "node build.mjs",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/work", "destination": "/work.html", "permanent": true },
+    { "source": "/work/", "destination": "/work.html", "permanent": true },
+    { "source": "/approach", "destination": "/approach.html", "permanent": true },
+    { "source": "/approach/", "destination": "/approach.html", "permanent": true }
+  ]
 }

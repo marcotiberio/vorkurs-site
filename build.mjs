@@ -16,10 +16,13 @@ const LINK = 'underline decoration-2 underline-offset-4 hover:no-underline';
 const CURRENT = 'aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-4 aria-[current=page]:hover:no-underline';
 const FOCUS = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink';
 const RULE = 'border-t border-line';
-// Two tones, as on addmore.studio: the first sentence in ink, the rest in grey.
+// Title above subtitle, both in ink: the first sentence, then the rest on its own line.
+// inner: a class for an inline span inside each line (the home hero sets its text on paper).
+const stacked = (first, rest, inner = '') => [first, rest].filter(Boolean)
+  .map((t) => `<span class="block">${inner ? `<span class="${inner}">${md(t)}</span>` : md(t)}</span>`).join('');
 const twoTone = (text) => {
   const [, first, rest] = String(text || '').match(/^(.+?[.?!])\s+([\s\S]+)$/) || [, text, ''];
-  return `${md(first)}${rest ? ` <span class="text-grey">${md(rest)}</span>` : ''}`;
+  return stacked(first, rest);
 };
 // A section opens with a small numbered label and its intro set large.
 const sectionIntro = (s, n) => `<header class="flex flex-col gap-5 pt-8 pb-10 tablet:pt-10 tablet:pb-12">
@@ -117,7 +120,7 @@ const header = (current) => {
 };
 
 const hero = (h, extra = '') => `  <section class="flex flex-col gap-6 pt-8 pb-8 tablet:gap-9 tablet:pt-12 tablet:pb-12">
-    <h1 class="text-display-sm text-balance tablet:text-display">${md(h.title)}${h.subtitle ? ` <span class="text-grey">${md(h.subtitle)}</span>` : ''}</h1>
+    <h1 class="text-display-sm text-balance tablet:text-display">${stacked(h.title, h.subtitle)}</h1>
 ${extra}  </section>`;
 
 // On other pages, #contact and friends point back to the home page.
@@ -344,7 +347,7 @@ const logos = home.show_logos === false ? [] : shown(home.logos);
 const trailPool = [...new Set(cases.flatMap((c) => [...(c.media || []), ...(c.full_case?.enabled ? (c.full_case.blocks || []).flatMap((b) => b.media || []) : [])])
   .filter((m) => m.type === 'image' && m.src).map((m) => src(m.src)))];
 const homeHero = `  <section class="relative isolate flex min-h-[72svh] flex-col justify-between gap-6 overflow-hidden pt-8 pb-4 tablet:min-h-[82svh] tablet:pt-12" data-trail>
-    <h1 class="relative z-10 max-w-[1500px] text-display-sm text-balance tablet:text-hero"><span class="bg-paper box-decoration-clone">${md(h.title)}${h.subtitle ? ` <span class="text-grey">${md(h.subtitle)}</span>` : ''}</span></h1>
+    <h1 class="relative z-10 max-w-[1500px] text-display-sm text-balance tablet:text-hero">${stacked(h.title, h.subtitle, 'bg-paper box-decoration-clone')}</h1>
 ${heroExtra.replace(/^    <div class="/, '    <div class="relative z-10 ')}    <div class="trail-stage pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
     <div class="relative z-10 flex items-end justify-between gap-4">
       <a class="${cx(LINK, 'bg-paper text-lead-sm tablet:text-lead')}" href="work.html">${esc(home.work_title)} →</a>
