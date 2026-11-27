@@ -25,6 +25,7 @@
     {
       "visible": true,
       "id": "brandmelder",
+      "thumbs": ["img/shot-bm-articles.jpg"],
       "title": "brandmelder",
       "client": "Netzwerk Klimajournalismus",
       "meta": ["with NEW STANDARD.S, Berlin", "Web development & image tooling"],
@@ -43,6 +44,7 @@
     {
       "visible": true,
       "id": "crossboundary",
+      "thumbs": ["img/shot-cb-insights.jpg"],
       "title": "Multi-site platform",
       "client": "CrossBoundary",
       "meta": ["with backendforth, Berlin", "Multi-site frontend development"],
@@ -153,6 +155,7 @@
     {
       "visible": true,
       "id": "solea",
+      "thumbs": ["img/shot-solea-booking.jpg", "img/shot-solea-work.jpg"],
       "title": "Brand & booking app",
       "client": "Solea",
       "meta": ["Design and build for a workplace wellbeing start-up, Amsterdam", "Brand & booking platform"],
@@ -188,6 +191,7 @@
     {
       "visible": true,
       "id": "buycloud",
+      "thumbs": ["img/shot-bc-manifesto.jpg"],
       "title": "Buycloud",
       "client": "Noa Jansma",
       "meta": ["Het Nieuwe Instituut, Rotterdam", "Platform development"],
