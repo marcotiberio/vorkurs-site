@@ -26,7 +26,7 @@
       "items": [
         { "visible": true, "heading": "Direction sprint", "label": "Two weeks, fixed price", "lead": "For when you know something needs to change but not yet what to make.", "text": "Week one, with your team and some of your users, we work out what to make and why. Week two, we build a working version with your real content, try it with 3–5 people, and hand over a short plan: what to build, what to leave out, what it costs." },
         { "visible": true, "heading": "Embedded", "label": "Monthly retainer", "lead": "For teams that need someone senior inside, not alongside.", "text": "We join your team 2–3 days a week, sit with the people who use what we build, and work directly in your stack: design, engineering, or both." },
-        { "visible": true, "heading": "Project", "label": "End to end", "lead": "For when you need something designed, built and running.", "text": "From brief to launch and into production. Strategy, design, engineering, deployment: one team, no handoff gaps." },
+        { "visible": true, "heading": "Project", "label": "Fixed price", "lead": "For when you need something designed, built and running.", "text": "From brief to launch and into production. Strategy, design, engineering, deployment: one team, no handoff gaps." },
         { "visible": true, "heading": "Advisory", "label": "Fractional lead", "lead": "For organisations that need senior direction without a full-time hire.", "text": "We come in as a fractional lead: set the direction, define the workflow, align the team, and step back when the system runs on its own." }
       ]
     },
@@ -34,7 +34,7 @@
       "visible": true,
       "title": "Principles",
       "on_home": false,
-      "intro": "The name comes from the Bauhaus *Vorkurs*, the preliminary course where every student started with materials, form and function. These four come from there.",
+      "intro": "Four principles from the Bauhaus *Vorkurs*, the preliminary course where every student started with materials, form and function.",
       "items": [
         { "visible": true, "heading": "Form follows function", "label": "", "lead": "", "text": "Every decision is shaped by use, context, and accessibility. Structure comes first." },
         { "visible": true, "heading": "True materials", "label": "", "lead": "", "text": "Strategy, technology, and content that reflect reality. Built for durability, not short-term appeal." },
