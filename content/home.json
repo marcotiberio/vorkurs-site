@@ -11,6 +11,7 @@
   "show_logos": true,
   "logos": [
     { "visible": true, "name": "Carbon Equity", "image": "assets/logos/logo-carbonequity.svg", "height": 32, "height_mobile": 26, "mono": false },
+    { "visible": true, "name": "Theta Capital", "image": "assets/logos/logo-thetacapital.png", "height": 20, "height_mobile": 16, "mono": false },
     { "visible": true, "name": "CrossBoundary", "image": "assets/logos/logo-crossboundary.svg", "height": 34, "height_mobile": 26, "mono": false },
     { "visible": true, "name": "citizenM", "image": "assets/logos/logo-citizenm.png", "height": 38, "height_mobile": 30, "mono": false },
     { "visible": true, "name": "onformative", "image": "assets/logos/logo-onformative.svg", "height": 22, "height_mobile": 17, "mono": false },
