@@ -24,9 +24,9 @@
       "on_home": true,
       "intro": "Most work starts with a Direction sprint. From there, a fixed-price build, or we stay on as your product direction.",
       "items": [
-        { "visible": true, "heading": "Direction sprint", "label": "From €X", "lead": "For when you know something needs to change but not yet what to make.", "text": "Week one, with your team and some of your users, we work out what to make and why. Week two, we build a working version with your real content, try it with 3–5 people, and hand over a short plan: what to build, what to leave out, what it costs. If you go on to a Project, the sprint fee comes off its price." },
+        { "visible": true, "heading": "Direction sprint", "label": "From €6,500", "lead": "For when you know something needs to change but not yet what to make.", "text": "Week one, with your team and some of your users, we work out what to make and why. Week two, we build a working version with your real content, try it with 3–5 people, and hand over a short plan: what to build, what to leave out, what it costs. If you go on to a Project, the sprint fee comes off its price." },
         { "visible": true, "heading": "Project", "label": "Fixed price", "lead": "For when you need something designed, built and running.", "text": "From brief to launch and into production. Strategy, design, engineering, deployment: one team, no handoff gaps. The price is set in the sprint plan, before any work starts." },
-        { "visible": true, "heading": "Advisory", "label": "Fixed monthly fee", "lead": "For teams that need someone senior inside, without a full-time hire.", "text": "One fixed fee a month for one active stream of work, not a count of days. We set the direction, sit with the people who use what we build, work in your stack where it helps, and step back when the system runs on its own." }
+        { "visible": true, "heading": "Advisory", "label": "Fixed monthly fee", "lead": "For teams that need someone senior inside, without a full-time hire.", "text": "One fixed fee a month for one active stream of work, not a count of days. We set the direction, sit with the people who use what we build, work in your stack where it helps, and step back when the system runs on its own. Three months to start, then month to month." }
       ]
     },
     {
